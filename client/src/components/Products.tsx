@@ -14,6 +14,8 @@ export const Products = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0,
     },
     {
       id: crypto.randomUUID(),
@@ -23,6 +25,8 @@ export const Products = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: false,
+      total: 0,
+      quantity: 0,
     },
   ]);
   const [electrical, setElectrical] = useState([
@@ -34,6 +38,8 @@ export const Products = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0,
     },
     {
       id: crypto.randomUUID(),
@@ -43,6 +49,8 @@ export const Products = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: false,
+      total: 0,
+      quantity: 0,
     },
   ]);
   const [overalls, setOveralls] = useState([
@@ -54,6 +62,8 @@ export const Products = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0,
     },
     {
       id: crypto.randomUUID(),
@@ -63,6 +73,8 @@ export const Products = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: false,
+      total: 0,
+      quantity: 0,
     },
   ]);
   const [forHomeAndCottage, setForHomeAndCottage] = useState([
@@ -74,6 +86,8 @@ export const Products = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0,
     },
     {
       id: crypto.randomUUID(),
@@ -83,6 +97,8 @@ export const Products = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: false,
+      total: 0,
+      quantity: 0,
     },
   ]);
   const [seasonal, setSeasonal] = useState([
@@ -94,6 +110,8 @@ export const Products = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0,
     },
     {
       id: crypto.randomUUID(),
@@ -103,6 +121,8 @@ export const Products = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: false,
+      total: 0,
+      quantity: 0,
     },
   ]);
   const [tools, setTools] = useState([
@@ -114,6 +134,8 @@ export const Products = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0,
     },
     {
       id: crypto.randomUUID(),
@@ -123,6 +145,8 @@ export const Products = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: false,
+      total: 0,
+      quantity: 0,
     },
   ]);
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export const Slider = () => {
   return (
@@ -13,9 +14,9 @@ export const Slider = () => {
             <h1 className="text-5xl text-start">
               DeWALT - Инструмент с настоящим характером
             </h1>
-            <button className="px-8 py-4 bg-[#F05A00] self-start hover:bg-black ">
+            <Link to='/catalog' className="px-8 py-4 bg-[#F05A00] self-start hover:bg-black ">
               ПЕРЕЙТИ В КАТАЛОГ
-            </button>
+            </Link>
           </div>
           <div className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer">
             <AiOutlineArrowRight className="text-white" />

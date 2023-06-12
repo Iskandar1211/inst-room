@@ -16,6 +16,8 @@ export const FeaturedItems = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0
     },
     {
       id: crypto.randomUUID(),
@@ -25,6 +27,8 @@ export const FeaturedItems = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0
     },
     {
       id: crypto.randomUUID(),
@@ -34,6 +38,8 @@ export const FeaturedItems = () => {
       inStock: true,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0
     },
     {
       id: crypto.randomUUID(),
@@ -43,6 +49,8 @@ export const FeaturedItems = () => {
       inStock: false,
       detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
       isNew: true,
+      total: 0,
+      quantity: 0
     },
   ]);
 
@@ -64,7 +72,7 @@ export const FeaturedItems = () => {
               </div>
               <div className="flex gap-2 justify-between overflow-hidden px-4 w-[100%]">
                 {products.map((product) => (
-                  <div className="w-[310px] h-[380px]">
+                  <div key={product.id} className="w-[310px] h-[380px]">
                     <Card key={product.id} product={product} />
                   </div>
                 ))}

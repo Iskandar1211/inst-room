@@ -5,5 +5,7 @@ export interface IProduct {
     price: number,
     inStock: boolean,
     detailed: string,
-    isNew:boolean
+    isNew: boolean,
+    total: number,
+    quantity: number
 }
