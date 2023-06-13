@@ -8,10 +8,11 @@ import { IProduct } from "../../types/Model";
 interface Props {
   title?: string;
   products: IProduct[];
-  slideToShow:number
+  slideToShow: number;
+  width: number;
 }
 
-export const Carousel = ({ title, products, slideToShow }: Props) => {
+export const Carousel = ({ title, products, slideToShow, width }: Props) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -51,7 +52,7 @@ export const Carousel = ({ title, products, slideToShow }: Props) => {
     ],
   };
   return (
-    <div className=" w-[47%] py-4 ">
+    <div className={`w-[${width}%] py-4`}>
       <h2 className="text-4xl m-3 text-start"> {title} </h2>
       <Slider {...settings}>
         {products.map((product) => (
