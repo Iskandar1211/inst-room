@@ -8,7 +8,9 @@ import { useAppSelector } from "../store/hooks/hooks";
 export const Header = () => {
   const products = useAppSelector((state) => state.cart.items);
   const favorites = useAppSelector((state) => state.favorites.items);
-
+  const totalPrice = products.reduce((acum, item) => {
+    return acum + item.price;
+  }, 0);
   return (
     <div className="bg-[#212526] h-[10vh]">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[100%] flex justify-between items-center">
@@ -24,7 +26,7 @@ export const Header = () => {
             Заказать звонок
           </a>
         </div>
-        <div className="h-[100%] flex gap-1">
+        <div className="h-[100%] flex gap-1 max-sm:hidden ">
           <Link
             to="/favorites"
             className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
@@ -34,12 +36,12 @@ export const Header = () => {
               {favorites.length}
             </span>
           </Link>
-          <div className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]">
+          <Link to='/dark-compair' className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]">
             <FiBarChart2 className="text-white" />
             <span className="absolute text-[0.9rem] bg-[#F05A00] rounded-full px-1 h-3 flex items-center justify-center py-2 right-4 top-4 text-white">
               0
             </span>
-          </div>
+          </Link>
           <div className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]">
             <FaRegUserCircle className="text-white" />
           </div>
@@ -54,7 +56,7 @@ export const Header = () => {
           </Link>
           <div className="text-white flex flex-col justify-center ml-2">
             <p>Товаров на сумму</p>
-            <p className="text-start">2000 &#8381;</p>
+            <p className="text-start">{totalPrice} &#8381;</p>
           </div>
         </div>
       </div>

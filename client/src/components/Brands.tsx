@@ -4,6 +4,7 @@ import {
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
 
+
 export const Brands = () => {
   return (
     <div className="bg-[#212526]">

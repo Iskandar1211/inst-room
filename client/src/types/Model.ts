@@ -9,3 +9,4 @@ export interface IProduct {
     total: number,
     quantity: number
 }
+

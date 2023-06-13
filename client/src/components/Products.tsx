@@ -2,7 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { IProduct } from "../types/Model";
 import { Card } from "./Card";
+import { Carousel } from "./Carousel/Carousel";
 import { TitleForCard } from "./TitleForCard";
+import { products } from "./Carousel/data";
 
 export const Products = () => {
   const [paints, setPaints] = useState<IProduct[]>([
@@ -153,59 +155,17 @@ export const Products = () => {
   return (
     <div className="bg-[#CBCBCB] pt-6 pb-6">
       <div className=" lg:px-32 md:px-7 max-sm:px-4 sm:px-6 ">
-        <div className="flex gap-10 flex-wrap mt-5">
-          <div className="flex-1">
-            <TitleForCard title="Малярные товары" />
-            <div className="flex justify-between">
-              {paints.map((paint) => (
-                <Card key={paint.id} product={paint} />
-              ))}
-            </div>
-          </div>
-          <div className="flex-1">
-            <TitleForCard title="Электрооборудование" />
-            <div className="flex justify-between">
-              {electrical.map((electric) => (
-                <Card key={electric.id} product={electric} />
-              ))}
-            </div>
-          </div>
+        <div className="flex justify-between ">
+          <Carousel slideToShow={2} title="Малярные товары" products={products} />
+          <Carousel slideToShow={2} title="Электрооборудование" products={products} />
         </div>
-        <div className="flex gap-10 flex-wrap mt-5">
-          <div className="flex-1">
-            <TitleForCard title="Спецодежда" />
-            <div className="flex justify-between">
-              {overalls.map((overal) => (
-                <Card key={overal.id} product={overal} />
-              ))}
-            </div>
-          </div>
-          <div className="flex-1">
-            <TitleForCard title="Для дома и дачи" />
-            <div className="flex justify-between">
-              {forHomeAndCottage.map((product) => (
-                <Card key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
+        <div className="flex justify-between ">
+          <Carousel slideToShow={2} title="Спецодежда" products={products} />
+          <Carousel slideToShow={2} title="Для дома и дачи" products={products} />
         </div>
-        <div className="flex gap-10 flex-wrap mt-5 mb-5">
-          <div className="flex-1">
-            <TitleForCard title="Сезонные" />
-            <div className="flex justify-between">
-              {seasonal.map((prudict) => (
-                <Card key={prudict.id} product={prudict} />
-              ))}
-            </div>
-          </div>
-          <div className="flex-1">
-            <TitleForCard title="Инструмент" />
-            <div className="flex justify-between">
-              {tools.map((tool) => (
-                <Card key={tool.id} product={tool} />
-              ))}
-            </div>
-          </div>
+        <div className="flex justify-between ">
+          <Carousel slideToShow={2} title="Сезонное" products={products} />
+          <Carousel slideToShow={2} title="Инструмент" products={products} />
         </div>
       </div>
     </div>
