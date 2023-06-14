@@ -10,8 +10,6 @@ import { GardenInventoryPage } from "./pages/GardenInventoryPage";
 import { CartPage } from "./pages/CartPage";
 import { FavoritesPage } from "./pages/FavoritesPage";
 import { DarkCompairPage } from "./pages/DarkCompairPage";
-import { Carousel } from "./components/Carousel/Carousel";
-import { products } from "./components/Carousel/data";
 
 function App() {
   return (

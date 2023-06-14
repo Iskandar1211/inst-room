@@ -6,6 +6,7 @@ import {
 import { IProduct } from "../types/Model";
 import { Card } from "./Card";
 import { Carousel } from "./Carousel/Carousel";
+import { FeaturesCarousel } from "./Carousel/FeaturesCarousel";
 
 export const FeaturedItems = () => {
   const [products, setProducts] = useState<IProduct[]>([
@@ -111,7 +112,7 @@ export const FeaturedItems = () => {
       <div className="bg-[#212526] py-5">
         <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 ">
           <div className="w-[94%] m-auto">
-            <Carousel width={100} products={products} slideToShow={4} />
+            <FeaturesCarousel products={products} slideToShow={4} />
           </div>
         </div>
       </div>

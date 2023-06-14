@@ -11,7 +11,7 @@ interface Props {
   slideToShow: number;
 }
 
-export const Carousel = ({ title, products, slideToShow}: Props) => {
+export const FeaturesCarousel = ({ title, products, slideToShow}: Props) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -51,7 +51,7 @@ export const Carousel = ({ title, products, slideToShow}: Props) => {
     ],
   };
   return (
-    <div className={`lg:w-[47%] py-4 w-[77%] m-auto`}>
+    <div className={`w-[100%] py-4`}>
       <h2 className="text-4xl m-3 text-start"> {title} </h2>
       <Slider {...settings}>
         {products.map((product) => (

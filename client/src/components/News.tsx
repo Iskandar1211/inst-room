@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const News = () => {
   return (
@@ -12,9 +13,9 @@ export const News = () => {
             при которой его правосубъектность отличается от правосубъектности
             лиц, в нем участвующих. Компании имеют статус юридического лица.
           </p>
-          <button className="bg-[#F05A00] hover:bg-black text-white w-[250px] h-[50px] ">
+          <Link to='/detail-news' className="bg-[#F05A00] hover:bg-black text-white w-[250px] h-[50px] ">
             ПЕРЕЙТИ К НОВОСТЯМ
-          </button>
+          </Link>
         </div>
         <div className="flex-1 flex flex-col gap-6">
           <div>

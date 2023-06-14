@@ -1,9 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { IProduct } from "../types/Model";
-import { Card } from "./Card";
 import { Carousel } from "./Carousel/Carousel";
-import { TitleForCard } from "./TitleForCard";
 import { products } from "./Carousel/data";
 
 export const Products = () => {
@@ -155,17 +153,17 @@ export const Products = () => {
   return (
     <div className="bg-[#CBCBCB] pt-6 pb-6">
       <div className=" lg:px-32 md:px-7 max-sm:px-4 sm:px-6 ">
-        <div className="flex justify-between ">
-          <Carousel width={47} slideToShow={2} title="Малярные товары" products={products} />
-          <Carousel width={47} slideToShow={2} title="Электрооборудование" products={products} />
+        <div className="lg:flex lg:justify-between lg:gap-8">
+          <Carousel  slideToShow={2} title="Малярные товары" products={products} />
+          <Carousel  slideToShow={2} title="Электрооборудование" products={products} />
         </div>
-        <div className="flex justify-between ">
-          <Carousel width={47} slideToShow={2} title="Спецодежда" products={products} />
-          <Carousel width={47} slideToShow={2} title="Для дома и дачи" products={products} />
+        <div className="lg:flex lg:justify-between lg:gap-8">
+          <Carousel  slideToShow={2} title="Спецодежда" products={products} />
+          <Carousel  slideToShow={2} title="Для дома и дачи" products={products} />
         </div>
-        <div className="flex justify-between ">
-          <Carousel width={47} slideToShow={2} title="Сезонное" products={products} />
-          <Carousel width={47} slideToShow={2} title="Инструмент" products={products} />
+        <div className="lg:flex lg:justify-between lg:gap-8">
+          <Carousel  slideToShow={2} title="Сезонное" products={products} />
+          <Carousel  slideToShow={2} title="Инструмент" products={products} />
         </div>
       </div>
     </div>
