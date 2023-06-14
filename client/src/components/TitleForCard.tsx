@@ -8,7 +8,7 @@ interface Props {
   title: string;
 }
 
-export const TitleForCard = ({title}:Props) => {
+export const TitleForCard = ({ title }: Props) => {
   return (
     <div className="flex gap-4 mb-4">
       <p className="text-3xl text-start">{title}</p>

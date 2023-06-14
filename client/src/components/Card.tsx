@@ -37,7 +37,7 @@ export const Card = ({ product }: Props) => {
     bgBuy,
   ].join(" ");
   return (
-    <div className="bg-white flex gap-2 flex-col justify-between border px-2 py-2">
+    <div className="bg-white flex ml-3 gap-1 flex-col justify-between border px-2 py-2">
       <div className="flex justify-between ">
         <p>
           {product.isNew ? (
