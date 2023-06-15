@@ -6,9 +6,9 @@ import { SlSocialVkontakte } from "react-icons/sl";
 export const Footter = () => {
   return (
     <div className="bg-[#212526]">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6">
-        <div className="flex gap-12 py-10 ">
-          <div className="flex-1 text-white text-start flex flex-col gap-3">
+      <div className="px-4 py-6 lg:px-32 md:px-7 sm:px-12 max-sm:px-4 text-l lg:text-xl text-white text-start">
+        <div className="flex flex-wrap lg:flex-nowrap justify-between">
+          <div className="w-full lg:w-auto mb-4 lg:mb-0 flex-1 flex flex-col gap-3">
             <p>Малярные товары</p>
             <p>Электрооборудование</p>
             <p>Спецодежда</p>
@@ -16,28 +16,28 @@ export const Footter = () => {
             <p>Сезонное</p>
             <p>Инструмент</p>
           </div>
-          <div className="flex-1 text-white text-start flex flex-col gap-3">
+          <div className="w-full lg:w-auto mb-4 lg:mb-0 flex-1 flex flex-col gap-3">
             <p>О компании</p>
             <p>Контакты</p>
             <p>Новинки</p>
             <p>Хиты сезона</p>
             <p>Распродажи</p>
           </div>
-          <div className="flex-1 text-start">
+          <div className="w-full lg:w-auto flex-1">
             <div className="flex flex-col gap-3">
               <div>
                 <img src="logo.svg" alt="logo" />
               </div>
-              <div className="text-white">
+              <div className="text-white hidden sm:block">
                 <p>+7 495 120-32-14</p>
                 <p>+7 495 120-32-15</p>
               </div>
-              <div className="flex gap-2">
+              <div className="flex  gap-2 hidden sm:block">
                 <RxInstagramLogo className="bg-white cursor-pointer text-3xl rounded-full px-1" />
                 <SlSocialVkontakte className="bg-white cursor-pointer text-3xl rounded-full px-1" />
                 <FiFacebook className="bg-white cursor-pointer text-3xl rounded-full px-1" />
               </div>
-              <div className="text-white ">
+              <div className="text-white hidden sm:block">
                 <p>Соглашение пользователя</p>
                 <p>«Copyright © Название 2023»</p>
               </div>
