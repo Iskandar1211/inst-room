@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const DetalNews = () => {
+export const DetalNewsPage = () => {
   return (
     <div className="w-[100vw] h[80-vh] ">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6">

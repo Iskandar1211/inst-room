@@ -19,7 +19,6 @@ export const Carousel = ({ title, products, slideToShow}: Props) => {
     slidesToShow: slideToShow,
     slidesToScroll: 1,
     initialSlide: 0,
-    autoplay: true,
     autoplaySpeed: 2000,
     cssEase: "linear",
     variableWidth: true,

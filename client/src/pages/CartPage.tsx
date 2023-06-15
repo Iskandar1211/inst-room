@@ -99,9 +99,9 @@ export const CartPage = () => {
               <span>К оплате</span>
               <span className="text-[#F05A00]">{totalPrice} ₽</span>
             </div>
-            <div className="w-[280px] h-[50px] bg-[#F05A00] text-white flex justify-center items-center">
+            <Link to='/order-form' className="w-[280px] h-[50px] bg-[#F05A00] text-white flex justify-center items-center">
               ПЕРЕЙТИ К ОФОРМЛЕНИЮ
-            </div>
+            </Link>
           </div>
         </div>
       </div>
