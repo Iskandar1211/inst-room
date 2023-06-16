@@ -1,6 +1,6 @@
 import { Breadcrumbs, Input } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import {
   Accordion,
   AccordionHeader,
@@ -8,88 +8,16 @@ import {
 } from "@material-tailwind/react";
 import AccordionHistoryBuy from "../components/UX-UI/Accordion/AccordionHistoryBuy";
 import moment from "moment";
-import { IProductAcord } from "../types/Model";
-
+import { IHistoryOfOrder, IProductAcord } from "../types/Model";
 
 export const ProfilePage = () => {
- 
+  const [products, setProducts] = useState<IHistoryOfOrder[]>([]);
 
-  const products: IProductAcord[] = [
-    {
-      id: crypto.randomUUID(),
-      orderNumber:1,
-      created: moment().subtract(10, "days").calendar(),
-      received: moment().subtract(10, "days").calendar(),
-      purchases: [
-        {
-          id: crypto.randomUUID(),
-          name: "Emal Big",
-          img: "/Painting-supplies/Emal-116-big.png",
-          price: 500,
-          inStock: true,
-          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
-          isNew: true,
-          total: 0,
-          quantity: 1,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Emal",
-          img: "/Painting-supplies/Emal-116.png",
-          price: 650,
-          inStock: false,
-          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
-          isNew: true,
-          total: 0,
-          quantity: 1,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Emal Big",
-          img: "/electric/nozzle.png",
-          price: 500,
-          inStock: true,
-          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
-          isNew: true,
-          total: 0,
-          quantity: 2,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Emal",
-          img: "/electric/screwdriver.png",
-          price: 650,
-          inStock: false,
-          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
-          isNew: true,
-          total: 0,
-          quantity: 1,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Emal Big",
-          img: "/electric/nozzle.png",
-          price: 500,
-          inStock: true,
-          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
-          isNew: true,
-          total: 0,
-          quantity: 1,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Emal",
-          img: "/electric/screwdriver.png",
-          price: 650,
-          inStock: false,
-          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
-          isNew: true,
-          total: 0,
-          quantity: 1,
-        },
-      ],
-    },
-  ];
+  useEffect(() => {
+    fetch("http://localhost:3009/history-of-orders")
+      .then((response) => response.json())
+      .then((historyBuys) => setProducts(historyBuys));
+  }, []);
 
   // const totalPrice = products.reduce((acum, item) => {
   //   return acum + item.total;

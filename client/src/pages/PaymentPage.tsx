@@ -23,6 +23,15 @@ export const PaymentPage = () => {
     onlinePayment: false,
   });
 
+  const addAll = () => {
+    fetch("http://localhost:3009/create-history-of-orders", {
+      method: "POST",
+      body: JSON.stringify(productsFromCart),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   const addProductsFromCart = () => {
     fetch("http://localhost:3009/create-product-from-cart", {
       method: "POST",
@@ -42,6 +51,7 @@ export const PaymentPage = () => {
     })
       .then((response) => {
         if (response.ok) {
+          addAll();
           setComplited(true);
         }
       })
@@ -173,8 +183,11 @@ export const PaymentPage = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-10 justify-center p-32 items-center">
-          <Link className="text-2xl text-red-700 flex gap-4 items-center" to="/">
-            <BsArrowBarRight className="text-3xl"/> Возвращаться на главную
+          <Link
+            className="text-2xl text-red-700 flex gap-4 items-center"
+            to="/"
+          >
+            <BsArrowBarRight className="text-3xl" /> Возвращаться на главную
           </Link>
           <BsCheckCircleFill className="text-[250px] text-[#F05A00] " />
           <p className="text-4xl">

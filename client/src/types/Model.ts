@@ -44,3 +44,14 @@ export interface IPayment {
     bankСard: boolean,
     onlinePayment: boolean,
 }
+
+export interface IHistoryOfOrder {
+    id: string,
+    orderNumber: number,
+    created: string,
+    received: string,
+    purchases: IProduct[],
+    orders: IOrder[],
+    deliveryInfo: IDelivery[],
+    payments: IPayment[]
+}
