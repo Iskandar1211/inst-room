@@ -32,7 +32,7 @@ export const Footter = () => {
                 <p>+7 495 120-32-14</p>
                 <p>+7 495 120-32-15</p>
               </div>
-              <div className="flex  gap-2 hidden sm:block">
+              <div className="flex  gap-2 ">
                 <RxInstagramLogo className="bg-white cursor-pointer text-3xl rounded-full px-1" />
                 <SlSocialVkontakte className="bg-white cursor-pointer text-3xl rounded-full px-1" />
                 <FiFacebook className="bg-white cursor-pointer text-3xl rounded-full px-1" />
