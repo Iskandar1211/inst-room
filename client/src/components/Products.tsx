@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { IProduct } from "../types/Model";
-import { Carousel } from "./Carousel/Carousel";
-import { products } from "./Carousel/data";
+import { Carousel } from "./UX-UI/Carousel/Carousel";
+import { products } from "./UX-UI/Carousel/data";
 
 export const Products = () => {
   const [paints, setPaints] = useState<IProduct[]>([

@@ -42,9 +42,9 @@ export const Header = () => {
               0
             </span>
           </Link>
-          <div className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]">
+          <Link to='/profile-page' className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]">
             <FaRegUserCircle className="text-white" />
-          </div>
+          </Link>
           <Link
             to="/cart"
             className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"

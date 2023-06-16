@@ -14,6 +14,7 @@ import { DetalNewsPage } from "./pages/DetalNewsPage";
 import { OrderFormPage } from "./pages/OrderFormPage";
 import { DeliveryInfoPage } from "./pages/DeliveryInfoPage";
 import { PaymentPage } from "./pages/PaymentPage";
+import { ProfilePage } from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/order-form" element={<OrderFormPage />} />
         <Route path="/delivery-info" element={<DeliveryInfoPage />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/profile-page" element={<ProfilePage />} />
       </Routes>
       <Footter />
     </div>

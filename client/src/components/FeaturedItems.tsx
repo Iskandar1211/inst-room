@@ -5,8 +5,8 @@ import {
 } from "react-icons/md";
 import { IProduct } from "../types/Model";
 import { Card } from "./Card";
-import { Carousel } from "./Carousel/Carousel";
-import { FeaturesCarousel } from "./Carousel/FeaturesCarousel";
+import { Carousel } from "./UX-UI/Carousel/Carousel";
+import { FeaturesCarousel } from "./UX-UI/Carousel/FeaturesCarousel";
 
 export const FeaturedItems = () => {
   const [products, setProducts] = useState<IProduct[]>([

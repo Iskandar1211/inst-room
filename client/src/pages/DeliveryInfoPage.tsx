@@ -6,12 +6,36 @@ import {
   Option,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
+import { IDelivery } from "../types/Model";
 
 export const DeliveryInfoPage = () => {
   const [pickup, setPickup] = useState(false);
 
+  const navigate = useNavigate();
+
+  const [courierDelivery, setCourierDelivery] = useState<IDelivery>({
+    id: crypto.randomUUID(),
+    city: "",
+    street: "",
+    frame: "",
+    house: "",
+    apartment: "",
+    delivery: true,
+    pickupAddress: "",
+  });
+
+  const addDelivery = () => {
+    fetch("http://localhost:3009/create-delivery-info", {
+      method: "POST",
+      body: JSON.stringify(courierDelivery),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    navigate("/payment");
+  };
   const dispatch = useAppDispatch();
 
   const products = useAppSelector((state) => state.cart.items);
@@ -23,7 +47,7 @@ export const DeliveryInfoPage = () => {
 
   return (
     <div className="bg-[#CBCBCB]">
-      <div className="lg:px-32 md:px-7 flex flex-col gap-6">
+      <div className="lg:px-32 md:px-7 flex flex-col gap-6 pt-4">
         <Breadcrumbs>
           <Link className="opacity-60" to="/">
             Главная
@@ -51,13 +75,34 @@ export const DeliveryInfoPage = () => {
                 </p>
                 <div className="flex gap-[80px] text-[20px]">
                   <div className="flex items-center">
-                    {pickup && <Checkbox onClick={() => setPickup(false)} />}
-                    {!pickup && <Checkbox checked />}
+                    {pickup && (
+                      <Checkbox
+                        onChange={(e) => {
+                          const isChecked = e.target.checked;
+                          setCourierDelivery({
+                            ...courierDelivery,
+                            delivery: isChecked,
+                          });
+                        }}
+                        onClick={() => setPickup(false)}
+                      />
+                    )}
+                    {!pickup && <Checkbox defaultChecked />}
                     Доставка курьером
                   </div>
                   <div>
-                    {pickup && <Checkbox checked />}
-                    {!pickup && <Checkbox onClick={() => setPickup(true)} />}
+                    {pickup && <Checkbox defaultChecked />}
+                    {!pickup && (
+                      <Checkbox
+                        onChange={(e) => {
+                          setCourierDelivery({
+                            ...courierDelivery,
+                            delivery: false,
+                          });
+                        }}
+                        onClick={() => setPickup(true)}
+                      />
+                    )}
                     Самовывоз
                   </div>
                 </div>
@@ -67,17 +112,55 @@ export const DeliveryInfoPage = () => {
                   <b className="text-start">Введите адрес доставки</b>
                   <div className="flex gap-[100px]">
                     <div className="flex flex-col gap-8 flex-1">
-                      <Input label="Город" />
-                      <Input label="Улица" />
-                      <Input label="Ближайшая дата доставки" />
+                      <Input
+                        onChange={(e) =>
+                          setCourierDelivery({
+                            ...courierDelivery,
+                            city: e.target.value,
+                          })
+                        }
+                        label="Город"
+                      />
+                      <Input
+                        onChange={(e) =>
+                          setCourierDelivery({
+                            ...courierDelivery,
+                            street: e.target.value,
+                          })
+                        }
+                        label="Улица"
+                      />
                     </div>
                     <div className="flex flex-col flex-1 gap-8">
-                      <Input label="Корпус" />
+                      <Input
+                        onChange={(e) =>
+                          setCourierDelivery({
+                            ...courierDelivery,
+                            frame: e.target.value,
+                          })
+                        }
+                        label="Корпус"
+                      />
                       <div className="flex gap-2">
-                        <Input label="Дом" />
-                        <Input label="Квартира" />
+                        <Input
+                          onChange={(e) =>
+                            setCourierDelivery({
+                              ...courierDelivery,
+                              house: e.target.value,
+                            })
+                          }
+                          label="Дом"
+                        />
+                        <Input
+                          onChange={(e) =>
+                            setCourierDelivery({
+                              ...courierDelivery,
+                              apartment: e.target.value,
+                            })
+                          }
+                          label="Квартира"
+                        />
                       </div>
-                      <Input label="Сумма доставки" />
                     </div>
                   </div>
                 </div>
@@ -85,12 +168,30 @@ export const DeliveryInfoPage = () => {
                 <div className="flex flex-col gap-6">
                   <b className="text-start">Выберите пункт доставки</b>
                   <div className="w-[50%]">
-                    <Select label="виберите пункт из списка">
-                      <Option>Москва, ул Первомайская 14</Option>
-                      <Option>Душанбе, ул Алишер Навои 55</Option>
-                      <Option>Худжанд, ул Чаббор Р 68</Option>
-                      <Option>Истаравшан, ул Исмоили Сомони 10</Option>
-                      <Option>Душанбе, ул Короче да</Option>
+                    <Select
+                      label="виберите пункт из списка"
+                      onChange={(selectValue) => {
+                        setCourierDelivery({
+                          ...courierDelivery,
+                          pickupAddress: selectValue,
+                        });
+                      }}
+                    >
+                      <Option value="Дашанбе, ул Мушфики 14">
+                        Дашанбе, ул Мушфики 14
+                      </Option>
+                      <Option value="Душанбе, ул Алишер Навои 55">
+                        Душанбе, ул Алишер Навои 55
+                      </Option>
+                      <Option value="Худжанд, ул Чаббор Р 68">
+                        Худжанд, ул Чаббор Р 68
+                      </Option>
+                      <Option value="Истаравшан, ул Исмоили Сомони 10">
+                        Истаравшан, ул Исмоили Сомони 10
+                      </Option>
+                      <Option value="Душанбе, Саъдии Шерози">
+                        Душанбе, Саъдии Шерози
+                      </Option>
                     </Select>
                   </div>
                   <div className="text-start">
@@ -102,12 +203,12 @@ export const DeliveryInfoPage = () => {
                   </div>
                 </div>
               )}
-              <Link
-                to="/payment"
+              <div
+                onClick={addDelivery}
                 className="w-[308px] h-[50px] flex justify-center items-center bg-[#212526] text-white"
               >
                 ДАЛЕЕ
-              </Link>
+              </div>
             </div>
           </div>
           <div className="flex-1 flex justify-center py-[30px] px-[30px] bg-[#212526] h-[212px] rounded text-white">
