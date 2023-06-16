@@ -13,7 +13,7 @@ export const News = () => {
             при которой его правосубъектность отличается от правосубъектности
             лиц, в нем участвующих. Компании имеют статус юридического лица.
           </p>
-          <Link to='/detail-news' className="bg-[#F05A00] hover:bg-black text-white w-[250px] h-[50px] ">
+          <Link to='/detail-news' className="bg-[#F05A00] hover:bg-black text-white w-[250px] flex justify-center items-center h-[50px] ">
             ПЕРЕЙТИ К НОВОСТЯМ
           </Link>
         </div>

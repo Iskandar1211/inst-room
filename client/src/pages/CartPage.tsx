@@ -8,6 +8,7 @@ import {
   removeFromCart,
 } from "../store/reducers/Cart";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { Breadcrumbs } from "@material-tailwind/react";
 
 export const CartPage = () => {
   const dispatch = useAppDispatch();
@@ -15,15 +16,17 @@ export const CartPage = () => {
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.total;
   }, 0);
+  const discount = (totalPrice / 100) * 5;
+
   return (
     <div>
       <div className=" lg:px-32 md:px-7 flex flex-col gap-6 max-sm:px-4 sm:px-6 py-6 bg-[#CBCBCB]">
-        <div className="flex gap-2">
-          <span className="text-[#8A8A8A]">
-            <Link to="/">Главная</Link>
-          </span>
-          / <Link to="/cart">Корзина</Link>
-        </div>
+        <Breadcrumbs>
+          <Link className="opacity-60" to="/">
+            Главная
+          </Link>
+          <Link to="/cart">Корзина</Link>
+        </Breadcrumbs>
         <div className="text-4xl flex justify-between">
           Корзина
           <div className="w-fit px-2 py-1 border border-[#3B3B3B] text-[16px] cursor-pointer text-[#3B3B3B]">
@@ -93,15 +96,18 @@ export const CartPage = () => {
               style={{ borderBottom: "1px solid gray" }}
             >
               <span>Скидка</span>
-              <span>— 250 ₽</span>
+              <span>— {discount} ₽</span>
             </div>
             <div className="flex justify-between text-[20px] py-2">
               <span>К оплате</span>
               <span className="text-[#F05A00]">{totalPrice} ₽</span>
             </div>
-            <div className="w-[280px] h-[50px] bg-[#F05A00] text-white flex justify-center items-center">
+            <Link
+              to="/order-form"
+              className="w-[280px] h-[50px] bg-[#F05A00] text-white flex justify-center items-center"
+            >
               ПЕРЕЙТИ К ОФОРМЛЕНИЮ
-            </div>
+            </Link>
           </div>
         </div>
       </div>

@@ -10,6 +10,10 @@ import { GardenInventoryPage } from "./pages/GardenInventoryPage";
 import { CartPage } from "./pages/CartPage";
 import { FavoritesPage } from "./pages/FavoritesPage";
 import { DarkCompairPage } from "./pages/DarkCompairPage";
+import { DetalNewsPage } from "./pages/DetalNewsPage";
+import { OrderFormPage } from "./pages/OrderFormPage";
+import { DeliveryInfoPage } from "./pages/DeliveryInfoPage";
+import { PaymentPage } from "./pages/PaymentPage";
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/dark-compair" element={<DarkCompairPage />} />
+        <Route path="/detail-news" element={<DetalNewsPage />} />
+        <Route path="/order-form" element={<OrderFormPage />} />
+        <Route path="/delivery-info" element={<DeliveryInfoPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
       <Footter />
     </div>
