@@ -6,40 +6,94 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import { products } from "../components/Carousel/data";
+import AccordionHistoryBuy from "../components/UX-UI/Accordion/AccordionHistoryBuy";
+import moment from "moment";
+import { IProductAcord } from "../types/Model";
 
-interface Props {
-  id: number;
-  open: number;
-}
 
 export const ProfilePage = () => {
-  function Icon({ id, open }: Props) {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className={`${
-          id === open ? "rotate-180" : ""
-        } h-5 w-5 transition-transform`}
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-      </svg>
-    );
-  }
+ 
 
-  const [open, setOpen] = useState(0);
+  const products: IProductAcord[] = [
+    {
+      id: crypto.randomUUID(),
+      orderNumber:1,
+      created: moment().subtract(10, "days").calendar(),
+      received: moment().subtract(10, "days").calendar(),
+      purchases: [
+        {
+          id: crypto.randomUUID(),
+          name: "Emal Big",
+          img: "/Painting-supplies/Emal-116-big.png",
+          price: 500,
+          inStock: true,
+          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
+          isNew: true,
+          total: 0,
+          quantity: 1,
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Emal",
+          img: "/Painting-supplies/Emal-116.png",
+          price: 650,
+          inStock: false,
+          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
+          isNew: true,
+          total: 0,
+          quantity: 1,
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Emal Big",
+          img: "/electric/nozzle.png",
+          price: 500,
+          inStock: true,
+          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
+          isNew: true,
+          total: 0,
+          quantity: 2,
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Emal",
+          img: "/electric/screwdriver.png",
+          price: 650,
+          inStock: false,
+          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
+          isNew: true,
+          total: 0,
+          quantity: 1,
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Emal Big",
+          img: "/electric/nozzle.png",
+          price: 500,
+          inStock: true,
+          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
+          isNew: true,
+          total: 0,
+          quantity: 1,
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Emal",
+          img: "/electric/screwdriver.png",
+          price: 650,
+          inStock: false,
+          detailed: "Эмаль Condor ПФ-115 жёлтая 1,8 кг",
+          isNew: true,
+          total: 0,
+          quantity: 1,
+        },
+      ],
+    },
+  ];
 
-  const handleOpen = (value: number) => {
-    setOpen(open === value ? 0 : value);
-  };
-
-  const totalPrice = products.reduce((acum, item) => {
-    return acum + item.total;
-  }, 0);
+  // const totalPrice = products.reduce((acum, item) => {
+  //   return acum + item.total;
+  // }, 0);
 
   const [userInfo, setUserInfo] = useState(false);
 
@@ -102,122 +156,9 @@ export const ProfilePage = () => {
           </div>
           <div className="flex-[3] bg-white p-4">
             {!userInfo ? (
-              <Fragment>
-                <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
-                  <AccordionHeader onClick={() => handleOpen(1)}>
-                    <div className="flex justify-around w-[100%] items-center">
-                      <b>Заказ № 25463</b>
-                      <div className="flex gap-[12px] text-[#8A8A8A] font-normal">
-                        <p>Создан:</p>
-                        <p>14.07.2022</p>
-                      </div>
-                      <div className="flex gap-[12px] text-[#8A8A8A] font-normal">
-                        <p>Создан:</p>
-                        <p>14.07.2022</p>
-                      </div>
-                    </div>
-                  </AccordionHeader>
-                  <AccordionBody>
-                    {products.map((product) => (
-                      <div
-                        key={product.id}
-                        className="grid grid-cols-3 items-center px-3 bg-white py-3"
-                      >
-                        <div className="flex gap-2 items-center">
-                          <img
-                            className="w-[60px] h-[60px]"
-                            src={product.img}
-                            alt={product.name}
-                          />
-                          <div>{product.detailed}</div>
-                        </div>
-                        <div>
-                          <div>{product.price} ₽</div>
-                        </div>
-                        <div className="flex justify-around">
-                          <div>{product.total} ₽</div>
-                        </div>
-                      </div>
-                    ))}
-                  </AccordionBody>
-                </Accordion>
-                <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
-                  <AccordionHeader onClick={() => handleOpen(2)}>
-                    <div className="flex justify-around w-[100%] items-center">
-                      <b>Заказ № 25463</b>
-                      <div className="flex gap-[12px] text-[#8A8A8A] font-normal">
-                        <p>Создан:</p>
-                        <p>14.07.2022</p>
-                      </div>
-                      <div className="flex gap-[12px] text-[#8A8A8A] font-normal">
-                        <p>Создан:</p>
-                        <p>14.07.2022</p>
-                      </div>
-                    </div>
-                  </AccordionHeader>
-                  <AccordionBody>
-                    {products.map((product) => (
-                      <div
-                        key={product.id}
-                        className="grid grid-cols-3 items-center px-3 bg-white py-3"
-                      >
-                        <div className="flex gap-2 items-center">
-                          <img
-                            className="w-[60px] h-[60px]"
-                            src={product.img}
-                            alt={product.name}
-                          />
-                          <div>{product.detailed}</div>
-                        </div>
-                        <div>
-                          <div>{product.price} ₽</div>
-                        </div>
-                        <div className="flex justify-around">
-                          <div>{product.total} ₽</div>
-                        </div>
-                      </div>
-                    ))}
-                  </AccordionBody>
-                </Accordion>
-                <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
-                  <AccordionHeader onClick={() => handleOpen(3)}>
-                    <div className="flex justify-around w-[100%] items-center">
-                      <b>Заказ № 25463</b>
-                      <div className="flex gap-[12px] text-[#8A8A8A] font-normal">
-                        <p>Создан:</p>
-                        <p>14.07.2022</p>
-                      </div>
-                      <div className="flex gap-[12px] text-[#8A8A8A] font-normal">
-                        <p>Создан:</p>
-                        <p>14.07.2022</p>
-                      </div>
-                    </div>
-                  </AccordionHeader>
-                  <AccordionBody>
-                    {products.map((product) => (
-                      <div
-                        key={product.id}
-                        className="grid grid-cols-3 items-center px-3 bg-white py-3"
-                      >
-                        <div className="flex gap-2 items-center">
-                          <img
-                            className="w-[60px] h-[60px]"
-                            src={product.img}
-                            alt={product.name}
-                          />
-                          <div>{product.detailed}</div>
-                        </div>
-                        <div>
-                          <div>{product.price} ₽</div>
-                        </div>
-                        <div className="flex justify-around">
-                          <div>{product.total} ₽</div>
-                        </div>
-                      </div>
-                    ))}
-                  </AccordionBody>
-                </Accordion>
-              </Fragment>
+              products.map((product) => (
+                <AccordionHistoryBuy product={product} />
+              ))
             ) : (
               <div className="">
                 <div className="text-start text-[20px] mb-[24px]">
@@ -250,7 +191,9 @@ export const ProfilePage = () => {
                   <Input label="Старый пароль" />
                   <Input label="Новый пароль" />
                   <Input label="Подтвердите новый пароль" />
-                  <p className="text-[12px] text-[#8A8A8A] text-start">Пароль не менее 6 символов, содержит заглавные буквы (A-Z)</p>
+                  <p className="text-[12px] text-[#8A8A8A] text-start">
+                    Пароль не менее 6 символов, содержит заглавные буквы (A-Z)
+                  </p>
                 </div>
               </div>
             )}

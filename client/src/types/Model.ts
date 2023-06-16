@@ -10,3 +10,10 @@ export interface IProduct {
     quantity: number
 }
 
+export interface IProductAcord {
+    id: string,
+    orderNumber: number,
+    created: string,
+    received: string,
+    purchases: IProduct[]
+}
