@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Card } from "../../Card";
+import { Card } from "../cards/Card";
 import { IProduct } from "../../../types/Model";
 
 interface Props {

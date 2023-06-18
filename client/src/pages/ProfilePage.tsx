@@ -1,14 +1,10 @@
 import { Breadcrumbs, Input } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import { Fragment, useState, useEffect } from "react";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
-import AccordionHistoryBuy from "../components/UX-UI/Accordion/AccordionHistoryBuy";
-import moment from "moment";
-import { IHistoryOfOrder, IProductAcord } from "../types/Model";
+import { useState, useEffect } from "react";
+
+import AccordionHistoryBuy from "../components/UX-UI/accordion/AccordionHistoryBuy";
+
+import { IHistoryOfOrder } from "../types/Model";
 
 export const ProfilePage = () => {
   const [products, setProducts] = useState<IHistoryOfOrder[]>([]);
@@ -84,9 +80,13 @@ export const ProfilePage = () => {
           </div>
           <div className="flex-[3] bg-white p-4">
             {!userInfo ? (
-              products.map((product) => (
-                <AccordionHistoryBuy product={product} />
-              ))
+              products.length === 0 ? (
+                <div className="flex justify-center items-center">История пусто</div>
+              ) : (
+                products.map((product) => (
+                  <AccordionHistoryBuy product={product} />
+                ))
+              )
             ) : (
               <div className="">
                 <div className="text-start text-[20px] mb-[24px]">

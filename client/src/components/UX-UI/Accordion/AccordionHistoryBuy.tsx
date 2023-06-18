@@ -70,7 +70,7 @@ export default function AccordionHistoryBuy({ product }: PropsAccordion) {
                   src={purchas.img}
                   alt={purchas.name}
                 />
-                <div>{purchas.detailed}</div>
+                <div>{purchas.name}</div>
               </div>
               <div>
                 <div>
@@ -93,10 +93,10 @@ export default function AccordionHistoryBuy({ product }: PropsAccordion) {
             <div>
               {product.orders.map((order) => (
                 <div className="text-start">
-                  <div>Имя: {order.name}</div>
                   <div>Фамилия: {order.lastName}</div>
+                  <div>Имя: {order.name}</div>
                   <div>Телефон: {order.phone}</div>
-                  <div>Emain: {order.email}</div>
+                  <div>Email: {order.email}</div>
                 </div>
               ))}
             </div>

@@ -16,7 +16,6 @@ export const Navbar = () => {
         <div className="flex text-white gap-3">
           <Link to="/">О компании</Link>
           <Link to="/">Акции</Link>
-          <Link to="/">Хиты сезона</Link>
           <Link to="/">Новинки</Link>
         </div>
         <div className="flex gap-2">

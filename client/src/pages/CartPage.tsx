@@ -54,7 +54,7 @@ export const CartPage = () => {
               >
                 <div className="flex gap-2">
                   <img className="w-[60px] h-[60px]" src={product.img} alt="" />
-                  <div>{product.detailed}</div>
+                  <div>{product.name}</div>
                 </div>
                 <div>
                   <div>{product.price} ₽</div>
