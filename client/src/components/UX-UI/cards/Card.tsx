@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { AiOutlineHeart, AiOutlineCheck, AiFillHeart } from "react-icons/ai";
 import { FiBarChart2, FiCheckCircle } from "react-icons/fi";
 import { SlBasket } from "react-icons/sl";
-import { useAppDispatch } from "../store/hooks/hooks";
-import { addToCart } from "../store/reducers/Cart";
-import { addToFavorites } from "../store/reducers/Favorites";
-import { IProduct } from "../types/Model";
+import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../../store/hooks/hooks";
+import { addToCart } from "../../../store/reducers/Cart";
+import { addToFavorites } from "../../../store/reducers/Favorites";
+import { IProduct } from "../../../types/Model";
 
 interface Props {
   product: IProduct;
 }
-
 export const Card = ({ product }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
@@ -37,7 +37,7 @@ export const Card = ({ product }: Props) => {
     bgBuy,
   ].join(" ");
   return (
-    <div className="bg-white flex ml-3 gap-1 flex-col justify-between border px-2 py-2">
+    <div className="bg-white flex ml-3 gap-1 flex-col justify-between border px-2 py-2 w-[280px] h-[380px]">
       <div className="flex justify-between ">
         <p>
           {product.isNew ? (
@@ -50,37 +50,36 @@ export const Card = ({ product }: Props) => {
           <FiBarChart2 />
           <div>
             {isAddFavorites ? (
-              <AiFillHeart className='text-[#FC573B]'/>
+              <AiFillHeart className="text-[#FC573B]" />
             ) : (
               <AiOutlineHeart onClick={onAddFavorites} />
             )}
           </div>
         </div>
       </div>
-      <h1>{product.name}</h1>
       <div className="flex justify-center">
-        <img src={product.img} alt={product.name} />
+        <img
+          className="w-[210px] h-[185px]"
+          src={product.img}
+          alt={product.name}
+        />
       </div>
-      <div className="flex gap-2">
-        <span className="flex-1 bg-[#DEDBDB] cursor-pointer h-[3px] rounded"></span>
-        <span className="flex-1 bg-[#DEDBDB] cursor-pointer h-[3px] rounded"></span>
-        <span className="flex-1 bg-[#F05A00] cursor-pointer h-[3px] rounded"></span>
-        <span className="flex-1 bg-[#DEDBDB] cursor-pointer h-[3px] rounded"></span>
-      </div>
-      <p className="text-start">{product.detailed}</p>
+      <Link to='/card-product' className="hover:text-blue-500 cursor-pointer">{product.name}</Link>
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
           <p className="font-bold">{product.price} ₽</p>
-          <p className="text-[#DEDBDB] line-through">{product.price + 200}</p>
+          <p className="text-[#DEDBDB] line-through text-[14px]">
+            {product.isNew === false && (product.price + product.price / 100 * 5) }
+          </p>
         </div>
         <div className=" w-fit flex gap-3 items-center">
           <p>
             {product.inStock ? (
-              <span className="text-[#126935] flex gap-2 items-center justify-center">
+              <span className="text-[#126935] text-[12px] flex gap-2 items-center justify-center">
                 <AiOutlineCheck /> в наличии
               </span>
             ) : (
-              <span className="text-red-500">нет в наличии</span>
+              <span className="text-red-500">под заказ</span>
             )}
           </p>
           <div

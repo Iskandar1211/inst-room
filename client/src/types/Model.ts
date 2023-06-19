@@ -7,7 +7,8 @@ export interface IProduct {
     detailed: string,
     isNew: boolean,
     total: number,
-    quantity: number
+    quantity: number,
+    categories: string
 }
 
 export interface IProductAcord {
@@ -55,3 +56,4 @@ export interface IHistoryOfOrder {
     deliveryInfo: IDelivery[],
     payments: IPayment[]
 }
+

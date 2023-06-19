@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { IPayment } from "../types/Model";
 import { BsCheckCircleFill, BsArrowBarRight } from "react-icons/bs";
+import { clearCart } from "../store/reducers/Cart";
 
 export const PaymentPage = () => {
   const [complited, setComplited] = useState(false);
@@ -53,6 +54,7 @@ export const PaymentPage = () => {
         if (response.ok) {
           addAll();
           setComplited(true);
+          dispatch(clearCart());
         }
       })
       .catch((error) => {
@@ -182,17 +184,18 @@ export const PaymentPage = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-10 justify-center p-32 items-center">
-          <Link
-            className="text-2xl text-red-700 flex gap-4 items-center"
-            to="/"
-          >
-            <BsArrowBarRight className="text-3xl" /> Возвращаться на главную
-          </Link>
-          <BsCheckCircleFill className="text-[250px] text-[#F05A00] " />
-          <p className="text-4xl">
-            Заказ успешно подтвержден и оплата завершена!
-          </p>
+        <div className="py-16">
+          <div className="flex flex-col bg-white rounded-[5px] w-[422px] h-[400px] m-auto gap-10 justify-center px-4 items-center">
+            <b className="text-[20px]">Ваш заявка принята</b>
+            <BsCheckCircleFill className="text-[50px] text-[#F05A00] " />
+            <p>Спасибо за заявку! Мы свяжемся с вами в ближайщее время</p>
+            <Link
+              to="/"
+              className="w-[170px] h-[48px] py-[14px] px-[32px] flex justify-center items-center text-white bg-[#F05A00]"
+            >
+              НА ГЛАВНУЮ
+            </Link>
+          </div>
         </div>
       )}
     </div>

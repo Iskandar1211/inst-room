@@ -14,7 +14,8 @@ export interface Item {
     detailed: string,
     isNew: boolean,
     total: number,
-    quantity: number
+    quantity: number,
+    categories: string
 }
 
 const initialState: FavoritesState = {
@@ -44,7 +45,6 @@ export const Favorites = createSlice({
         clearFavorites: state => {
             state.items = []
         },
-       
     },
 })
 
