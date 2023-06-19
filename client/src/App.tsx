@@ -15,6 +15,9 @@ import { PaymentPage } from "./pages/PaymentPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage";
 import { CardProductPage } from "./pages/CardProductPage";
+import { TextPage } from "./pages/TextPage";
+import { ListDirectoryPage } from "./pages/ListDirectoryPage";
+import { ContactsPage } from "./pages/ContactsPage";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/card-product/:id" element={<CardProductPage />} />
+        <Route path="/text-page" element={<TextPage />} />
+        <Route path="/listDirectory-page" element={<ListDirectoryPage />} />
+        <Route path="/contacts-page" element={<ContactsPage />} />
       </Routes>
       <Footter />
     </div>
