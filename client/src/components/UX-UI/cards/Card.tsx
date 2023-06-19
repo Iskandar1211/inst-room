@@ -15,6 +15,7 @@ export const Card = ({ product }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddFavorites, setIsAddFavorites] = useState(false);
+  const [isAddComprison, setIsAddComprisson] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -47,7 +48,11 @@ export const Card = ({ product }: Props) => {
           )}
         </p>
         <div className="text-gray-400 flex gap-2 text-2xl cursor-pointer">
-          <FiBarChart2 />
+          {!isAddComprison ? (
+            <FiBarChart2 />
+          ) : (
+            <FiBarChart2 className="text-[#FC573B]" />
+          )}
           <div>
             {isAddFavorites ? (
               <AiFillHeart className="text-[#FC573B]" />
@@ -64,12 +69,18 @@ export const Card = ({ product }: Props) => {
           alt={product.name}
         />
       </div>
-      <Link to='/card-product' className="hover:text-blue-500 cursor-pointer">{product.name}</Link>
+      <Link
+        to={`/card-product/${product.id}`}
+        className="hover:text-blue-500 cursor-pointer"
+      >
+        {product.name}
+      </Link>
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
           <p className="font-bold">{product.price} ₽</p>
           <p className="text-[#DEDBDB] line-through text-[14px]">
-            {product.isNew === false && (product.price + product.price / 100 * 5) }
+            {product.isNew === false &&
+              product.price + (product.price / 100) * 5}
           </p>
         </div>
         <div className=" w-fit flex gap-3 items-center">

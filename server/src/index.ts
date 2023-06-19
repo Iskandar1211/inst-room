@@ -56,7 +56,7 @@ app.post('/create-history-of-orders', async (req: Request, res: Response) => {
 
 
 
-app.post('/create-product', (req: Request, res: Response) => {
+app.post('/create-order', (req: Request, res: Response) => {
   const newProduct = req.body;
   orders.push(newProduct);
   res.send('продукт успешно создан')
@@ -585,6 +585,15 @@ app.get('/for-home-and-cottage', (req: Request, res: Response) => {
 app.get('/products', (req: Request, res: Response) => {
   res.send(products)
 })
+
+app.get('/products/:id', (req: Request, res: Response) => {
+  const { id } = req.params
+  const findProduct = products.find(product => product.id === id)
+  res.send(findProduct)
+})
+
+
+
 
 app.listen(port, () => {
   console.log(`Сервер запущен на порту ${port}`);

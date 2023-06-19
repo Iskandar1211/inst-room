@@ -14,13 +14,15 @@ export const Header = () => {
   const products = useAppSelector((state) => state.cart.items);
   const favorites = useAppSelector((state) => state.favorites.items);
   const totalPrice = products.reduce((acum, item) => {
-    return acum + item.price;
+    return acum + item.total;
   }, 0);
+  const discount = Math.floor((totalPrice / 100) * 5);
+  const resultBuy = totalPrice - discount;
 
   const [isRegistred, setIsRegistred] = useState(true);
   const [login, setLogin] = useState(true);
   const [loginConfirm, setLoginConfirg] = useState(true);
-  
+
   return (
     <div className="bg-[#212526] h-[10vh]">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[100%] flex justify-between items-center">
@@ -76,7 +78,7 @@ export const Header = () => {
           </Link>
           <div className="text-white flex flex-col justify-center ml-2">
             <p>Товаров на сумму</p>
-            <p className="text-start">{totalPrice} &#8381;</p>
+            <p className="text-start">{resultBuy} &#8381;</p>
           </div>
         </div>
       </div>

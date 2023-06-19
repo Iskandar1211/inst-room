@@ -3,7 +3,7 @@ import { IProduct } from "../types/Model";
 import { FeaturesCarousel } from "./UX-UI/carousel/FeaturesCarousel";
 
 export const FeaturedItems = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);  
 
   const [news, SetNews] = useState<IProduct[]>([]);
   const [filterProducts, setFilterProducts] = useState<IProduct[]>([]);
