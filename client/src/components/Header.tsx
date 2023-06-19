@@ -27,7 +27,7 @@ export const Header = () => {
             Заказать звонок
           </a></div>
         </div>
-        <div className="md:h-14 md:-mt-[16%] md:ml-22 md:flex md:absolute fixed gap-1 top-64 z-10 left-[67%]">
+        <div className="md:h-14 md:-mt-[16%] md:ml-22 md:flex md:absolute fixed gap-1 top-64 z-10 left-[55%]">
           <Link
             to="/favorites"
             className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] md:relative cursor-pointer hover:bg-[#F05A00]"
