@@ -560,7 +560,7 @@ const products: IProduct[] = [{
   categories: 'Электрооборудование',
 },
 
-]
+];
 
 app.get('/painting-supplies', (req: Request, res: Response) => {
   const paintingSupplies = products.filter(product => product.categories === 'Малярные товары');

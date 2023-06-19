@@ -16,9 +16,11 @@ export const Header = () => {
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.price;
   }, 0);
+
   const [isRegistred, setIsRegistred] = useState(true);
   const [login, setLogin] = useState(true);
-  const [loginConfirm, setLoginConfirg] = useState(false);
+  const [loginConfirm, setLoginConfirg] = useState(true);
+  
   return (
     <div className="bg-[#212526] h-[10vh]">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[100%] flex justify-between items-center">

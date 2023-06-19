@@ -14,10 +14,9 @@ import { DeliveryInfoPage } from "./pages/DeliveryInfoPage";
 import { PaymentPage } from "./pages/PaymentPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage";
-
+import { CardProductPage } from "./pages/CardProductPage";
 
 function App() {
-    
   return (
     <div className="App">
       <Header />
@@ -33,6 +32,7 @@ function App() {
         <Route path="/delivery-info" element={<DeliveryInfoPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
+        <Route path="/card-product/:id" element={<CardProductPage />} />
       </Routes>
       <Footter />
     </div>

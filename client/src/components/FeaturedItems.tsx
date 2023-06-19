@@ -15,7 +15,7 @@ export const FeaturedItems = () => {
         setProducts(product);
         SetNews(products.filter((product) => product.isNew === true));
       });
-  });
+  }, []);
 
   const onFilterProducts = (item: string) => {
     if (item === "Новинки") {

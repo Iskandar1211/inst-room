@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineHeart, AiOutlineCheck, AiFillHeart } from "react-icons/ai";
 import { FiBarChart2, FiCheckCircle } from "react-icons/fi";
 import { SlBasket } from "react-icons/sl";
+import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 import { addToCart } from "../../../store/reducers/Cart";
 import { addToFavorites } from "../../../store/reducers/Favorites";
@@ -63,7 +64,7 @@ export const Card = ({ product }: Props) => {
           alt={product.name}
         />
       </div>
-      <h1 className="hover:text-blue-500 cursor-pointer">{product.name}</h1>
+      <Link to='/card-product' className="hover:text-blue-500 cursor-pointer">{product.name}</Link>
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
           <p className="font-bold">{product.price} ₽</p>
