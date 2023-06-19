@@ -2,9 +2,8 @@ import { Breadcrumbs, Input } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import AccordionHistoryBuy from "../components/UX-UI/accordion/AccordionHistoryBuy";
-
 import { IHistoryOfOrder } from "../types/Model";
+import AccordionHistoryBuy from "../components/UX-UI/Accordion/AccordionHistoryBuy";
 
 export const ProfilePage = () => {
   const [products, setProducts] = useState<IHistoryOfOrder[]>([]);
@@ -81,7 +80,9 @@ export const ProfilePage = () => {
           <div className="flex-[3] bg-white p-4">
             {!userInfo ? (
               products.length === 0 ? (
-                <div className="flex justify-center items-center">История пусто</div>
+                <div className="flex justify-center items-center">
+                  История пусто
+                </div>
               ) : (
                 products.map((product) => (
                   <AccordionHistoryBuy product={product} />
