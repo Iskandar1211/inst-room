@@ -13,15 +13,11 @@ export const Footter = () => {
             <p>Электрооборудование</p>
             <p>Спецодежда</p>
             <p>Для дома и дачи</p>
-            <p>Сезонное</p>
-            <p>Инструмент</p>
           </div>
           <div className="flex-1 text-white text-start flex flex-col gap-3">
             <p>О компании</p>
             <p>Контакты</p>
             <p>Новинки</p>
-            <p>Хиты сезона</p>
-            <p>Распродажи</p>
           </div>
           <div className="flex-1 text-start">
             <div className="flex flex-col gap-3">

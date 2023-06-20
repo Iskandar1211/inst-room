@@ -14,7 +14,8 @@ export interface Item {
     detailed: string,
     isNew: boolean,
     total: number,
-    quantity: number
+    quantity: number,
+    categories: string
 }
 
 const initialState: CartState = {

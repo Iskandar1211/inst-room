@@ -13,6 +13,8 @@ import { LoginConfirm } from "./UX-UI/dialog/LoginConfirm";
 export const Header = () => {
   const products = useAppSelector((state) => state.cart.items);
   const favorites = useAppSelector((state) => state.favorites.items);
+  const comparison = useAppSelector((state) => state.comparison.comparison);
+
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.total;
   }, 0);
@@ -26,9 +28,9 @@ export const Header = () => {
   return (
     <div className="bg-[#212526] h-[10vh]">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[100%] flex justify-between items-center">
-        <div className="max-sm:w-1/4 md:w-1/8">
+        <Link to='/' className="max-sm:w-1/4 md:w-1/8">
           <img src="logo.svg" alt="logo" />
-        </div>
+        </Link>
         <div className="max-sm:flex max-sm:flex-col text-[#fff] sm:flex sm:gap-2">
           <span>Время работы:</span> <span>10:00-20:00</span>
         </div>
@@ -52,7 +54,7 @@ export const Header = () => {
           >
             <FiBarChart2 className="text-white" />
             <span className="absolute text-[0.9rem] bg-[#F05A00] rounded-full px-1 h-3 flex items-center justify-center py-2 right-4 top-4 text-white">
-              0
+              {comparison.length}
             </span>
           </Link>
           {!isRegistred && <Registration />}

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 import { addToCart } from "../../../store/reducers/Cart";
 import { addToFavorites } from "../../../store/reducers/Favorites";
+import { addToСomparison } from "../../../store/reducers/Сomparison";
 import { IProduct } from "../../../types/Model";
 
 interface Props {
@@ -32,6 +33,12 @@ export const Card = ({ product }: Props) => {
       setIsAddFavorites(true);
     }
   };
+  const onAddCompaier = () => {
+    if (!isAddComprison) {
+      dispatch(addToСomparison(product));
+      setIsAddComprisson(true);
+    }
+  };
   const bgBuy = isClicked ? "bg-[#F05A00] text-white" : "";
   const buyStyles = [
     "border text-3xl cursor-pointer w-[60px] h-[56px] flex justify-center items-center border-[#F05A00] text-[#F05A00]",
@@ -49,7 +56,7 @@ export const Card = ({ product }: Props) => {
         </p>
         <div className="text-gray-400 flex gap-2 text-2xl cursor-pointer">
           {!isAddComprison ? (
-            <FiBarChart2 />
+            <FiBarChart2 onClick={onAddCompaier} />
           ) : (
             <FiBarChart2 className="text-[#FC573B]" />
           )}
