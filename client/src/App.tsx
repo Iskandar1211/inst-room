@@ -16,6 +16,7 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage";
 import { CardProductPage } from "./pages/CardProductPage";
 
+
 function App() {
   return (
     <div className="App">

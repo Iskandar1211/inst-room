@@ -1,3 +1,4 @@
+import { Tooltip } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { AiOutlineHeart, AiOutlineCheck, AiFillHeart } from "react-icons/ai";
 import { FiBarChart2, FiCheckCircle } from "react-icons/fi";
@@ -60,6 +61,7 @@ export const Card = ({ product }: Props) => {
           ) : (
             <FiBarChart2 className="text-[#FC573B]" />
           )}
+
           <div>
             {isAddFavorites ? (
               <AiFillHeart className="text-[#FC573B]" />

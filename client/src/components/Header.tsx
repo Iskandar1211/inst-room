@@ -28,13 +28,13 @@ export const Header = () => {
   return (
     <div className="bg-[#212526] h-[10vh]">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[100%] flex justify-between items-center">
-        <Link to='/' className="max-sm:w-1/4 md:w-1/8">
+        <Link to="/" className="max-sm:w-1/4 md:w-1/8">
           <img src="logo.svg" alt="logo" />
         </Link>
         <div className="max-sm:flex max-sm:flex-col text-[#fff] sm:flex sm:gap-2">
           <span>Время работы:</span> <span>10:00-20:00</span>
         </div>
-        <div className="flex flex-col max-sm:hidden">
+        <div className="flex flex-col items-center max-sm:hidden">
           <span className="text-white">+7 495 120-32-14</span>
           <RequestAcall />
         </div>

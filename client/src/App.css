@@ -1,0 +1,31 @@
+.nav-filter {
+    border-right: 1px solid #edaa0f;
+  }
+  
+  .nav-filter::-webkit-scrollbar {
+    width: 4px;
+    cursor: pointer;
+  }
+  
+  .nav-filter::-webkit-scrollbar-thumb {
+    background-color: #3b8ddf;
+    border-radius: 10px;
+  }
+  
+  .nav-filter::-webkit-scrollbar-thumb:hover {
+    background-color: #0e2235;
+  }
+  
+  .nav-filter::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .nav-filter::-webkit-scrollbar-thumb {
+    background-color: #e3ab2a;
+    border-radius: 10px;
+  }
+  
+  .nav-filter::-webkit-scrollbar-thumb:hover {
+    background-color: #0e2235;
+  }
+  
