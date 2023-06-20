@@ -1,131 +1,147 @@
-import React, { useState } from "react";
+import { Option, Select } from "@material-tailwind/react";
+import React, { useState, useEffect } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
-
-interface ICatalog {
-  id: string;
-  name: string;
-  img: string;
-}
+import { Card } from "../components/UX-UI/cards/Card";
+import { IProduct } from "../types/Model";
 
 export const CatalogPage = () => {
-  const [catalogs, setCatalogs] = useState<ICatalog[]>([
-    {
-      id: crypto.randomUUID(),
-      name: "Поливочный инвентарь",
-      img: "/catalog/1.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Насосы",
-      img: "/catalog/2.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Поликарбонат",
-      img: "/catalog/3.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Садово-огородный инвентарь",
-      img: "/catalog/4.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Поливочный инвентарь",
-      img: "/catalog/5.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Грунд",
-      img: "/catalog/6.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Сетка Рабица",
-      img: "/catalog/7.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Летний душ",
-      img: "/catalog/4.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Умывальники, рукомойники",
-      img: "/catalog/3.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Побелка",
-      img: "/catalog/5.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Краска садовая",
-      img: "/catalog/2.png",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Удобрения",
-      img: "/catalog/6.png",
-    },
-  ]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:3009/products")
+      .then((response) => response.json())
+      .then((product) => {
+        setProducts(product);
+        setFilteredProducts(product);
+      });
+  }, []);
+
+  const onSortProducts = (value: string | undefined) => {
+    if (value === "По убыванию цены") {
+      const sortedProducts = [...products].sort((a, b) => b.price - a.price);
+      setProducts(sortedProducts);
+    } else if (value === "По возрастание цены") {
+      const sortedProducts = [...products].sort((a, b) => a.price - b.price);
+      setProducts(sortedProducts);
+    } else if (value === "Сначала новые") {
+      const sortedProducts = [...products].sort((a, b) =>
+        a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1
+      );
+      setProducts(sortedProducts);
+    } else if (value === "От А до Я") {
+      const sortedProducts = [...products].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setProducts(sortedProducts);
+    } else if (value === "От Я до А") {
+      const sortedProducts = [...products].sort((a, b) =>
+        b.name.localeCompare(a.name)
+      );
+      setProducts(sortedProducts);
+    }
+  };
+
+  const [selectedItem, setSelectedItem] = useState<string>("");
+
+  const onFilteredProducts = (item: string) => {
+    setSelectedItem(item);
+    const filter = filteredProducts.filter(
+      (product) => product.categories === item
+    );
+    setProducts(filter);
+  };
 
   return (
-    <div className="bg-[#CBCBCB;]">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 pt-5 flex flex-col gap-4">
-        <div className="text-start">
-          <span className="text-[#8A8A8A]">
-            <Link to="/">Главная</Link>
-          </span>
-          / <Link to="/catalog">Каталог</Link>
+    <div>
+      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 flex flex-col gap-5">
+        <div className="text-start mt-4 flex gap-2">
+          <Link className="text-[#8A8A8A]" to="/">
+            Главная
+          </Link>
+          /<Link to="/catalog">Каталог</Link>
         </div>
         <div className="text-4xl text-start">Каталог</div>
-        <div className="bg-white">
-          <div className="mb-8">
-            <div className="flex">
-              <div className="flex-1 bg-white py-3 border cursor-pointer border-blue-gray-200">
-                Малярные товары
-              </div>
-              <div className="flex-1 bg-white py-3 border cursor-pointer border-blue-gray-200">
-                Электрооборудование
-              </div>
-              <div className="flex-1 bg-white py-3 border cursor-pointer border-blue-gray-200">
-                Спецодежда
-              </div>
+        <div className="flex gap-4">
+          <div className="flex-1 flex flex-col gap-6 mb-5">
+            <div className="bg-[#212526] text-white">
+              <ul>
+                <li
+                  onClick={() => onFilteredProducts("Малярные товары")}
+                  className={`border border-gray-400 px-2 py-4 flex justify-between cursor-pointer ${
+                    selectedItem === "Малярные товары" ? "bg-[#F05A00]" : ""
+                  }`}
+                >
+                  Малярные товары <IoIosArrowForward />
+                </li>
+                <li
+                  onClick={() => onFilteredProducts("Электрооборудование")}
+                  className={`border border-gray-400 px-2 py-4 flex justify-between cursor-pointer ${
+                    selectedItem === "Электрооборудование" ? "bg-[#F05A00]" : ""
+                  }`}
+                >
+                  Электроинструмент <IoIosArrowForward />
+                </li>
+                <li
+                  onClick={() => onFilteredProducts("Спецодежда")}
+                  className={`border border-gray-400 px-2 py-4 flex justify-between cursor-pointer ${
+                    selectedItem === "Спецодежда" ? "bg-[#F05A00]" : ""
+                  }`}
+                >
+                  Спецодежда <IoIosArrowForward />
+                </li>
+                <li
+                  onClick={() => onFilteredProducts("Для дома и дачи")}
+                  className={`border border-gray-400 px-2 py-4 flex justify-between cursor-pointer ${
+                    selectedItem === "Для дома и дачи" ? "bg-[#F05A00]" : ""
+                  }`}
+                >
+                  Для дома и дачи <IoIosArrowForward />
+                </li>
+              </ul>
             </div>
-            <div className="flex">
-              <div className="flex-1 bg-white py-3 border cursor-pointer border-blue-gray-200">
-                Сезонное
+            <div className="relative ">
+              <div className="absolute left-5 top-5 text-white text-start">
+                <p className="font-bold">Новое поступление</p>
+                <p className="text-[12px]">Успей покататься</p>
               </div>
-              <div className="flex-1 py-3 border border-blue-gray-400 cursor-pointer bg-[#F05A00] text-white">
-                Для дома и дачи
+              <img
+                className="w-[100%]"
+                src="/new-arrival.png"
+                alt="new-arrival"
+              />
+            </div>
+            <div className="relative ">
+              <div className="absolute left-5 top-5 text-white text-start">
+                <p className="font-bold">Печи со скидкой</p>
+                <p className="text-[12px]">до 30%</p>
               </div>
-              <div className="flex-1 bg-white py-3 border border-blue-gray-200 cursor-pointer">
-                Инструменты
-              </div>
+              <img className="w-[100%]" src="/oven.png" alt="new-arrival" />
             </div>
           </div>
-          <div className="flex flex-wrap gap-4 justify-center mb-6">
-            {catalogs.map((catalog) => (
-              <div className="w-[310px] h-[348px] flex flex-col bg-[#F2F5F7]">
-                <div className="flex justify-center py-[44px] px-[55px]">
-                  <img src={catalog.img} alt={catalog.name} />
-                </div>
-                {catalog.name === "Садово-огородный инвентарь" ? (
-                  <Link
-                    className="py-4 hover:bg-[#F05A00] cursor-pointer bg-black text-white"
-                    to="/garden-inventory-page"
-                  >
-                    Садово-огородный инвентарь
-                  </Link>
-                ) : (
-                  <p className="py-4 hover:bg-[#F05A00] cursor-pointer bg-black text-white">
-                    {catalog.name}
-                  </p>
-                )}
+          <div className="flex flex-col flex-[2.5] ">
+            <div className="flex">
+              <div className="flex items-center gap-1 ">
+                <p className="font-bold">Сортировать:</p>
+                <Select
+                  label="Выбирите сортировку"
+                  onChange={(value) => onSortProducts(value)}
+                >
+                  <Option value="По возрастание цены">
+                    По возрастание цены
+                  </Option>
+                  <Option value="По убыванию цены">По убыванию цены</Option>
+                  <Option value="Сначала новые">Сначала новые</Option>
+                  <Option value="От А до Я">От А до Я</Option>
+                  <Option value="От Я до А">От Я до А</Option>
+                </Select>
               </div>
-            ))}
+            </div>
+            <div className="grid grid-cols-3 gap-3 py-8">
+              {products.map((product) => (
+                <Card key={product.id} product={product} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
