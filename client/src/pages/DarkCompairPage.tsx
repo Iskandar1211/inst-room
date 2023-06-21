@@ -8,6 +8,7 @@ import { FiCheckCircle } from "react-icons/fi";
 import { addToCart } from "../store/reducers/Cart";
 import { IProduct } from "../types/Model";
 import { CompairCard } from "../components/UX-UI/cards/CompairCard";
+import { Breadcrumbs } from "@material-tailwind/react";
 
 export const DarkCompairPage = () => {
   const comparison = useAppSelector((state) => state.comparison.comparison);
@@ -15,15 +16,12 @@ export const DarkCompairPage = () => {
   return (
     <div className="bg-[#212526] py-5">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 flex flex-col gap-3">
-        <div className="flex gap-2 text-white">
-          <span className="text-[#8A8A8A]">
-            <Link to="/">Главная</Link>
-          </span>
-          /
-          <Link className="text-white" to="/dark-compair">
-            Сравнение
+        <Breadcrumbs className="mt-4 bg-[black]">
+          <Link className="opacity-60 text-white" to="/">
+            Главная
           </Link>
-        </div>
+          <Link to="/dark-compair" className="text-white">Сравнение</Link>
+        </Breadcrumbs>
         <div className="text-4xl text-white flex justify-between">
           <div>Сравнение товаров</div>
         </div>

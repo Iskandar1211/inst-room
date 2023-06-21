@@ -71,13 +71,13 @@ export const Card = ({ product }: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
+      <Link to={`/card-product/${product.id}`} className="flex justify-center">
         <img
           className="w-[210px] h-[185px]"
           src={product.img}
           alt={product.name}
         />
-      </div>
+      </Link>
       <Link
         to={`/card-product/${product.id}`}
         className="hover:text-[#F05A00] cursor-pointer"

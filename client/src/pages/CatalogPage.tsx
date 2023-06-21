@@ -1,4 +1,4 @@
-import { Option, Select } from "@material-tailwind/react";
+import { Breadcrumbs, Option, Select } from "@material-tailwind/react";
 import React, { useState, useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
@@ -80,12 +80,12 @@ export const CatalogPage = () => {
   return (
     <div>
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 flex flex-col gap-5">
-        <div className="text-start mt-4 flex gap-2">
-          <Link className="text-[#8A8A8A]" to="/">
+        <Breadcrumbs className="mt-4">
+          <Link className="opacity-60" to="/">
             Главная
           </Link>
-          /<Link to="/catalog">Каталог</Link>
-        </div>
+          <Link to="/catalog">Каталог</Link>
+        </Breadcrumbs>
         <div className="text-4xl text-start">Каталог</div>
         <div className="flex gap-4">
           <div className="flex-1 flex flex-col gap-6 mb-5">
