@@ -9,10 +9,10 @@ interface ISlider {
 }
 
 export const Slider = () => {
-  const [indexSlider, setIndexSlider] = useState(0);
-  setTimeout(() => {
-    nextSlide();
-  }, 4000);
+  const [indexCatalog, setIndexCatalog] = useState(0);
+  const [indexStocks, setIndexStocks] = useState(0);
+  const [indexPaints, setIndexPaints] = useState(0);
+  const [indexDrill, setIndexDrill] = useState(0);
 
   const sliderCatalog: ISlider[] = [
     {
@@ -102,11 +102,32 @@ export const Slider = () => {
       imgSrc: "/slider/4/4.jpg",
     },
   ];
-  const nextSlide = () => {
-    if (indexSlider >= 3) {
-      setIndexSlider(0);
+  const nextCatalog = () => {
+    if (indexCatalog >= 3) {
+      setIndexCatalog(0);
     } else {
-      setIndexSlider(indexSlider + 1);
+      setIndexCatalog(indexCatalog + 1);
+    }
+  };
+  const nextStocks = () => {
+    if (indexStocks >= 3) {
+      setIndexStocks(0);
+    } else {
+      setIndexStocks(indexStocks + 1);
+    }
+  };
+  const nextPaints = () => {
+    if (indexPaints >= 3) {
+      setIndexPaints(0);
+    } else {
+      setIndexPaints(indexPaints + 1);
+    }
+  };
+  const nextDrill = () => {
+    if (indexDrill >= 3) {
+      setIndexDrill(0);
+    } else {
+      setIndexDrill(indexDrill + 1);
     }
   };
   return (
@@ -114,7 +135,7 @@ export const Slider = () => {
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 flex gap-2 h-[100%] py-2">
         <div
           style={{
-            backgroundImage: `url(${sliderCatalog[indexSlider].imgSrc})`,
+            backgroundImage: `url(${sliderCatalog[indexCatalog].imgSrc})`,
             backgroundSize: "cover",
             transition: "1s linear",
           }}
@@ -122,7 +143,7 @@ export const Slider = () => {
         >
           <div className="text-white w-[100%] flex flex-col gap-32">
             <h1 className="text-5xl text-start">
-              {sliderCatalog[indexSlider].name}
+              {sliderCatalog[indexCatalog].name}
             </h1>
             <Link
               to={`/catalog/${"painting-supplies"}`}
@@ -132,7 +153,7 @@ export const Slider = () => {
             </Link>
           </div>
           <div
-            onClick={nextSlide}
+            onClick={nextCatalog}
             className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer"
           >
             <AiOutlineArrowRight className="text-white" />
@@ -140,16 +161,19 @@ export const Slider = () => {
         </div>
         <div
           style={{
-            backgroundImage: `url(${sliderStocks[indexSlider].imgSrc})`,
+            backgroundImage: `url(${sliderStocks[indexStocks].imgSrc})`,
             backgroundSize: "cover",
             transition: "1s linear",
           }}
           className="flex-1 relative px-4"
         >
           <div className="text-white text-3xl text-start">
-            {sliderStocks[indexSlider].name}
+            {sliderStocks[indexStocks].name}
           </div>
-          <div className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer">
+          <div
+            onClick={nextStocks}
+            className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer"
+          >
             <AiOutlineArrowRight className="text-white" />
           </div>
         </div>
@@ -157,31 +181,31 @@ export const Slider = () => {
           <div
             className="flex-1 relative px-4"
             style={{
-              backgroundImage: `url(${sliderPaints[indexSlider].imgSrc})`,
+              backgroundImage: `url(${sliderPaints[indexPaints].imgSrc})`,
               backgroundSize: "cover",
               transition: "1s linear",
             }}
           >
             <div className="text-white text-2xl text-start">
-              {sliderPaints[indexSlider].name}
+              {sliderPaints[indexPaints].name}
             </div>
-            <div className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer">
+            <div onClick={nextPaints} className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer">
               <AiOutlineArrowRight className="text-white" />
             </div>
           </div>
           <div
             className="flex-1 relative px-4"
             style={{
-              backgroundImage: `url(${sliderDrill[indexSlider].imgSrc})`,
+              backgroundImage: `url(${sliderDrill[indexDrill].imgSrc})`,
               backgroundSize: "cover",
               transition: "1s linear",
             }}
           >
             <div className="text-white text-2xl text-start">
-              {sliderDrill[indexSlider].name}
+              {sliderDrill[indexDrill].name}
             </div>
 
-            <div className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer">
+            <div onClick={nextDrill} className="px-2 py-2 bg-black w-fit text-3xl absolute left-1 bottom-1 hover:bg-[#F05A00] cursor-pointer">
               <AiOutlineArrowRight className="text-white" />
             </div>
           </div>

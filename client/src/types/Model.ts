@@ -57,3 +57,18 @@ export interface IHistoryOfOrder {
     payments: IPayment[]
 }
 
+export interface IRegistration {
+    id: string,
+    lastName: string,
+    name: string,
+    phone: string,
+    email: string,
+    password: string,
+    confirmPassword: string
+}
+export interface ILogin {
+    phone: string
+}
+export interface ILoginConfirm {
+    code: string
+}

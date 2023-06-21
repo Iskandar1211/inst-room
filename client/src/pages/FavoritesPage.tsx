@@ -1,4 +1,4 @@
-import { Option, Select } from "@material-tailwind/react";
+import { Breadcrumbs, Option, Select } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CardFavorites } from "../components/UX-UI/cards/CardFavorites";
@@ -39,15 +39,15 @@ export const FavoritesPage = () => {
       setSortFavorite(sortedFavorites);
     }
   };
-  
+
   return (
     <div className=" lg:px-32 md:px-7 flex flex-col gap-6 max-sm:px-4 sm:px-6 py-6 bg-[#CBCBCB]">
-      <div className="flex gap-2">
-        <span className="text-[#8A8A8A]">
-          <Link to="/">Главная</Link>
-        </span>
-        / <Link to="/favorites">Избранное</Link>
-      </div>
+      <Breadcrumbs className="mt-4">
+        <Link className="opacity-60" to="/">
+          Главная
+        </Link>
+        <Link to="/favorites">Избранное</Link>
+      </Breadcrumbs>
       <div className="text-4xl text-start">Избранное</div>
       <div className="flex">
         <div className="flex-1 text-start font-bold">

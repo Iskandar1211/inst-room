@@ -1,10 +1,9 @@
 import { Breadcrumbs, Input } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
 import AccordionHistoryBuy from "../components/UX-UI/accordion/AccordionHistoryBuy";
-
 import { IHistoryOfOrder } from "../types/Model";
+import { useAppSelector } from "../store/hooks/hooks";
 
 export const ProfilePage = () => {
   const [products, setProducts] = useState<IHistoryOfOrder[]>([]);
@@ -15,9 +14,6 @@ export const ProfilePage = () => {
       .then((historyBuys) => setProducts(historyBuys));
   }, []);
 
-  // const totalPrice = products.reduce((acum, item) => {
-  //   return acum + item.total;
-  // }, 0);
 
   const [userInfo, setUserInfo] = useState(false);
 
@@ -31,6 +27,8 @@ export const ProfilePage = () => {
     "h-[72px] flex items-center cursor-pointer justify-center ",
     userInfoLinksActive,
   ].join(" ");
+
+
 
   return (
     <div className="bg-[#CBCBCB]">
@@ -59,29 +57,13 @@ export const ProfilePage = () => {
                 Личная информация
               </p>
             </div>
-            <div className="relative ">
-              <div className="absolute left-5 top-5 text-white text-start">
-                <p className="font-bold">Новое поступление</p>
-                <p className="text-[12px]">Успей покататься</p>
-              </div>
-              <img
-                className="w-[100%]"
-                src="/new-arrival.png"
-                alt="new-arrival"
-              />
-            </div>
-            <div className="relative">
-              <div className="absolute left-5 top-5 text-white text-start">
-                <p className="font-bold">Печи со скидкой</p>
-                <p className="text-[12px]">до 30%</p>
-              </div>
-              <img className="w-[100%]" src="/oven.png" alt="new-arrival" />
-            </div>
           </div>
           <div className="flex-[3] bg-white p-4">
             {!userInfo ? (
               products.length === 0 ? (
-                <div className="flex justify-center items-center">История пусто</div>
+                <div className="flex justify-center items-center">
+                  История пусто
+                </div>
               ) : (
                 products.map((product) => (
                   <AccordionHistoryBuy product={product} />

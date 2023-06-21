@@ -13,7 +13,7 @@ export default class userController {
         }
     }
 
-    static onCreateUser() {
+    static onRegister() {
         return async (req: any, res: any) => {
             try {
                 if (!req.body) {

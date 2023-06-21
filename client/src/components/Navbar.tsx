@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 import { FiFacebook } from "react-icons/fi";
 import { Search } from "./Search";
 import { IProduct } from "../types/Model";
-import { Button, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
+import {
+  Button,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
 
 export const Navbar = () => {
   const [isSearch, setIsSearch] = useState(false);
@@ -37,31 +43,47 @@ export const Navbar = () => {
     fetch("http://localhost:3009/products")
       .then((response) => response.json())
       .then((product) => setProducts(product));
-  });
+  }, []);
 
   return (
     <div className="bg-black ">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[10vh] flex items-center justify-between"> 
-          <Menu>
-            <MenuHandler>
-              <Button className="flex bg-transparent gap-4 items-center hover:bg-[#F05A00] border-[#F05A00]"><RiBarChartHorizontalFill className="text-3xl" /> Каталог товаров </Button>
-            </MenuHandler>
-            <MenuList>
-            <Link to={`/catalog/${"painting-supplies"}`}><MenuItem>Малярные товары</MenuItem></Link>
-            <Link to={`/catalog/${"electrical"}`}><MenuItem>Электрооборудование</MenuItem></Link>
-            <Link to={`/catalog/${"overalls"}`}><MenuItem>Спецодежда</MenuItem></Link>
-            <Link to={`/catalog/${"for-home-and-cottage"}`}><MenuItem>Для дома и дачи</MenuItem></Link>               
-            </MenuList>
-          </Menu>
+      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[10vh] flex items-center justify-between">
+        <Menu>
+          <MenuHandler>
+            <Button className="flex bg-transparent gap-4 items-center hover:bg-[#F05A00] border-[#F05A00]">
+              <RiBarChartHorizontalFill className="text-3xl" /> Каталог товаров{" "}
+            </Button>
+          </MenuHandler>
+          <MenuList>
+            <Link to={`/catalog/${"painting-supplies"}`}>
+              <MenuItem>Малярные товары</MenuItem>
+            </Link>
+            <Link to={`/catalog/${"electrical"}`}>
+              <MenuItem>Электрооборудование</MenuItem>
+            </Link>
+            <Link to={`/catalog/${"overalls"}`}>
+              <MenuItem>Спецодежда</MenuItem>
+            </Link>
+            <Link to={`/catalog/${"for-home-and-cottage"}`}>
+              <MenuItem>Для дома и дачи</MenuItem>
+            </Link>
+          </MenuList>
+        </Menu>
         <div className="flex text-white gap-3">
-          <Link className="hover:text-[#F05A00]" to="/about">О компании</Link>
-          <Link className="hover:text-[#F05A00]" to="/stocks-page">Акции</Link>
-          <Link className="hover:text-[#F05A00]" to="/new-product">Новинки</Link>
+          <Link className="hover:text-[#F05A00]" to="/about">
+            О компании
+          </Link>
+          <Link className="hover:text-[#F05A00]" to="/stocks-page">
+            Акции
+          </Link>
+          <Link className="hover:text-[#F05A00]" to="/new-product">
+            Новинки
+          </Link>
         </div>
         <div className="flex gap-2">
-          <RxInstagramLogo className="bg-white cursor-pointer text-3xl rounded-full px-1" />
-          <SlSocialVkontakte className="bg-white cursor-pointer text-3xl rounded-full px-1" />
-          <FiFacebook className="bg-white cursor-pointer text-3xl rounded-full px-1" />
+          <RxInstagramLogo className="bg-white cursor-pointer text-3xl rounded-full px-1 hover:text-[#D52574]" />
+          <SlSocialVkontakte className="bg-white cursor-pointer text-3xl rounded-full px-1 hover:text-[#0272F1]" />
+          <FiFacebook className="bg-white cursor-pointer text-3xl rounded-full px-1 hover:text-[#6781B8]" />
         </div>
         <div className={styleForSearchContainer}>
           <label className="sr-only">Search</label>
@@ -111,7 +133,7 @@ export const Navbar = () => {
                 )}
                 <Link
                   onClick={() => setIsSearch(false)}
-                  to="/catalog"
+                  to={`/catalog/${"painting-supplies"}`}
                   className={`bg-[#3B3B3B] z-10 flex justify-center items-center text-2xl cursor-pointer text-white h-[60px]  rounded-lg ${widthFroSeacrchButton}`}
                 >
                   Показать все

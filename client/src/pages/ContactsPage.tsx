@@ -1,15 +1,17 @@
+import { Breadcrumbs } from "@material-tailwind/react";
 import React from "react";
 import { Link } from "react-router-dom";
 export const ContactsPage = () => {
   return (
-    <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 ">
-      <div className="flex ">
-        <span className="text-[#8a8a8a] gap-2">
-          <Link to="/">Главная</Link>/<span>Контакты</span>
-        </span>
-      </div>
+    <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 py-10">
+      <Breadcrumbs className="mt-4">
+        <Link className="opacity-60 " to="/">
+          Главная
+        </Link>
+        <Link to="/contacts">Контакты</Link>
+      </Breadcrumbs>
       <div className="flex text-3xl font-bold my-10">
-        <h1>КОНТАКТИ</h1>
+        <h1>Контакты</h1>
       </div>
       <div className="flex gap-10">
         <img

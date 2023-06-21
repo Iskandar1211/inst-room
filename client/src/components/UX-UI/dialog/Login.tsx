@@ -10,11 +10,35 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
+import { setLogin } from "../../../store/reducers/Registration";
 
-export function Login() {
-  const [open, setOpen] = React.useState(false);
+interface Props {
+  setIsLogin: (arg: boolean) => void;
+}
+
+export function Login({ setIsLogin }: Props) {
+  const [open, setOpen] = React.useState(true);
 
   const handleOpen = () => setOpen(!open);
+
+  const login = useAppSelector((state) => state.registration.login);
+
+  const dispatch = useAppDispatch();
+
+  const onLogin = () => {
+    fetch("http://localhost:3009/post-code", {
+      method: "POST",
+      body: JSON.stringify(login),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.ok) {
+        setIsLogin(true);
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -34,7 +58,13 @@ export function Login() {
         </div>
         <DialogBody divider>
           <div className="grid gap-6">
-            <Input label="Телефон" />
+            <Input
+              value={login.phone}
+              onChange={(e) =>
+                dispatch(setLogin({ ...login, phone: e.target.value }))
+              }
+              label="Телефон"
+            />
           </div>
         </DialogBody>
         <DialogFooter className="flex flex-col gap-[12px]">
@@ -42,7 +72,10 @@ export function Login() {
             variant="gradient"
             size="lg"
             color="indigo"
-            onClick={handleOpen}
+            onClick={() => {
+              handleOpen();
+              onLogin();
+            }}
           >
             ПОЛУЧИТЬ КОД
           </Button>

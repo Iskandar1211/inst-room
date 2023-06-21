@@ -9,12 +9,37 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
+import { setLoginConfirm } from "../../../store/reducers/Registration";
 
-export function LoginConfirm() {
-  const [open, setOpen] = React.useState(false);
+interface Props {
+  setIsLoginConfirm: (arg: boolean) => void;
+}
+
+export function LoginConfirm({ setIsLoginConfirm }: Props) {
+  const [open, setOpen] = React.useState(true);
 
   const handleOpen = () => setOpen(!open);
 
+  const loginConfirm = useAppSelector(
+    (state) => state.registration.loginConfirm
+  );
+
+  const dispatch = useAppDispatch();
+
+  const onLoginConfirm = () => {
+    fetch("http://localhost:3009/post-code", {
+      method: "POST",
+      body: JSON.stringify(loginConfirm),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.ok) {
+        setIsLoginConfirm(true);
+      }
+    });
+  };
   return (
     <React.Fragment>
       <div
@@ -34,9 +59,19 @@ export function LoginConfirm() {
         <DialogBody divider>
           <div className="grid gap-6">
             <p>4 цифры</p>
-            <Input label="Телефон" />
-            <p>Код отправлен на номер:  <span>*********5612</span></p>
-            <Button value='text'>Изменить</Button>
+            <Input
+              value={loginConfirm.code}
+              onChange={(e) =>
+                dispatch(
+                  setLoginConfirm({ ...loginConfirm, code: e.target.value })
+                )
+              }
+              label="Потдвердите код"
+            />
+            <p>
+              Код отправлен на номер: <span></span>
+            </p>
+            {/* <Button value='text'>Изменить</Button> */}
           </div>
         </DialogBody>
         <DialogFooter className="flex flex-col gap-[12px]">
@@ -44,12 +79,15 @@ export function LoginConfirm() {
             variant="gradient"
             size="lg"
             color="indigo"
-            onClick={handleOpen}
+            onClick={() => {
+              handleOpen();
+              onLoginConfirm();
+            }}
           >
             Войти
           </Button>
           <div className="text-[12px] flex gap-2 justify-end">
-          Отправить код ещё раз можно через 00:59
+            Отправить код ещё раз можно через 00:59
           </div>
         </DialogFooter>
       </Dialog>
