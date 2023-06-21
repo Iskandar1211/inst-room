@@ -15,7 +15,10 @@ import { PaymentPage } from "./pages/PaymentPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage";
 import { CardProductPage } from "./pages/CardProductPage";
-
+import { AboutCompany } from "./pages/AboutCompany";
+import { ContactsPage } from "./pages/ContactsPage";
+import { NewProduct } from "./pages/NewProduct";
+import { StocksPage } from "./pages/StocksPage";
 
 function App() {
   return (
@@ -25,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog/:categories" element={<CatalogPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/dark-compair" element={<DarkCompairPage />} />
@@ -34,6 +38,10 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/card-product/:id" element={<CardProductPage />} />
+        <Route path="/about" element={<AboutCompany />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/new-product" element={<NewProduct />} />
+        <Route path="/stocks-page" element={<StocksPage />} />
       </Routes>
       <Footter />
     </div>

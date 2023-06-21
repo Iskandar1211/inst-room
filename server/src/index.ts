@@ -591,6 +591,15 @@ app.get('/products/:id', (req: Request, res: Response) => {
   const findProduct = products.find(product => product.id === id)
   res.send(findProduct)
 })
+app.get('/stocks-products', (req: Request, res: Response) => {
+  const filterProduct = products.filter(product => product.isNew === false)
+  res.send(filterProduct)
+})
+
+app.get('/new-products', (req: Request, res: Response) => {
+  const filterProduct = products.filter(product => product.isNew === true)
+  res.send(filterProduct)
+})
 
 
 

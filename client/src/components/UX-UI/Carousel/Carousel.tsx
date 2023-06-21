@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Card } from "../cards/Card";
 import { IProduct } from "../../../types/Model";
+import { Link } from "react-router-dom";
 
 interface Props {
   title?: string;
@@ -11,7 +12,7 @@ interface Props {
   slideToShow: number;
 }
 
-export const Carousel = ({ title, products, slideToShow}: Props) => {
+export const Carousel = ({ title, products, slideToShow }: Props) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -49,9 +50,21 @@ export const Carousel = ({ title, products, slideToShow}: Props) => {
       },
     ],
   };
+  let titleLink: string = "";
+  if (title === "Малярные товары") {
+    titleLink = "painting-supplies";
+  } else if (title === "Электрооборудование") {
+    titleLink = "electrical";
+  } else if (title === "Спецодежда") {
+    titleLink = "overalls";
+  } else if (title === "Для дома и дачи") {
+    titleLink = "for-home-and-cottage";
+  }
   return (
-    <div className={`lg:w-[47%] py-4 w-[77%] m-auto`}>
-      <h2 className="text-4xl m-3 text-start"> {title} </h2>
+    <div className={`lg:w-[47%] py-4 w-[77%] m-auto flex flex-col gap-3`}>
+      <Link to={`/catalog/${titleLink}`} className="text-4xl m-3 text-start hover:text-[#F05A00]">
+        {title}
+      </Link>
       <Slider {...settings}>
         {products.map((product) => (
           <Card key={product.id} product={product} />

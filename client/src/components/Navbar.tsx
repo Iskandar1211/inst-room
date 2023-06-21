@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { FiFacebook } from "react-icons/fi";
 import { Search } from "./Search";
 import { IProduct } from "../types/Model";
+import { Button, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
 
 export const Navbar = () => {
   const [isSearch, setIsSearch] = useState(false);
@@ -40,15 +41,22 @@ export const Navbar = () => {
 
   return (
     <div className="bg-black ">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[10vh] flex items-center justify-between">
-        <div className="border flex hover:bg-[#F05A00] gap-3 border-[#F05A00] items-center w-fit px-2 rounded cursor-pointer py-2 text-white">
-          <RiBarChartHorizontalFill className="text-3xl" />
-          <p>Каталог товаров</p>
-        </div>
+      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[10vh] flex items-center justify-between"> 
+          <Menu>
+            <MenuHandler>
+              <Button className="flex bg-transparent gap-4 items-center hover:bg-[#F05A00] border-[#F05A00]"><RiBarChartHorizontalFill className="text-3xl" /> Каталог товаров </Button>
+            </MenuHandler>
+            <MenuList>
+            <Link to={`/catalog/${"painting-supplies"}`}><MenuItem>Малярные товары</MenuItem></Link>
+            <Link to={`/catalog/${"electrical"}`}><MenuItem>Электрооборудование</MenuItem></Link>
+            <Link to={`/catalog/${"overalls"}`}><MenuItem>Спецодежда</MenuItem></Link>
+            <Link to={`/catalog/${"for-home-and-cottage"}`}><MenuItem>Для дома и дачи</MenuItem></Link>               
+            </MenuList>
+          </Menu>
         <div className="flex text-white gap-3">
-          <Link to="/">О компании</Link>
-          <Link to="/">Акции</Link>
-          <Link to="/">Новинки</Link>
+          <Link className="hover:text-[#F05A00]" to="/about">О компании</Link>
+          <Link className="hover:text-[#F05A00]" to="/stocks-page">Акции</Link>
+          <Link className="hover:text-[#F05A00]" to="/new-product">Новинки</Link>
         </div>
         <div className="flex gap-2">
           <RxInstagramLogo className="bg-white cursor-pointer text-3xl rounded-full px-1" />

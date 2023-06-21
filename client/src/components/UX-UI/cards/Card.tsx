@@ -80,7 +80,7 @@ export const Card = ({ product }: Props) => {
       </div>
       <Link
         to={`/card-product/${product.id}`}
-        className="hover:text-blue-500 cursor-pointer"
+        className="hover:text-[#F05A00] cursor-pointer"
       >
         {product.name}
       </Link>

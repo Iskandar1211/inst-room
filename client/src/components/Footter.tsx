@@ -2,6 +2,7 @@ import React from "react";
 import { FiFacebook } from "react-icons/fi";
 import { RxInstagramLogo } from "react-icons/rx";
 import { SlSocialVkontakte } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 export const Footter = () => {
   return (
@@ -9,15 +10,15 @@ export const Footter = () => {
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6">
         <div className="flex gap-12 py-10 ">
           <div className="flex-1 text-white text-start flex flex-col gap-3">
-            <p>Малярные товары</p>
-            <p>Электрооборудование</p>
-            <p>Спецодежда</p>
-            <p>Для дома и дачи</p>
+            <Link className="hover:text-[#F05A00]" to={`/catalog/${"painting-supplies"}`}>Малярные товары</Link>
+            <Link className="hover:text-[#F05A00]" to={`/catalog/${"electrical"}`}>Электрооборудование</Link>
+            <Link className="hover:text-[#F05A00]" to={`/catalog/${"overalls"}`}>Спецодежда</Link>
+            <Link className="hover:text-[#F05A00]" to={`/catalog/${"for-home-and-cottage"}`}>Для дома и дачи</Link>
           </div>
           <div className="flex-1 text-white text-start flex flex-col gap-3">
-            <p>О компании</p>
-            <p>Контакты</p>
-            <p>Новинки</p>
+            <Link to='/about' className="hover:text-[#F05A00] w-fit">О компании</Link>
+            <Link to='/contacts' className="hover:text-[#F05A00] w-fit">Контакты</Link>
+            <Link to='/new-product' className="hover:text-[#F05A00] w-fit">Новинки</Link>
           </div>
           <div className="flex-1 text-start">
             <div className="flex flex-col gap-3">
