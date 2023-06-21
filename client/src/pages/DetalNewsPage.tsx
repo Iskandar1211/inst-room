@@ -14,14 +14,15 @@ export const DetalNewsPage = () => {
             Спрос на инструменты для домохозяйства вырос на 38% за год
           </span>
         </div>
-        <div className="justify-items-start">
-          <h1 className="justify-items-start">
-            Cпрос на инструменты для домохозяйств вырос на 38% за год
+        <div className="justify-items-start my-7 flex">
+          <h1 className="justify-items-start text-2xl font-bold">
+            Cпрос на инструменты для домохозяйств вырос <br />
+            <p className="flex">на 38% за год</p>
           </h1>
         </div>
       </div>
       <div>
-        <img className="w-[100%] " src="/news/photo.png" alt="news" />
+        <img className="w-[100%] " src="/news/photo1.png" alt="news" />
       </div>
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 py-8 relative text-justify">
         <p>
@@ -42,7 +43,7 @@ export const DetalNewsPage = () => {
           руководитель пресс-службы «Инструменты.ру» Сергей Денисенко
         </p>
         <div className=" justify-between py-10  flex col-auto  relative">
-          <div className="w-[30vw] h-[80vh] text-xs bg-[#F05A00] px-10 py-28  ">
+          <div className="w-[30vw] h-[60vh] text-xs bg-[#F05A00] px-10 py-28  ">
             <p className="text-white text-justify ">
               «На рост спроса в категории инструментов могли повлиять несколько
               факторов. В 2021 году в России выросли объёмы ввода жилья почти
@@ -54,12 +55,14 @@ export const DetalNewsPage = () => {
               «Инструменты.ру» Сергей Денисенко
             </p>
             <div className=" w-[35vw] py-10 justify-start  absolute left-0 text-justify  ">
-              <p className="py-20  text-start ">
+              <p className="py-48  text-justify  text-start ">
                 Онлайн — гипермаркет товаров для дома, дачи, строительства
                 и ремонта проанализировал спрос на аккумуляторные, ручные
-                и электроинструменты в октябре 2021 и сравнил эти цифры
-                с аналогичным периодом 2020 года. Этой осенью товары данной
-                категории россияне покупали чаще на 38%.
+                и электроинструменты в <br />
+                 октябре 2021 и сравнил эти цифры с аналогичным периодом
+                2020 года. <br />
+                Этой осенью товары данной категории россияне покупали чаще
+                на 38%.
               </p>
             </div>
           </div>
@@ -193,11 +196,11 @@ export const DetalNewsPage = () => {
           </ul>
         </div>
         <div>
-          <ul className="flex justify-between my-4 ">
+          <ul className="flex justify-between  relative">
             <li>Разбавитель</li>
-            <li>вода</li>
-            <li>вода</li>
-            <li>вода</li>
+            <li className=" mr-12">вода</li>
+            <li className=" mr-12">вода</li>
+            <li className=" mr-8">вода</li>
             <li>вода</li>
           </ul>
         </div>
@@ -213,7 +216,7 @@ export const DetalNewsPage = () => {
             <div className="w-[60vw] my-36">
               <img src="./news/photo3.png" alt="news" />
             </div>
-            <div className="w-[30vw] h-[70vh] text-xs bg-[#F05A00] px-10 py-10 overflow-hidden  ">
+            <div className="w-[30vw] h-[69vh] text-xs bg-[#F05A00] px-10 py-20 overflow-hidden  ">
               <p className="text-white text-justify ">
                 «На рост спроса в категории инструментов могли повлиять
                 несколько факторов. В 2021 году в России выросли объёмы ввода
