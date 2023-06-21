@@ -40,8 +40,9 @@ export default function AccordionHistoryBuy({ product }: PropsAccordion) {
   };
 
   const total = product.purchases.reduce((acum, item) => {
-    return acum + item.price;
+    return acum + item.total;
   }, 0);
+  
   return (
     <Fragment>
       <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>

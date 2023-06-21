@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiBarChart2 } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../store/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { RequestAcall } from "./UX-UI/dialog/RequestAcall";
 import { Registration } from "./UX-UI/dialog/Registration";
 import { Login } from "./UX-UI/dialog/Login";
@@ -15,15 +15,30 @@ export const Header = () => {
   const favorites = useAppSelector((state) => state.favorites.items);
   const comparison = useAppSelector((state) => state.comparison.comparison);
 
+  const dispatch = useAppDispatch();
+
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.total;
   }, 0);
+
   const discount = Math.floor((totalPrice / 100) * 5);
   const resultBuy = totalPrice - discount;
 
-  const [isRegistred, setIsRegistred] = useState(true);
-  const [login, setLogin] = useState(true);
-  const [loginConfirm, setLoginConfirg] = useState(true);
+  useEffect(() => {
+    fetch("http://localhost:3009/get-registration")
+      .then((response) => response.json())
+      .then((product) => {
+        if (product.length > 0 && product[0].name === "Искандар") {
+          setIsRegistred(true);
+          setIsLogin(true);
+          setIsLoginConfirm(true);
+        }
+      });
+  }, []);
+
+  const [isRegistred, setIsRegistred] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [isLoginConfirm, setIsLoginConfirm] = useState(false);
 
   return (
     <div className="bg-[#212526] h-[10vh]">
@@ -57,10 +72,12 @@ export const Header = () => {
               {comparison.length}
             </span>
           </Link>
-          {!isRegistred && <Registration />}
-          {isRegistred && !login && <Login />}
-          {isRegistred && login && !loginConfirm && <LoginConfirm />}
-          {isRegistred && login && loginConfirm && (
+          {!isRegistred && <Registration setIsRegistred={setIsRegistred} />}
+          {isRegistred && !isLogin && <Login setIsLogin={setIsLogin} />}
+          {isRegistred && isLogin && !isLoginConfirm && (
+            <LoginConfirm setIsLoginConfirm={setIsLoginConfirm} />
+          )}
+          {isRegistred && isLogin && isLoginConfirm && (
             <Link
               to="/profile-page"
               className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"

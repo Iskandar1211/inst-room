@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IDelivery, IHistoryOfOrder, IOrder, IPayment, IProduct } from './../../client/src/types/Model';
+import { IDelivery, IHistoryOfOrder, IOrder, IPayment, IProduct, IRegistration } from './../../client/src/types/Model';
 const express = require("express")
 import contactsRoutes = require('./routes/ContactRoutes');
 import messageRoutes from './routes/MessageRoutes';
@@ -601,7 +601,35 @@ app.get('/new-products', (req: Request, res: Response) => {
   res.send(filterProduct)
 })
 
+// Registration 
 
+const regstration: IRegistration[] = [];
+const phoneNumber = {
+  phone: ''
+};
+const code = '5432';
+
+app.post('/registration', (req: Request, res: Response) => {
+  const newUser = req.body;
+  regstration.push(newUser);
+  res.send('продукт успешно добавлен')
+})
+
+app.get('/get-registration', (req: Request, res: Response) => {
+  res.send(regstration)
+})
+
+app.post('/post-code', (req: Request, res: Response) => {
+  const newPhone = req.body;
+  phoneNumber.phone = newPhone
+  res.send('продукт успешно добавлен')
+})
+
+app.post('/post-code-confirm', (req: Request, res: Response) => {
+  const testingCode = req.body;
+  code === testingCode
+  res.send('вход выполнен')
+})
 
 
 app.listen(port, () => {

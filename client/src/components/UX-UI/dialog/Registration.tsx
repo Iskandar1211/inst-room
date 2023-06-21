@@ -6,15 +6,42 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-  Textarea,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
+import { setRegistration } from "../../../store/reducers/Registration";
 
-export function Registration() {
+interface Props {
+  setIsRegistred: (arg: boolean) => void;
+}
+
+export function Registration({ setIsRegistred }: Props) {
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => setOpen(!open);
+  const registration = useAppSelector(
+    (state) => state.registration.registration
+  );
+
+  const dispatch = useAppDispatch();
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
+  const onRegistration = () => {
+    fetch("http://localhost:3009/registration", {
+      method: "POST",
+      body: JSON.stringify(registration),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.ok) {
+        setIsRegistred(true);
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -34,12 +61,67 @@ export function Registration() {
         </div>
         <DialogBody divider>
           <div className="grid gap-6">
-            <Input label="Фамилия" />
-            <Input label="Имя" />
-            <Input label="Телефон" />
-            <Input label="Электронная почта" />
-            <Input label="Пароль" />
-            <Input label="Подтвердите пароль" />
+            <Input
+              value={registration.lastName}
+              onChange={(e) =>
+                dispatch(
+                  setRegistration({ ...registration, lastName: e.target.value })
+                )
+              }
+              label="Фамилия"
+            />
+            <Input
+              value={registration.name}
+              onChange={(e) =>
+                dispatch(
+                  setRegistration({ ...registration, name: e.target.value })
+                )
+              }
+              label="Имя"
+            />
+            <Input
+              type="tel"
+              value={registration.phone}
+              onChange={(e) =>
+                dispatch(
+                  setRegistration({ ...registration, phone: e.target.value })
+                )
+              }
+              label="Телефон"
+            />
+            <Input
+              type="email"
+              value={registration.email}
+              onChange={(e) =>
+                dispatch(
+                  setRegistration({ ...registration, email: e.target.value })
+                )
+              }
+              label="Электронная почта"
+            />
+            <Input
+              type="password"
+              value={registration.password}
+              onChange={(e) =>
+                dispatch(
+                  setRegistration({ ...registration, password: e.target.value })
+                )
+              }
+              label="Пароль"
+            />
+            <Input
+              value={registration.confirmPassword}
+              onChange={(e) =>
+                dispatch(
+                  setRegistration({
+                    ...registration,
+                    confirmPassword: e.target.value,
+                  })
+                )
+              }
+              type="password"
+              label="Подтвердите пароль"
+            />
           </div>
         </DialogBody>
         <DialogFooter className="flex flex-col gap-[12px]">
@@ -47,7 +129,10 @@ export function Registration() {
             variant="gradient"
             size="lg"
             color="indigo"
-            onClick={handleOpen}
+            onClick={() => {
+              handleOpen();
+              onRegistration();
+            }}
           >
             РЕГИСТРАЦИЯ
           </Button>
