@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const News = () => {
   return (
-    <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 mb-10">
+    <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 mb-10 bg-white">
       <div className="mt-16 flex gap-4">
         <div className="flex-1 flex flex-col justify-start gap-7 ">
           <p className="text-3xl ">Новости</p>

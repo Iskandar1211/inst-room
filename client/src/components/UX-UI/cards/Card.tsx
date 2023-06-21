@@ -1,3 +1,4 @@
+import { Tooltip } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { AiOutlineHeart, AiOutlineCheck, AiFillHeart } from "react-icons/ai";
 import { FiBarChart2, FiCheckCircle } from "react-icons/fi";
@@ -6,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 import { addToCart } from "../../../store/reducers/Cart";
 import { addToFavorites } from "../../../store/reducers/Favorites";
+import { addToСomparison } from "../../../store/reducers/Сomparison";
 import { IProduct } from "../../../types/Model";
 
 interface Props {
@@ -15,6 +17,7 @@ export const Card = ({ product }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddFavorites, setIsAddFavorites] = useState(false);
+  const [isAddComprison, setIsAddComprisson] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -29,6 +32,12 @@ export const Card = ({ product }: Props) => {
     if (!isAddFavorites) {
       dispatch(addToFavorites(product));
       setIsAddFavorites(true);
+    }
+  };
+  const onAddCompaier = () => {
+    if (!isAddComprison) {
+      dispatch(addToСomparison(product));
+      setIsAddComprisson(true);
     }
   };
   const bgBuy = isClicked ? "bg-[#F05A00] text-white" : "";
@@ -47,7 +56,12 @@ export const Card = ({ product }: Props) => {
           )}
         </p>
         <div className="text-gray-400 flex gap-2 text-2xl cursor-pointer">
-          <FiBarChart2 />
+          {!isAddComprison ? (
+            <FiBarChart2 onClick={onAddCompaier} />
+          ) : (
+            <FiBarChart2 className="text-[#FC573B]" />
+          )}
+
           <div>
             {isAddFavorites ? (
               <AiFillHeart className="text-[#FC573B]" />
@@ -64,12 +78,18 @@ export const Card = ({ product }: Props) => {
           alt={product.name}
         />
       </div>
-      <Link to='/card-product' className="hover:text-blue-500 cursor-pointer">{product.name}</Link>
+      <Link
+        to={`/card-product/${product.id}`}
+        className="hover:text-[#F05A00] cursor-pointer"
+      >
+        {product.name}
+      </Link>
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
           <p className="font-bold">{product.price} ₽</p>
           <p className="text-[#DEDBDB] line-through text-[14px]">
-            {product.isNew === false && (product.price + product.price / 100 * 5) }
+            {product.isNew === false &&
+              product.price + (product.price / 100) * 5}
           </p>
         </div>
         <div className=" w-fit flex gap-3 items-center">

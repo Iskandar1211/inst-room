@@ -1,21 +1,46 @@
 import { Option, Select } from "@material-tailwind/react";
 import React, { useState, useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Card } from "../components/UX-UI/cards/Card";
 import { IProduct } from "../types/Model";
 
 export const CatalogPage = () => {
+  const { categories } = useParams();
+  let categori: string = "";
+  if (categories === "painting-supplies") {
+    categori = "Малярные товары";
+  } else if (categories === "electrical") {
+    categori = "Электрооборудование";
+  } else if (categories === "overalls") {
+    categori = "Спецодежда";
+  } else if (categories === "for-home-and-cottage") {
+    categori = "Для дома и дачи";
+  }
+
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+
   const [products, setProducts] = useState<IProduct[]>([]);
+
   useEffect(() => {
     fetch("http://localhost:3009/products")
       .then((response) => response.json())
-      .then((product) => {
-        setProducts(product);
-        setFilteredProducts(product);
-      });
+      .then((products) => setFilteredProducts(products));
   }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:3009/products")
+      .then((response) => response.json())
+      .then((products) => {
+        const filtered = products.filter(
+          (product: IProduct) => product.categories === categori
+        );
+        setProducts(filtered);
+      });
+      setSelectedItem(categori);
+    
+  }, [categories]);
+
 
   const onSortProducts = (value: string | undefined) => {
     if (value === "По убыванию цены") {
@@ -93,7 +118,9 @@ export const CatalogPage = () => {
                 <li
                   onClick={() => onFilteredProducts("Для дома и дачи")}
                   className={`border border-gray-400 px-2 py-4 flex justify-between cursor-pointer ${
-                    selectedItem === "Для дома и дачи" ? "bg-[#F05A00]" : ""
+                    selectedItem === "Для дома и дачи"
+                      ? "bg-[#F05A00]"
+                      : ""
                   }`}
                 >
                   Для дома и дачи <IoIosArrowForward />

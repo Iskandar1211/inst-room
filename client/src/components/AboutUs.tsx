@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const AboutUs = () => {
   return (
@@ -17,7 +18,7 @@ export const AboutUs = () => {
             торгово-промышленное объединение предпринимателей, форма организации
             предприятия
           </p>
-          <button className="bg-[#212526] w-[230px] h-[50px] text-white">ПЕРЕЙТИ В КАТАЛОГ</button>
+          <Link to={`/catalog/${"painting-supplies"}`} className="bg-[#212526] w-[230px] h-[50px] text-white hover:bg-[#F05A00] flex justify-center items-center">ПЕРЕЙТИ В КАТАЛОГ</Link>
         </div>
       </div>
     </div>

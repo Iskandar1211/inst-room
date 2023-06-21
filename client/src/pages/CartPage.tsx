@@ -107,11 +107,11 @@ export const CartPage = () => {
               style={{ borderBottom: "1px solid gray" }}
             >
               <span>Скидка</span>
-              <span>— {discount} ₽</span>
+              <span>— {Math.floor(discount)} ₽</span>
             </div>
             <div className="flex justify-between text-[20px] py-2">
               <span>К оплате</span>
-              <span className="text-[#F05A00]">{totalPrice} ₽</span>
+              <span className="text-[#F05A00]">{totalPrice - Math.floor(discount)} ₽</span>
             </div>
             <Link
               to="/order-form"

@@ -27,7 +27,7 @@ export const OrderFormPage = () => {
 
   const onAddOrders = () => {
     // setOrders([...orders, order]);
-    fetch("http://localhost:3009/create-product", {
+    fetch("http://localhost:3009/create-order", {
       method: "POST",
       body: JSON.stringify(order),
       headers: {

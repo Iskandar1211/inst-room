@@ -4,29 +4,32 @@ import { FeaturesCarousel } from "./UX-UI/carousel/FeaturesCarousel";
 
 export const FeaturedItems = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
-
-  const [news, SetNews] = useState<IProduct[]>([]);
-  const [filterProducts, setFilterProducts] = useState<IProduct[]>([]);
+  const [itemList, setItemList] = useState("");
+  const [activeLink, setActiveLink] = useState<boolean>(false);
 
   useEffect(() => {
     fetch("http://localhost:3009/products")
       .then((response) => response.json())
-      .then((product) => {
-        setProducts(product);
-        SetNews(products.filter((product) => product.isNew === true));
+      .then((products) => {
+        if (itemList === "") {
+          setProducts(
+            products.filter((product: IProduct) => product.isNew === true)
+          );
+          setActiveLink(false);
+        } else if (itemList === "Акции") {
+          setProducts(
+            products.filter((product: IProduct) => product.isNew === false)
+          );
+          setActiveLink(true);
+        } else if (itemList === "Новинки") {
+          setProducts(
+            products.filter((product: IProduct) => product.isNew === true)
+          );
+          setActiveLink(false);
+        }
       });
-  }, []);
+  }, [itemList]);
 
-  const onFilterProducts = (item: string) => {
-    if (item === "Новинки") {
-      setFilterProducts(products.filter((product) => product.isNew === true));
-      setActiveLink(false);
-    } else if (item === "Акции") {
-      setFilterProducts(products.filter((product) => product.isNew === false));
-      setActiveLink(true);
-    }
-  };
-  const [activeLink, setActiveLink] = useState(false);
   const styleLinkNews = !activeLink
     ? "text-white cursor-pointer"
     : "text-[#212526] cursor-pointer";
@@ -37,13 +40,10 @@ export const FeaturedItems = () => {
     <div className="bg-[#212526]">
       <div className="bg-black py-3 px-2 lg:px-32 md:px-7 max-sm:px-4 sm:px-6">
         <ul className="flex gap-12">
-          <li
-            onClick={() => onFilterProducts("Новинки")}
-            className={styleLinkNews}
-          >
+          <li onClick={() => setItemList("Новинки")} className={styleLinkNews}>
             Новинки
           </li>
-          <li onClick={() => onFilterProducts("Акции")} className={styleStock}>
+          <li onClick={() => setItemList("Акции")} className={styleStock}>
             Акции
           </li>
         </ul>
@@ -51,11 +51,7 @@ export const FeaturedItems = () => {
       <div className="bg-[#212526] py-5">
         <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 ">
           <div className="w-[93%] m-auto">
-            {filterProducts.length === 0 ? (
-              <FeaturesCarousel products={news} slideToShow={4} />
-            ) : (
-              <FeaturesCarousel products={filterProducts} slideToShow={4} />
-            )}
+            <FeaturesCarousel products={products} slideToShow={4} />
           </div>
         </div>
       </div>

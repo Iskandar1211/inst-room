@@ -125,7 +125,7 @@ export const Slider = () => {
               {sliderCatalog[indexSlider].name}
             </h1>
             <Link
-              to="/catalog"
+              to={`/catalog/${"painting-supplies"}`}
               className="px-8 py-4 bg-[#F05A00] self-start hover:bg-black "
             >
               ПЕРЕЙТИ В КАТАЛОГ
@@ -174,8 +174,7 @@ export const Slider = () => {
             style={{
               backgroundImage: `url(${sliderDrill[indexSlider].imgSrc})`,
               backgroundSize: "cover",
-            transition: "1s linear",
-
+              transition: "1s linear",
             }}
           >
             <div className="text-white text-2xl text-start">
