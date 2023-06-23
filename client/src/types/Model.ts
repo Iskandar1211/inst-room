@@ -31,7 +31,6 @@ export interface IDelivery {
     id: string
     city: string
     street: string
-    frame: string
     house: string
     apartment: string
     delivery: boolean
@@ -65,6 +64,7 @@ export interface IRegistration {
     email: string,
     password: string,
     confirmPassword: string
+    role: string
 }
 export interface ILogin {
     phone: string

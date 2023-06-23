@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@material-tailwind/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -5,15 +6,12 @@ export const DetalNewsPage = () => {
   return (
     <div className="w-[100vw] h[80-vh] ">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6">
-        <div className="flex gap-2">
-          <span className="text-[#8A8A8A] flex">
-            <Link to="/">Главная</Link>/ <Link to="/news"> Новости</Link>
-          </span>
-
-          <span className="flex ">
-            Спрос на инструменты для домохозяйства вырос на 38% за год
-          </span>
-        </div>
+        <Breadcrumbs className="mt-4">
+          <Link className="opacity-60" to="/">
+            Главная
+          </Link>
+          <Link to="/detail-news">Новости</Link>
+        </Breadcrumbs>
         <div className="justify-items-start my-7 flex">
           <h1 className="justify-items-start text-2xl font-bold">
             Cпрос на инструменты для домохозяйств вырос <br />

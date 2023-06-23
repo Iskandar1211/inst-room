@@ -14,10 +14,11 @@ import { setRegistration } from "../../../store/reducers/Registration";
 
 interface Props {
   setIsRegistred: (arg: boolean) => void;
+  setIsLogin: (arg: boolean) => void;
 }
 
-export function Registration({ setIsRegistred }: Props) {
-  const [open, setOpen] = React.useState(false);
+export function Registration({ setIsRegistred, setIsLogin }: Props) {
+  const [open, setOpen] = React.useState(true);
 
   const registration = useAppSelector(
     (state) => state.registration.registration
@@ -38,7 +39,7 @@ export function Registration({ setIsRegistred }: Props) {
       },
     }).then((response) => {
       if (response.ok) {
-        setIsRegistred(true);
+        setIsRegistred(false);
       }
     });
   };
@@ -125,17 +126,30 @@ export function Registration({ setIsRegistred }: Props) {
           </div>
         </DialogBody>
         <DialogFooter className="flex flex-col gap-[12px]">
-          <Button
-            variant="gradient"
-            size="lg"
-            color="indigo"
-            onClick={() => {
-              handleOpen();
-              onRegistration();
-            }}
-          >
-            РЕГИСТРАЦИЯ
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant="gradient"
+              size="lg"
+              color="indigo"
+              onClick={() => {
+                handleOpen();
+                onRegistration();
+              }}
+            >
+              РЕГИСТРАЦИЯ
+            </Button>
+            <Button
+              onClick={() => {
+                setIsLogin(true);
+                handleOpen();
+              }}
+              variant="gradient"
+              size="lg"
+              color="amber"
+            >
+              Логин
+            </Button>
+          </div>
           <div className="text-[12px] flex gap-2">
             <span>Нажимая на кнопку вы соглашаетесь </span>
             <b className="font-bold">на обработку ваших персональных данных</b>

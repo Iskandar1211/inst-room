@@ -600,10 +600,47 @@ app.get('/new-products', (req: Request, res: Response) => {
   const filterProduct = products.filter(product => product.isNew === true)
   res.send(filterProduct)
 })
+app.post('/create-product', (req: Request, res: Response) => {
+  const newProduct = req.body;
+  products.push(newProduct);
+  res.send('продукт успешно добавлен')
+})
 
-// Registration 
+app.put('/edit-product/:id', (req: Request, res: Response) => {
+  const { id } = req.params; 
+  const updatedProduct = req.body;
+  const productIndex = products.findIndex((product) => product.id === id);
+  if (productIndex !== -1) {
+    products[productIndex] = { ...products[productIndex], ...updatedProduct };
+    res.send('Продукт успешно обновлен');
+  } else {
+    res.status(404).send('Продукт не найден');
+  }
+});
 
-const regstration: IRegistration[] = [];
+app.delete('/delete-product/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    products.filter(product => product.id !== id)
+    res.json({ message: 'Сообщение успешно удалено' });
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    res.status(500).json({ error: 'Внутренняя ошибка сервера' });
+  }
+});
+
+const regstration: IRegistration[] = [
+  {
+    id: uuidv4(),
+    lastName: 'Гадойбоев',
+    name: "Искандар",
+    phone: "+992929445515",
+    email: 'zed1211@mail.ru',
+    password: 'asdqwe',
+    confirmPassword: "asdqwe",
+    role: 'admin'
+  }
+];
 const phoneNumber = {
   phone: ''
 };
@@ -612,8 +649,19 @@ const code = '5432';
 app.post('/registration', (req: Request, res: Response) => {
   const newUser = req.body;
   regstration.push(newUser);
-  res.send('продукт успешно добавлен')
+  res.send('Регистрация успешно завершено')
 })
+
+app.delete('/delete-user/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    regstration.filter(user => user.id !== id)
+    res.json({ message: 'Сообщение успешно удалено' });
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    res.status(500).json({ error: 'Внутренняя ошибка сервера' });
+  }
+});
 
 app.get('/get-registration', (req: Request, res: Response) => {
   res.send(regstration)

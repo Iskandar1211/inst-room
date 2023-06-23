@@ -1,9 +1,8 @@
 import { Breadcrumbs, Input } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AccordionHistoryBuy from "../components/UX-UI/accordion/AccordionHistoryBuy";
-import { IHistoryOfOrder } from "../types/Model";
-import { useAppSelector } from "../store/hooks/hooks";
+import { IHistoryOfOrder, IRegistration } from "../types/Model";
 
 export const ProfilePage = () => {
   const [products, setProducts] = useState<IHistoryOfOrder[]>([]);
@@ -13,7 +12,6 @@ export const ProfilePage = () => {
       .then((response) => response.json())
       .then((historyBuys) => setProducts(historyBuys));
   }, []);
-
 
   const [userInfo, setUserInfo] = useState(false);
 
@@ -28,7 +26,26 @@ export const ProfilePage = () => {
     userInfoLinksActive,
   ].join(" ");
 
+  const [users, setUsers] = useState<IRegistration[]>();
+  const user = users?.find((user) => user.role === "user");
 
+  useEffect(() => {
+    fetch("http://localhost:3009/get-registration")
+      .then((response) => response.json())
+      .then((registration) => setUsers(registration));
+  }, []);
+
+  const navigation = useNavigate();
+  const onExit = () => {
+    const id = user?.id;
+    fetch(`http://localhost:3009/delete-user/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    navigation("/");
+  };
 
   return (
     <div className="bg-[#CBCBCB]">
@@ -53,8 +70,15 @@ export const ProfilePage = () => {
               <p
                 onClick={() => setUserInfo(true)}
                 className={userLinksStyleUserInfo}
+                style={{ borderBottom: "1px solid #3B3B3B" }}
               >
                 Личная информация
+              </p>
+              <p
+                onClick={() => onExit()}
+                className="flex justify-center h-[72px] cursor-pointer items-center text-white"
+              >
+                Выход
               </p>
             </div>
           </div>
@@ -84,7 +108,6 @@ export const ProfilePage = () => {
                   <div className="flex-1 flex flex-col gap-[20px]">
                     <Input label="Город" />
                     <Input label="Улица" />
-                    <Input label="Корпус" />
                     <div className="flex gap-[20px]">
                       <Input label="Дом" />
                       <Input label="Квартира" />

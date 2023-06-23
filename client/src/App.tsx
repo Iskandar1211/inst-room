@@ -19,6 +19,7 @@ import { AboutCompany } from "./pages/AboutCompany";
 import { ContactsPage } from "./pages/ContactsPage";
 import { NewProduct } from "./pages/NewProduct";
 import { StocksPage } from "./pages/StocksPage";
+import { AdminPage } from "./pages/AdminPage";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/new-product" element={<NewProduct />} />
         <Route path="/stocks-page" element={<StocksPage />} />
+        <Route path="/admin-page" element={<AdminPage />} />
       </Routes>
       <Footter />
     </div>

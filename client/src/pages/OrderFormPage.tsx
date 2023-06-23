@@ -23,10 +23,8 @@ export const OrderFormPage = () => {
   });
 
   
-  const [orders, setOrders] = useState<IOrder[]>([]);
 
   const onAddOrders = () => {
-    // setOrders([...orders, order]);
     fetch("http://localhost:3009/create-order", {
       method: "POST",
       body: JSON.stringify(order),
@@ -105,20 +103,20 @@ export const OrderFormPage = () => {
             </div>
           </div>
           <div className="flex-1 flex justify-center py-[30px] px-[30px] bg-[#212526] h-[212px] rounded text-white">
-            <div className="flex flex-col gap-4 w-[250px] ">
+            <div className="flex flex-col gap-4 w-[250px]">
               <div className="text-[20px] flex justify-between">
                 <span>Итого</span>
                 <span className="text-[#F05A00]">{totalPrice} ₽</span>
               </div>
-              <div className=" flex justify-between">
+              <div className="flex justify-between">
                 <span>{products.length} товаров</span>
                 <span>{totalPrice} ₽</span>
               </div>
-              <div className=" flex justify-between">
+              <div className="flex justify-between">
                 <span>Скидка</span>
                 <span>-{discount} ₽</span>
               </div>
-              <div className=" flex justify-between">
+              <div className="flex justify-between">
                 <span>Доставка</span>
                 <span>Бесплатно</span>
               </div>

@@ -15,10 +15,11 @@ import { setLogin } from "../../../store/reducers/Registration";
 
 interface Props {
   setIsLogin: (arg: boolean) => void;
+  setIsRegistred: (arg: boolean) => void;
 }
 
-export function Login({ setIsLogin }: Props) {
-  const [open, setOpen] = React.useState(true);
+export function Login({ setIsLogin, setIsRegistred }: Props) {
+  const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(!open);
 
@@ -68,17 +69,27 @@ export function Login({ setIsLogin }: Props) {
           </div>
         </DialogBody>
         <DialogFooter className="flex flex-col gap-[12px]">
-          <Button
-            variant="gradient"
-            size="lg"
-            color="indigo"
-            onClick={() => {
-              handleOpen();
-              onLogin();
-            }}
-          >
-            ПОЛУЧИТЬ КОД
-          </Button>
+          <div className="flex gap-4">
+            <Button
+              variant="gradient"
+              size="lg"
+              color="indigo"
+              onClick={() => {
+                handleOpen();
+                onLogin();
+              }}
+            >
+              ПОЛУЧИТЬ КОД
+            </Button>
+            <Button
+              onClick={() => setIsRegistred(true)}
+              variant="gradient"
+              size="lg"
+              color="green"
+            >
+              РЕГИСТРАЦИЯ
+            </Button>
+          </div>
           <div className="text-[12px] flex gap-2">
             <span>Нажимая на кнопку вы соглашаетесь </span>
             <b className="font-bold">на обработку ваших персональных данных</b>
