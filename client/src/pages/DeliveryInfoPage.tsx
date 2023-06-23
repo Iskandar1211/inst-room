@@ -19,7 +19,6 @@ export const DeliveryInfoPage = () => {
     id: crypto.randomUUID(),
     city: "",
     street: "",
-    frame: "",
     house: "",
     apartment: "",
     delivery: true,
@@ -132,15 +131,6 @@ export const DeliveryInfoPage = () => {
                       />
                     </div>
                     <div className="flex flex-col flex-1 gap-8">
-                      <Input
-                        onChange={(e) =>
-                          setCourierDelivery({
-                            ...courierDelivery,
-                            frame: e.target.value,
-                          })
-                        }
-                        label="Корпус"
-                      />
                       <div className="flex gap-2">
                         <Input
                           onChange={(e) =>

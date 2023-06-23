@@ -4,7 +4,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import { IHistoryOfOrder } from "../../../types/Model";
+import { IHistoryOfOrder, IProduct, IProductAcord } from "../../../types/Model";
 
 interface Props {
   id: number;
@@ -88,6 +88,38 @@ export default function AccordionHistoryBuy({ product }: PropsAccordion) {
             style={{ borderTop: "1px solid black" }}
           >
             <b>Итого:</b> <b>{total} ₽</b>
+          </div>
+          <div>
+            <div className="text-3xl">Заказал:</div>
+            <div>
+              {product.orders.map((order) => (
+                <div className="text-start">
+                  <div>Фамилия: {order.lastName}</div>
+                  <div>Имя: {order.name}</div>
+                  <div>Телефон: {order.phone}</div>
+                  <div>Email: {order.email}</div>
+                </div>
+              ))}
+            </div>
+            <div className="text-3xl">С доставков</div>
+            {product.deliveryInfo.map((delivery) => (
+              <div className="text-start">
+                <div>город: {delivery.city}</div>
+                <div>улица: {delivery.street}</div>
+                <div>Квартира {delivery.apartment}</div>
+                <div>Дом {delivery.house}</div>
+                <div>Корпус {delivery.pickupAddress}</div>
+              </div>
+            ))}
+            <div className="text-3xl">Способ оплаты</div>
+            {product.payments.map((pay) => (
+              <div className="text-start">
+                <div>{pay.cash && "Оплата при получении"}</div>
+                <div>{pay.cash && "наличными"}</div>
+                <div>{pay.bankСard && "банковской картой"}</div>
+                <div>{pay.onlinePayment && "Оплата онлайн"}</div>
+              </div>
+            ))}
           </div>
         </AccordionBody>
       </Accordion>

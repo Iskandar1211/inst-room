@@ -9,6 +9,7 @@ import { RequestAcall } from "./UX-UI/dialog/RequestAcall";
 import { Registration } from "./UX-UI/dialog/Registration";
 import { Login } from "./UX-UI/dialog/Login";
 import { LoginConfirm } from "./UX-UI/dialog/LoginConfirm";
+import { IRegistration } from "../types/Model";
 
 export const Header = () => {
   const products = useAppSelector((state) => state.cart.items);
@@ -24,21 +25,25 @@ export const Header = () => {
   const discount = Math.floor((totalPrice / 100) * 5);
   const resultBuy = totalPrice - discount;
 
+  const [users, setUsers] = useState<IRegistration[]>();
+  const user = users?.find((user) => user.role === "user");
+  const admin = users?.find((user) => user.role === "admin");
+
   useEffect(() => {
     fetch("http://localhost:3009/get-registration")
       .then((response) => response.json())
-      .then((product) => {
-        if (product.length > 0 && product[0].name === "Искандар") {
-          setIsRegistred(true);
-          setIsLogin(true);
-          setIsLoginConfirm(true);
-        }
-      });
+      .then((registration) => setUsers(registration));
   }, []);
 
   const [isRegistred, setIsRegistred] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [isLoginConfirm, setIsLoginConfirm] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:3009/get-registration")
+      .then((response) => response.json())
+      .then((registration) => setUsers(registration));
+  }, [isRegistred, isLogin, isLoginConfirm]);
 
   return (
     <div className="bg-[#212526] h-[10vh]">
@@ -72,19 +77,36 @@ export const Header = () => {
               {comparison.length}
             </span>
           </Link>
-          {!isRegistred && <Registration setIsRegistred={setIsRegistred} />}
-          {isRegistred && !isLogin && <Login setIsLogin={setIsLogin} />}
-          {isRegistred && isLogin && !isLoginConfirm && (
+          {isRegistred && (
+            <Registration
+              setIsLogin={setIsLogin}
+              setIsRegistred={setIsRegistred}
+            />
+          )}
+          {!isRegistred && !isLogin && (
+            <Login setIsRegistred={setIsRegistred} setIsLogin={setIsLogin} />
+          )}
+          {!isRegistred && isLogin && !isLoginConfirm && (
             <LoginConfirm setIsLoginConfirm={setIsLoginConfirm} />
           )}
-          {isRegistred && isLogin && isLoginConfirm && (
-            <Link
-              to="/profile-page"
-              className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
-            >
-              <FaRegUserCircle className="text-white" />
-            </Link>
-          )}
+          {!isRegistred &&
+            isLogin &&
+            isLoginConfirm &&
+            (admin && !user ? (
+              <Link
+                to="/admin-page"
+                className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
+              >
+                <FaRegUserCircle className="text-white" />
+              </Link>
+            ) : (
+              <Link
+                to="/profile-page"
+                className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
+              >
+                <FaRegUserCircle className="text-white" />
+              </Link>
+            ))}
 
           <Link
             to="/cart"
