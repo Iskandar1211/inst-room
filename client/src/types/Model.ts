@@ -65,6 +65,7 @@ export interface IRegistration {
     password: string,
     confirmPassword: string
     role: string
+    code: string
 }
 export interface ILogin {
     phone: string

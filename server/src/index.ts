@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
 import { IDelivery, IHistoryOfOrder, IOrder, IPayment, IProduct, IRegistration } from './../../client/src/types/Model';
 const express = require("express")
-import contactsRoutes = require('./routes/ContactRoutes');
-import messageRoutes from './routes/MessageRoutes';
 import userRoutes = require('./routes/UserRoutes')
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -10,13 +8,14 @@ const app = express();
 const port = 3009;
 import { v4 as uuidv4 } from 'uuid';
 import moment = require('moment');
+import productRoutes from './routes/ProductRoute';
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
 
 
-
+// история покупок
 const orders: IOrder[] = [];
 const deliveryInfo: IDelivery[] = []
 const payments: IPayment[] = [];
@@ -24,73 +23,7 @@ const productsFromCart: IProduct[] = []
 
 const HistoryOfOrders: IHistoryOfOrder[] = [];
 
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello server')
-})
-
-app.get('/history-of-orders', (req: Request, res: Response) => {
-  res.send(HistoryOfOrders)
-})
-
-app.post('/create-history-of-orders', async (req: Request, res: Response) => {
-  const newBody = {
-    id: uuidv4(),
-    orderNumber: HistoryOfOrders.length + 1,
-    created: moment().subtract(10, "days").calendar(),
-    received: moment().subtract(10, "days").calendar(),
-    purchases: [...productsFromCart],
-    orders: [...orders],
-    deliveryInfo: [...deliveryInfo],
-    payments: [...payments]
-  };
-
-  HistoryOfOrders.push(newBody);
-  orders.length = 0;
-  deliveryInfo.length = 0;
-  payments.length = 0;
-  productsFromCart.length = 0;
-
-  res.send('продукт успешно создан');
-});
-
-
-
-app.post('/create-order', (req: Request, res: Response) => {
-  const newProduct = req.body;
-  orders.push(newProduct);
-  res.send('продукт успешно создан')
-})
-
-app.get('/delivery-info', (req: Request, res: Response) => {
-  res.send(deliveryInfo)
-})
-
-app.post('/create-delivery-info', (req: Request, res: Response) => {
-  const newDelivery = req.body;
-  deliveryInfo.push(newDelivery);
-  res.send('доставку успешно добавлен')
-})
-
-app.post('/create-payment', (req: Request, res: Response) => {
-  const newPayment = req.body;
-  payments.push(newPayment);
-  res.send('оплата успешно выполнен')
-})
-
-app.post('/create-product-from-cart', (req: Request, res: Response) => {
-  const newProduct = req.body;
-  productsFromCart.push(...newProduct);
-  res.send('продукт успешно добавлен')
-})
-
-// app.use('/users', userRoutes);
-// app.use('/contacts', contactsRoutes);
-// app.use('/', messageRoutes)
-
-
-// Здесь массивы каталогов
-
+// массив продуктов 
 const products: IProduct[] = [{
   id: uuidv4(),
   name: "Куртка ДЕЛЬТА ПЛЮС",
@@ -562,72 +495,144 @@ const products: IProduct[] = [{
 
 ];
 
-app.get('/painting-supplies', (req: Request, res: Response) => {
-  const paintingSupplies = products.filter(product => product.categories === 'Малярные товары');
-  res.send(paintingSupplies)
+// регистрация и логин
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('hello server')
 })
 
-app.get('/overalls', (req: Request, res: Response) => {
-  const paintingSupplies = products.filter(product => product.categories === 'Спецодежда');
-  res.send(paintingSupplies)
+app.get('/history-of-orders', (req: Request, res: Response) => {
+  res.send(HistoryOfOrders)
 })
 
-app.get('/electrical', (req: Request, res: Response) => {
-  const paintingSupplies = products.filter(product => product.categories === 'Электрооборудование');
-  res.send(paintingSupplies)
-})
+app.post('/create-history-of-orders', async (req: Request, res: Response) => {
+  const newBody = {
+    id: uuidv4(),
+    orderNumber: HistoryOfOrders.length + 1,
+    created: moment().subtract(10, "days").calendar(),
+    received: moment().subtract(10, "days").calendar(),
+    purchases: [...productsFromCart],
+    orders: [...orders],
+    deliveryInfo: [...deliveryInfo],
+    payments: [...payments]
+  };
 
-app.get('/for-home-and-cottage', (req: Request, res: Response) => {
-  const paintingSupplies = products.filter(product => product.categories === 'Для дома и дачи');
-  res.send(paintingSupplies)
-})
+  HistoryOfOrders.push(newBody);
+  orders.length = 0;
+  deliveryInfo.length = 0;
+  payments.length = 0;
+  productsFromCart.length = 0;
 
-app.get('/products', (req: Request, res: Response) => {
-  res.send(products)
-})
+  res.send('продукт успешно создан');
+});
 
-app.get('/products/:id', (req: Request, res: Response) => {
-  const { id } = req.params
-  const findProduct = products.find(product => product.id === id)
-  res.send(findProduct)
-})
-app.get('/stocks-products', (req: Request, res: Response) => {
-  const filterProduct = products.filter(product => product.isNew === false)
-  res.send(filterProduct)
-})
 
-app.get('/new-products', (req: Request, res: Response) => {
-  const filterProduct = products.filter(product => product.isNew === true)
-  res.send(filterProduct)
-})
-app.post('/create-product', (req: Request, res: Response) => {
+
+app.post('/create-order', (req: Request, res: Response) => {
   const newProduct = req.body;
-  products.push(newProduct);
+  orders.push(newProduct);
+  res.send('продукт успешно создан')
+})
+
+app.get('/delivery-info', (req: Request, res: Response) => {
+  res.send(deliveryInfo)
+})
+
+app.post('/create-delivery-info', (req: Request, res: Response) => {
+  const newDelivery = req.body;
+  deliveryInfo.push(newDelivery);
+  res.send('доставку успешно добавлен')
+})
+
+app.post('/create-payment', (req: Request, res: Response) => {
+  const newPayment = req.body;
+  payments.push(newPayment);
+  res.send('оплата успешно выполнен')
+})
+
+app.post('/create-product-from-cart', (req: Request, res: Response) => {
+  const newProduct = req.body;
+  productsFromCart.push(...newProduct);
   res.send('продукт успешно добавлен')
 })
 
-app.put('/edit-product/:id', (req: Request, res: Response) => {
-  const { id } = req.params; 
-  const updatedProduct = req.body;
-  const productIndex = products.findIndex((product) => product.id === id);
-  if (productIndex !== -1) {
-    products[productIndex] = { ...products[productIndex], ...updatedProduct };
-    res.send('Продукт успешно обновлен');
-  } else {
-    res.status(404).send('Продукт не найден');
-  }
-});
+// app.use('/users', userRoutes);
+// app.use('/contacts', contactsRoutes);
+// app.use('/', messageRoutes)
 
-app.delete('/delete-product/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    products.filter(product => product.id !== id)
-    res.json({ message: 'Сообщение успешно удалено' });
-  } catch (error) {
-    console.error('Ошибка при выполнении запроса:', error);
-    res.status(500).json({ error: 'Внутренняя ошибка сервера' });
-  }
-});
+app.use('/', productRoutes)
+
+
+// Здесь массивы каталогов
+
+
+
+// app.get('/painting-supplies', (req: Request, res: Response) => {
+//   const paintingSupplies = products.filter(product => product.categories === 'Малярные товары');
+//   res.send(paintingSupplies)
+// })
+
+// app.get('/overalls', (req: Request, res: Response) => {
+//   const paintingSupplies = products.filter(product => product.categories === 'Спецодежда');
+//   res.send(paintingSupplies)
+// })
+
+// app.get('/electrical', (req: Request, res: Response) => {
+//   const paintingSupplies = products.filter(product => product.categories === 'Электрооборудование');
+//   res.send(paintingSupplies)
+// })
+
+// app.get('/for-home-and-cottage', (req: Request, res: Response) => {
+//   const paintingSupplies = products.filter(product => product.categories === 'Для дома и дачи');
+//   res.send(paintingSupplies)
+// })
+
+// app.get('/products', (req: Request, res: Response) => {
+//   res.send(products)
+// })
+
+// app.get('/products/:id', (req: Request, res: Response) => {
+//   const { id } = req.params
+//   const findProduct = products.find(product => product.id === id)
+//   res.send(findProduct)
+// })
+// app.get('/stocks-products', (req: Request, res: Response) => {
+//   const filterProduct = products.filter(product => product.isNew === false)
+//   res.send(filterProduct)
+// })
+
+// app.get('/new-products', (req: Request, res: Response) => {
+//   const filterProduct = products.filter(product => product.isNew === true)
+//   res.send(filterProduct)
+// })
+// app.post('/create-product', (req: Request, res: Response) => {
+//   const newProduct = req.body;
+//   products.push(newProduct);
+//   res.send('продукт успешно добавлен')
+// })
+
+// app.put('/edit-product/:id', (req: Request, res: Response) => {
+//   const { id } = req.params;
+//   const updatedProduct = req.body;
+//   const productIndex = products.findIndex((product) => product.id === id);
+//   if (productIndex !== -1) {
+//     products[productIndex] = { ...products[productIndex], ...updatedProduct };
+//     res.send('Продукт успешно обновлен');
+//   } else {
+//     res.status(404).send('Продукт не найден');
+//   }
+// });
+
+// app.delete('/delete-product/:id', async (req: Request, res: Response) => {
+//   const { id } = req.params;
+//   try {
+//     products.filter(product => product.id !== id)
+//     res.json({ message: 'Сообщение успешно удалено' });
+//   } catch (error) {
+//     console.error('Ошибка при выполнении запроса:', error);
+//     res.status(500).json({ error: 'Внутренняя ошибка сервера' });
+//   }
+// });
 
 const regstration: IRegistration[] = [
   {
@@ -638,13 +643,11 @@ const regstration: IRegistration[] = [
     email: 'zed1211@mail.ru',
     password: 'asdqwe',
     confirmPassword: "asdqwe",
-    role: 'admin'
+    role: 'admin',
+    code: '5432'
   }
 ];
-const phoneNumber = {
-  phone: ''
-};
-const code = '5432';
+
 
 app.post('/registration', (req: Request, res: Response) => {
   const newUser = req.body;
@@ -669,14 +672,14 @@ app.get('/get-registration', (req: Request, res: Response) => {
 
 app.post('/post-code', (req: Request, res: Response) => {
   const newPhone = req.body;
-  phoneNumber.phone = newPhone
-  res.send('продукт успешно добавлен')
+  const login = regstration.find(user => user.phone === newPhone);
+  res.send(`Номер телефона подтверждён `)
 })
 
 app.post('/post-code-confirm', (req: Request, res: Response) => {
   const testingCode = req.body;
-  code === testingCode
-  res.send('вход выполнен')
+  const confirmUser = regstration.find(user => user.phone === testingCode);
+  res.send(`Вход выполнен `)
 })
 
 

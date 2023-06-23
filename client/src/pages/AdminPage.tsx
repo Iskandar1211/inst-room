@@ -9,16 +9,15 @@ import {
   Option,
   Select,
   Textarea,
-  Typography,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import AccordionHistoryBuy from "../components/UX-UI/accordion/AccordionHistoryBuy";
 import { IHistoryOfOrder } from "../types/Model";
 import { IProduct } from "../types/Model";
 import { CardAdminPanel } from "../components/UX-UI/cards/CardAdminPanel";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { addToProduct } from "../store/reducers/Products";
+import AccordionHistoryBuyAdmin from "../components/UX-UI/accordion/AccordionHistoryBuyAdmin";
 
 export const AdminPage = () => {
   const [HistoryProducts, setHistoryProducts] = useState<IHistoryOfOrder[]>([]);
@@ -152,7 +151,7 @@ export const AdminPage = () => {
                 </div>
               ) : (
                 HistoryProducts.map((product) => (
-                  <AccordionHistoryBuy product={product} />
+                  <AccordionHistoryBuyAdmin product={product} />
                 ))
               )
             ) : (

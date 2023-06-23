@@ -21,7 +21,8 @@ const initialState: IRegistrInterface = {
         email: "",
         password: "",
         confirmPassword: "",
-        role: "user"
+        role: "user",
+        code: ''
     },
     login: {
         phone: ""

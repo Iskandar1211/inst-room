@@ -32,7 +32,7 @@ function Icon({ id, open }: Props) {
   );
 }
 
-export default function AccordionHistoryBuy({ product }: PropsAccordion) {
+export default function AccordionHistoryBuyAdmin({ product }: PropsAccordion) {
   const [open, setOpen] = useState(0);
 
   const handleOpen = (value: number) => {
@@ -101,16 +101,30 @@ export default function AccordionHistoryBuy({ product }: PropsAccordion) {
                 </div>
               ))}
             </div>
-            <div className="text-3xl">С доставков</div>
-            {product.deliveryInfo.map((delivery) => (
-              <div className="text-start">
-                <div>город: {delivery.city}</div>
-                <div>улица: {delivery.street}</div>
-                <div>Квартира {delivery.apartment}</div>
-                <div>Дом {delivery.house}</div>
-                <div>Корпус {delivery.pickupAddress}</div>
-              </div>
-            ))}
+
+            {product.deliveryInfo.map((delivery) => {
+              if (delivery.pickupAddress === "") {
+                return (
+                  <div className="text-start">
+                    <div className="text-3xl">С доставков</div>
+                    <div>город: {delivery.city}</div>
+                    <div>улица: {delivery.street}</div>
+                    <div>квартира: {delivery.apartment}</div>
+                    <div>дом: {delivery.house}</div>
+                  </div>
+                );
+              } else {
+                return (
+                  <div className="text-start">
+                    <div className="text-3xl">Самовывоз</div>
+                    <div className="text-xl flex gap-3">
+                      Адрес самовывоза:
+                      <span className="text-[16px]">{delivery.pickupAddress}</span>
+                    </div>
+                  </div>
+                );
+              }
+            })}
             <div className="text-3xl">Способ оплаты</div>
             {product.payments.map((pay) => (
               <div className="text-start">
