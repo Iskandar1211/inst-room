@@ -3,7 +3,7 @@ import {
   MdOutlineArrowBackIos,
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
-import { BrandSlides } from "./UX-UI/carousel/BrandSlides";
+import { BrandSlides } from "./UX-UI/Carousel/BrandSlides";
 
 const srcImg = [
   { id: crypto.randomUUID(), img: "/brands/centro.png" },

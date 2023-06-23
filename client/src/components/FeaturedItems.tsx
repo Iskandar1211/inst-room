@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IProduct } from "../types/Model";
-import { FeaturesCarousel } from "./UX-UI/carousel/FeaturesCarousel";
+import { FeaturesCarousel } from "./UX-UI/Carousel/FeaturesCarousel";
 
 export const FeaturedItems = () => {
   const [products, setProducts] = useState<IProduct[]>([]);

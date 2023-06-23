@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { IProduct } from "../types/Model";
-import { Carousel } from "./UX-UI/carousel/Carousel";
+import { Carousel } from "./UX-UI/Carousel/Carousel";
+
 
 
 export const Products = () => {
