@@ -521,10 +521,10 @@ app.get('/', (req: Request, res: Response) => {
 //   };
 
 //   HistoryOfOrders.push(newBody);
-//   orders.length = 0;
-//   deliveryInfo.length = 0;
-//   payments.length = 0;
-//   productsFromCart.length = 0;
+  // orders.length = 0;
+  // deliveryInfo.length = 0;
+  // payments.length = 0;
+  // productsFromCart.length = 0;
 
 //   res.send('продукт успешно создан');
 // });

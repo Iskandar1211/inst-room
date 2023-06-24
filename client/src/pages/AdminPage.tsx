@@ -76,6 +76,7 @@ export const AdminPage = () => {
     dispatch(addToProduct(product));
   };
 
+
   useEffect(() => {
     fetch("http://localhost:3009/history-of-orders")
       .then((response) => response.json())

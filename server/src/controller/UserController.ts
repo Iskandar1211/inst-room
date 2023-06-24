@@ -3,6 +3,8 @@ import moment from "moment";
 import { v4 as uuidv4 } from 'uuid';
 import { IDelivery, IPayment, IProduct } from "../../../client/src/types/Model";
 import { UserModel } from "../models/UserModel";
+const db = require('../db')
+
 
 export default class userController {
     static getAllUsers() {
@@ -178,31 +180,28 @@ export default class userController {
     }
     static onGetHistoryOfOrders() {
         return async (req: any, res: any) => {
-            return async (req: Request, res: Response) => {
-                try {
-                    const orders = await UserModel.getOrders()
-                    const productsFromCart: IProduct[] = await UserModel.getProductsFromCard()
-                    const deliveryInfo: IDelivery[] = await UserModel.getDeliveryInfo()
-                    const payments: IPayment[] = await UserModel.getPayments()
-
-                    const historyOfOrders = [];
-                    const history = {
-                        id: uuidv4(),
-                        orderNumber: historyOfOrders.length + 1,
-                        created: moment().subtract(10, "days").calendar(),
-                        received: moment().subtract(10, "days").calendar(),
-                        purchases: [...productsFromCart],
-                        orders: [...orders],
-                        deliveryInfo: [...deliveryInfo],
-                        payments: [...payments]
-                    }
-                    historyOfOrders.push(history)
-
-                    return res.json(historyOfOrders)
-                } catch (error) {
-                    return res.status(401).json(error)
-                }
+            try {
+                const orders = await UserModel.getOrders();
+                const productsFromCart: IProduct[] = await UserModel.getProductsFromCard();
+                const deliveryInfo: IDelivery[] = await UserModel.getDeliveryInfo();
+                const payments: IPayment[] = await UserModel.getPayments();
+                const historyOfOrders = [];
+                const history = {
+                    id: uuidv4(),
+                    orderNumber: historyOfOrders.length + 1,
+                    created: moment().subtract(10, "days").calendar(),
+                    received: moment().subtract(10, "days").calendar(),
+                    purchases: [...productsFromCart],
+                    orders: [...orders],
+                    deliveryInfo: [...deliveryInfo],
+                    payments: [...payments]
+                };
+                historyOfOrders.push(history);
+                return res.json(historyOfOrders);
+            } catch (error) {
+                return res.status(401).json('ошибка 401');
             }
-        }
+        };
     }
+
 }

@@ -39,6 +39,7 @@ export class UserModel {
         const result = await db.query(`SELECT * FROM orders`)
         return result.rows;
     }
+ 
     static async createDeliveryInfo(req: Request, res: Response): Promise<IDelivery> {
         const { id, city, street, house, apartment, delivery, pickupAddress } = req.body;
         const query = 'INSERT INTO delivery_info (id, city, street, house, apartment, delivery, "pickupAddress" ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
