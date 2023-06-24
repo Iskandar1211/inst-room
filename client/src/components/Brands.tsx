@@ -16,9 +16,9 @@ const srcImg = [
 export const Brands = () => {
   return (
     <div className="bg-[#212526]">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 py-10">
-        <div className="text-start py-2 text-2xl text-white">Наши бренды</div>
-        <BrandSlides slideToShow={4} products={srcImg}/>
+      <div className="lg:px-32 md:px-7 px-4 w-[73%] md:w-full m-auto py-10">
+        <div className="md:text-start text-center py-2 text-2xl text-white">Наши бренды</div>
+        <BrandSlides slideToShow={4} products={srcImg} />
       </div>
     </div>
   );

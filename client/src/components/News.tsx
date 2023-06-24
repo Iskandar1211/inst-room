@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const News = () => {
   return (
     <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 mb-10 bg-white py-4">
-      <div className="mt-16 flex gap-4">
+      <div className="md:mt-16 mt-8 md:flex md:gap-4 flex flex-col gap-3 px-2">
         <div className="flex-1 flex flex-col justify-start gap-7 ">
           <p className="text-3xl ">Новости</p>
           <p className="text-start">

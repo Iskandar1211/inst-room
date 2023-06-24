@@ -48,7 +48,7 @@ export function Registration({ setIsRegistred, setIsLogin }: Props) {
     <React.Fragment>
       <div
         onClick={handleOpen}
-        className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
+        className="max-w-sm h-[60px] w-[70px] md:h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] md:w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
       >
         <FaRegUserCircle className="text-white" />
       </div>
