@@ -30,9 +30,9 @@ export const Header = () => {
   const admin = users?.find((user) => user.role === "admin");
 
   useEffect(() => {
-    fetch("http://localhost:3009/get-registration")
+    fetch("http://localhost:3009/get-users")
       .then((response) => response.json())
-      .then((registration) => setUsers(registration));
+      .then((users) => setUsers(users));
   }, []);
 
   const [isRegistred, setIsRegistred] = useState(false);
@@ -40,9 +40,9 @@ export const Header = () => {
   const [isLoginConfirm, setIsLoginConfirm] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3009/get-registration")
+    fetch("http://localhost:3009/get-users")
       .then((response) => response.json())
-      .then((registration) => setUsers(registration));
+      .then((users) => setUsers(users));
   }, [isRegistred, isLogin, isLoginConfirm]);
 
   return (

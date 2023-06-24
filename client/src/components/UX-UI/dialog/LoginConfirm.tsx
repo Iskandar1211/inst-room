@@ -28,7 +28,7 @@ export function LoginConfirm({ setIsLoginConfirm }: Props) {
   const dispatch = useAppDispatch();
 
   const onLoginConfirm = () => {
-    fetch("http://localhost:3009/post-code", {
+    fetch("http://localhost:3009/login-confirm", {
       method: "POST",
       body: JSON.stringify(loginConfirm),
       headers: {

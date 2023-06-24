@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { IProduct } from "../../../client/src/types/Model";
 import ProductController from "../controller/ProductController";
+import userController from "../controller/UserController";
 
 const productRoutes = Router();
 
@@ -31,6 +32,7 @@ productRoutes.get('/for-home-and-cottage', async (req: Request, res: Response) =
 });
 
 productRoutes.get('/products', ProductController.getAllProducts());
+
 
 productRoutes.get('/products/:id', async (req: Request, res: Response) => {
     const { id } = req.params;

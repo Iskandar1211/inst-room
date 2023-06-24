@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { IPayment } from "../types/Model";
-import { BsCheckCircleFill, BsArrowBarRight } from "react-icons/bs";
+import { BsCheckCircleFill } from "react-icons/bs";
 import { clearCart } from "../store/reducers/Cart";
 
 export const PaymentPage = () => {
@@ -11,6 +11,7 @@ export const PaymentPage = () => {
 
   const dispatch = useAppDispatch();
   const productsFromCart = useAppSelector((state) => state.cart.items);
+  
   const totalPrice = productsFromCart.reduce((acum, item) => {
     return acum + item.total;
   }, 0);
@@ -24,15 +25,6 @@ export const PaymentPage = () => {
     onlinePayment: false,
   });
 
-  const addAll = () => {
-    fetch("http://localhost:3009/create-history-of-orders", {
-      method: "POST",
-      body: JSON.stringify(productsFromCart),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  };
   const addProductsFromCart = () => {
     fetch("http://localhost:3009/create-product-from-cart", {
       method: "POST",
@@ -52,7 +44,6 @@ export const PaymentPage = () => {
     })
       .then((response) => {
         if (response.ok) {
-          addAll();
           setComplited(true);
           dispatch(clearCart());
         }

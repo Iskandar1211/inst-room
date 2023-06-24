@@ -28,7 +28,7 @@ export function Login({ setIsLogin, setIsRegistred }: Props) {
   const dispatch = useAppDispatch();
 
   const onLogin = () => {
-    fetch("http://localhost:3009/post-code", {
+    fetch("http://localhost:3009/login", {
       method: "POST",
       body: JSON.stringify(login),
       headers: {
