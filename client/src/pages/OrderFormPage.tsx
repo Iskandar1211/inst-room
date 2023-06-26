@@ -1,5 +1,5 @@
 import { Breadcrumbs, Input } from "@material-tailwind/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { addToOrder, addToPurchases } from "../store/reducers/Order";
@@ -22,13 +22,35 @@ export const OrderFormPage = () => {
     email: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const dispatch = useAppDispatch();
 
   const onAddOrders = () => {
-    dispatch(addToPurchases(products));
-    dispatch(addToOrder(order));
-    navigate("/delivery-info");
+    if (
+      order.email !== "" &&
+      order.lastName !== "" &&
+      order.name !== "" &&
+      order.phone !== ""
+    ) {
+      dispatch(addToPurchases(products));
+      dispatch(addToOrder(order));
+      navigate("/delivery-info");
+    } else {
+      setMessage("Поля не должен быть путимы");
+    }
   };
+
+  useEffect(() => {
+    if (
+      order.email.length > 0 ||
+      order.lastName.length > 0 ||
+      order.name.length > 0 ||
+      order.phone.length > 0
+    ) {
+      setMessage("");
+    }
+  }, [order.email, order.lastName, order.name, order.phone]);
 
   return (
     <div className="bg-[#CBCBCB]">
@@ -97,6 +119,7 @@ export const OrderFormPage = () => {
               >
                 ДАЛЕЕ
               </div>
+              <p className="text-red-500">{message}</p>
             </div>
           </div>
           <div className="flex-1 flex justify-center py-[30px] px-[30px] bg-[#212526] h-[212px] rounded text-white">

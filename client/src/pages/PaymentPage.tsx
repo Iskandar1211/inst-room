@@ -1,14 +1,11 @@
 import { Breadcrumbs, Checkbox } from "@material-tailwind/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
-import { IPayment, IProduct } from "../types/Model";
+import { IPayment } from "../types/Model";
 import { BsCheckCircleFill } from "react-icons/bs";
-import {
-  addTopPayments,
-  addToPurchases,
-  clearOrder,
-} from "../store/reducers/Order";
+import { addTopPayments, clearOrder } from "../store/reducers/Order";
+import { clearCart } from "../store/reducers/Cart";
 
 export const PaymentPage = () => {
   const [complited, setComplited] = useState(false);
@@ -17,8 +14,6 @@ export const PaymentPage = () => {
   const productsFromCart = useAppSelector((state) => state.cart.items);
 
   const order = useAppSelector((state) => state.order.order);
-  console.log(order);
-  
 
   const totalPrice = productsFromCart.reduce((acum, item) => {
     return acum + item.total;
@@ -33,22 +28,45 @@ export const PaymentPage = () => {
     onlinePayment: false,
   });
 
-  const addOrder = () => {
-    dispatch(addTopPayments(payment));
+  const [message, setMessage] = useState("");
 
-    if (order.purchases.length > 0 && order.payments.length > 0) {
-      fetch("http://localhost:3009/create-history-order", {
-        method: "POST",
-        body: JSON.stringify(order),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((status) => {
-        if (status.ok) {
-          dispatch(clearOrder());
-        }
-      });
-      setComplited(true);
+  const addOrder = () => {
+    if (payment.paymentUponReceipt && !payment.onlinePayment) {
+      dispatch(addTopPayments(payment));
+      if (order.purchases.length > 0 && order.payments.length > 0) {
+        fetch("http://localhost:3009/create-history-order", {
+          method: "POST",
+          body: JSON.stringify(order),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((status) => {
+          if (status.ok) {
+            dispatch(clearOrder());
+            dispatch(clearCart());
+          }
+        });
+        setComplited(true);
+      }
+    } else if (!payment.paymentUponReceipt && payment.onlinePayment) {
+      dispatch(addTopPayments(payment));
+      if (order.purchases.length > 0 && order.payments.length > 0) {
+        fetch("http://localhost:3009/create-history-order", {
+          method: "POST",
+          body: JSON.stringify(order),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((status) => {
+          if (status.ok) {
+            dispatch(clearOrder());
+            dispatch(clearCart());
+          }
+        });
+        setComplited(true);
+      }
+    } else {
+      setMessage("Выберите способ оплаты");
     }
   };
 
@@ -147,6 +165,7 @@ export const PaymentPage = () => {
                     Нажимая на кнопку вы соглашаетесь на обработку ваших
                     персональных данных
                   </p>
+                  <p className="text-red-500">{message}</p>
                 </div>
               </div>
             </div>

@@ -26,9 +26,29 @@ export const DeliveryInfoPage = () => {
     pickupAddress: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const addDelivery = () => {
-    dispath(addToDeliveryInfo(courierDelivery))
-    navigate("/payment");
+    if (
+      courierDelivery.city !== "" &&
+      courierDelivery.street !== "" &&
+      courierDelivery.house !== "" &&
+      courierDelivery.apartment !== ""
+    ) {
+      dispath(addToDeliveryInfo(courierDelivery));
+      navigate("/payment");
+    } else if (
+      courierDelivery.city === "" &&
+      courierDelivery.street === "" &&
+      courierDelivery.house === "" &&
+      courierDelivery.apartment === "" &&
+      courierDelivery.pickupAddress !== ""
+    ) {
+      dispath(addToDeliveryInfo(courierDelivery));
+      navigate("/payment");
+    } else {
+      setMessage("Поля не должны быть пустимы");
+    }
   };
 
   const products = useAppSelector((state) => state.cart.items);
@@ -193,6 +213,7 @@ export const DeliveryInfoPage = () => {
               >
                 ДАЛЕЕ
               </div>
+              <p className="text-red-500">{message}</p>
             </div>
           </div>
           <div className="flex-1 flex justify-center py-[30px] px-[30px] bg-[#212526] h-[212px] rounded text-white">
