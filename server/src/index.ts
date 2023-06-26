@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import { IDelivery, IHistoryOfOrder, IOrder, IPayment, IProduct, IRegistration } from './../../client/src/types/Model';
 const express = require("express");
 const cors = require('cors');
@@ -9,8 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 import moment = require('moment');
 import productRoutes from './routes/ProductRoute';
 import userRouter from './routes/UserRoutes';
+import { Request, Response } from 'express';
 const db = require('./db')
-
 
 
 app.use(express.json());
@@ -503,28 +502,51 @@ const HistoryOfOrders: IHistoryOfOrder[] = [];
 app.get('/', (req: Request, res: Response) => {
   res.send('hello server')
 })
+// app.get('/history-of-order', async (req: Request, res: Response) => {
+//   const historu = await db.query('SELECT * FROM history_of_order')
+//   res.send(historu.rows)
+// })
+// app.post('/create-history-order', (req: Request, res: Response) => {
+//   const { id, orderNumber, created, received, purchases, orders, deliveryInfo, payments } = req.body;
+//   const purchasesJson = JSON.stringify(purchases);
+//   const ordersJson = JSON.stringify(orders);
+//   const deliveryInfoJson = JSON.stringify(deliveryInfo);
+//   const paymentsJson = JSON.stringify(payments);
+  
+//   const query = 'INSERT INTO history_of_order (id, "orderNumber", created, received, purchases, orders, "deliveryInfo", payments) VALUES ($1, $2, $3, $4, $5::jsonb, $6::jsonb, $7::jsonb, $8::jsonb)';
+//   const values = [id, orderNumber, created, received, purchasesJson, ordersJson, deliveryInfoJson, paymentsJson];
+
+//   db.query(query, values, (error: string) => {
+//     if (error) {
+//       console.error('Error executing query', error);
+//       res.status(500).json({ error: 'An error occurred while processing your request.' });
+//     } else {
+//       res.status(200).json({ message: 'Order added successfully.' });
+//     }
+//   });
+// });
 
 // app.get('/history-of-orders', (req: Request, res: Response) => {
 //   res.send(HistoryOfOrders)
 // })
 
 // app.post('/create-history-of-orders', async (req: Request, res: Response) => {
-//   const newBody = {
-//     id: uuidv4(),
-//     orderNumber: HistoryOfOrders.length + 1,
-//     created: moment().subtract(10, "days").calendar(),
-//     received: moment().subtract(10, "days").calendar(),
-//     purchases: [...productsFromCart],
-//     orders: [...orders],
-//     deliveryInfo: [...deliveryInfo],
-//     payments: [...payments]
-//   };
+// const newBody = {
+  // id: uuidv4(),
+  // orderNumber: HistoryOfOrders.length + 1,
+  // created: moment().subtract(10, "days").calendar(),
+  // received: moment().subtract(10, "days").calendar(),
+  // purchases: [...productsFromCart],
+  // orders: [...orders],
+  // deliveryInfo: [...deliveryInfo],
+  // payments: [...payments]
+// };
 
 //   HistoryOfOrders.push(newBody);
-  // orders.length = 0;
-  // deliveryInfo.length = 0;
-  // payments.length = 0;
-  // productsFromCart.length = 0;
+// orders.length = 0;
+// deliveryInfo.length = 0;
+// payments.length = 0;
+// productsFromCart.length = 0;
 
 //   res.send('продукт успешно создан');
 // });

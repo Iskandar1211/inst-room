@@ -28,54 +28,19 @@ export class UserModel {
         const result = await db.query('DELETE FROM users WHERE id = $1', [id]);
         return result.rows;
     }
-    static async сreateOrder(req: Request, res: Response): Promise<IOrder[]> {
-        const { id, name, lastName, phone, email } = req.body;
-        const query = 'INSERT INTO orders (id, name, "lastName", phone, email) VALUES ($1, $2, $3, $4, $5) RETURNING *';
-        const values = [id, name, lastName, phone, email];
-        const result = await db.query(query, values);
-        return result.rows;
-    }
-    static async getOrders(): Promise<IOrder[]> {
-        const result = await db.query(`SELECT * FROM orders`)
-        return result.rows;
-    }
- 
-    static async createDeliveryInfo(req: Request, res: Response): Promise<IDelivery> {
-        const { id, city, street, house, apartment, delivery, pickupAddress } = req.body;
-        const query = 'INSERT INTO delivery_info (id, city, street, house, apartment, delivery, "pickupAddress" ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-        const values = [id, city, street, house, apartment, delivery, pickupAddress];
-        const result = await db.query(query, values);
-        return result.rows;
-    }
-    static async getDeliveryInfo(): Promise<IDelivery[]> {
-        const result = await db.query('SELECT * FROM delivery_info');
-        return result.rows;
-    }
 
-    static async createPayment(req: Request, res: Response): Promise<IPayment[]> {
-        const { id, paymentUponReceipt, cash, bankСard, onlinePayment } = req.body;
-        const query = 'INSERT INTO payments (id, "paymentUponReceipt", cash, "bankСard", "onlinePayment") VALUES ($1, $2, $3, $4, $5) RETURNING *';
-        const values = [id, paymentUponReceipt, cash, bankСard, onlinePayment];
-        const result = await db.query(query, values);
-        return result.rows;
-    }
-    static async getPayments(): Promise<IPayment[]> {
-        const result = await db.query('SELECT * FROM payments');
-        return result.rows;
-    }
-    static async createProductFromCart(req: Request, res: Response): Promise<IProduct[]> {
-        const products = req.body;
-        const insertedProducts: IProduct[] = [];
+    static async createOrder(req: Request): Promise<IHistoryOfOrder[]> {
+        const { id, orderNumber, created, received, purchases, orders, deliveryInfo, payments } = req.body;
+        const purchasesJson = JSON.stringify(purchases);
+        const ordersJson = JSON.stringify(orders);
+        const deliveryInfoJson = JSON.stringify(deliveryInfo);
+        const paymentsJson = JSON.stringify(payments);
 
-        for (const product of products) {
-            const { id, name, img, price, inStock, detailed, isNew, total, quantity, categories } = product;
-            const result = await db.query('INSERT INTO products_from_сart (id, name, img, price, "inStock", detailed, "isNew", total, quantity, categories) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *', [id, name, img, price, inStock, detailed, isNew, total, quantity, categories]);
-            insertedProducts.push(result.rows[0]);
-        }
-        return insertedProducts;
+        const result = await db.query('INSERT INTO history_of_order (id, "orderNumber", created, received, purchases, orders, "deliveryInfo", payments) VALUES ($1, $2, $3, $4, $5::jsonb, $6::jsonb, $7::jsonb, $8::jsonb)', [id, orderNumber, created, received, purchasesJson, ordersJson, deliveryInfoJson, paymentsJson]);
+        return result.rows;
     }
-    static async getProductsFromCard(): Promise<IProduct[]> {
-        const result = await db.query('SELECT * FROM products_from_сart');
+    static async getHistoryOrders(): Promise<IHistoryOfOrder[]> {
+        const result = await db.query('SELECT * FROM history_of_order');
         return result.rows;
     }
 }

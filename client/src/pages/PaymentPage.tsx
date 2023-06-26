@@ -1,17 +1,25 @@
-import { Breadcrumbs, Checkbox, Input } from "@material-tailwind/react";
-import React, { useState } from "react";
+import { Breadcrumbs, Checkbox } from "@material-tailwind/react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
-import { IPayment } from "../types/Model";
+import { IPayment, IProduct } from "../types/Model";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { clearCart } from "../store/reducers/Cart";
+import {
+  addTopPayments,
+  addToPurchases,
+  clearOrder,
+} from "../store/reducers/Order";
 
 export const PaymentPage = () => {
   const [complited, setComplited] = useState(false);
 
   const dispatch = useAppDispatch();
   const productsFromCart = useAppSelector((state) => state.cart.items);
+
+  const order = useAppSelector((state) => state.order.order);
+  console.log(order);
   
+
   const totalPrice = productsFromCart.reduce((acum, item) => {
     return acum + item.total;
   }, 0);
@@ -25,33 +33,23 @@ export const PaymentPage = () => {
     onlinePayment: false,
   });
 
-  const addProductsFromCart = () => {
-    fetch("http://localhost:3009/create-product-from-cart", {
-      method: "POST",
-      body: JSON.stringify(productsFromCart),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  };
-  const addDelivery = () => {
-    fetch("http://localhost:3009/create-payment", {
-      method: "POST",
-      body: JSON.stringify(payment),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          setComplited(true);
-          dispatch(clearCart());
+  const addOrder = () => {
+    dispatch(addTopPayments(payment));
+
+    if (order.purchases.length > 0 && order.payments.length > 0) {
+      fetch("http://localhost:3009/create-history-order", {
+        method: "POST",
+        body: JSON.stringify(order),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((status) => {
+        if (status.ok) {
+          dispatch(clearOrder());
         }
-      })
-      .catch((error) => {
-        console.log(error);
       });
-    addProductsFromCart();
+      setComplited(true);
+    }
   };
 
   return (
@@ -140,7 +138,7 @@ export const PaymentPage = () => {
                 </div>
                 <div className="text-start">
                   <button
-                    onClick={() => addDelivery()}
+                    onClick={() => addOrder()}
                     className="w-[308px] h-[50px] flex justify-center items-center bg-[#F05A00] text-white"
                   >
                     ПОДТВЕРДИТЬ ЗАКАЗ

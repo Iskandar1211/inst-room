@@ -1,6 +1,5 @@
 import { Breadcrumbs, Option, Select } from "@material-tailwind/react";
 import React, { useState, useEffect } from "react";
-import { IoIosArrowForward } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
 import { Card } from "../components/UX-UI/cards/Card";
 import { IProduct } from "../types/Model";

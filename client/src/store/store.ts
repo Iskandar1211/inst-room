@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { cartSlice } from './reducers/Cart'
 import { Registration } from './reducers/Registration';
 import { productsSlice } from './reducers/Products';
+import { orderSlice } from './reducers/Order';
 
 
 export const store = configureStore({
@@ -12,7 +13,8 @@ export const store = configureStore({
     favorites: Favorites.reducer,
     comparison: Сomparison.reducer,
     registration: Registration.reducer,
-    productsAdmin: productsSlice.reducer
+    productsAdmin: productsSlice.reducer,
+    order: orderSlice.reducer
   },
 })
 

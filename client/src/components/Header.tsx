@@ -4,7 +4,7 @@ import { FiBarChart2 } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
+import { useAppSelector } from "../store/hooks/hooks";
 import { RequestAcall } from "./UX-UI/dialog/RequestAcall";
 import { Registration } from "./UX-UI/dialog/Registration";
 import { Login } from "./UX-UI/dialog/Login";
@@ -17,8 +17,6 @@ export const Header = () => {
   const products = useAppSelector((state) => state.cart.items);
   const favorites = useAppSelector((state) => state.favorites.items);
   const comparison = useAppSelector((state) => state.comparison.comparison);
-
-  const dispatch = useAppDispatch();
 
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.total;
@@ -130,7 +128,9 @@ export const Header = () => {
             onClick={() => setShowSidebar(!showSidebar)}
             className="text-white md:hidden text-4xl px-1 py-1 hover:bg-[#F05A00] hover:rounded-full hover:px-1 hover:py-1"
           />
-          {showSidebar && <Sidebar resultBuy={resultBuy} setShowSidebar={setShowSidebar}/>}
+          {showSidebar && (
+            <Sidebar resultBuy={resultBuy} setShowSidebar={setShowSidebar} />
+          )}
         </div>
       </div>
     </div>

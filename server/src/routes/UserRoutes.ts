@@ -7,13 +7,8 @@ userRoutes.get('/get-users', userController.getAllUsers());
 userRoutes.post('/registration', userController.onCreateUser());
 userRoutes.post('/login', userController.onLogin());
 userRoutes.post('/login-confirm', userController.onLoginConfirm());
-userRoutes.delete('/delete-user', userController.onLoginConfirm());
+userRoutes.delete('/delete-user', userController.onDeleteUser());
 userRoutes.get('/history-of-orders', userController.onGetHistoryOfOrders());
-userRoutes.post('/create-order', userController.onCreateOrder());
-userRoutes.get('/get-orders', userController.onGetOrders());
-userRoutes.get('/delivery-info', userController.onGetDeliveryInfo());
-userRoutes.post('/create-delivery-info', userController.onCreateDeliveryInfo());
-userRoutes.post('/create-payment', userController.onCreatePayment());
-userRoutes.post('/create-product-from-cart', userController.onCreateProductFromCart());
+userRoutes.post('/create-history-order', userController.onCreateOrder())
 
 export default userRoutes;

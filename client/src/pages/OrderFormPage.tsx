@@ -1,13 +1,13 @@
 import { Breadcrumbs, Input } from "@material-tailwind/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
+import { addToOrder, addToPurchases } from "../store/reducers/Order";
 import { IOrder } from "../types/Model";
 
 export const OrderFormPage = () => {
   const navigate = useNavigate();
 
-  const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.cart.items);
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.total;
@@ -22,16 +22,11 @@ export const OrderFormPage = () => {
     email: "",
   });
 
-  
+  const dispatch = useAppDispatch();
 
   const onAddOrders = () => {
-    fetch("http://localhost:3009/create-order", {
-      method: "POST",
-      body: JSON.stringify(order),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    dispatch(addToPurchases(products));
+    dispatch(addToOrder(order));
     navigate("/delivery-info");
   };
 
@@ -44,7 +39,9 @@ export const OrderFormPage = () => {
           </Link>
           <Link to="/order-form">Оформление заказа</Link>
         </Breadcrumbs>
-        <div className="md:text-4xl text-2xl md:text-start text-center">Оформление заказа</div>
+        <div className="md:text-4xl text-2xl md:text-start text-center">
+          Оформление заказа
+        </div>
         <div className="flex md:flex-row flex-col bg-white px-6 py-6 gap-4">
           <div className=" flex-[2]">
             <div className=" mb-2 flex gap-16 text-[20px] font-normal-400">

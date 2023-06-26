@@ -8,11 +8,12 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
+import { addToDeliveryInfo } from "../store/reducers/Order";
 import { IDelivery } from "../types/Model";
 
 export const DeliveryInfoPage = () => {
   const [pickup, setPickup] = useState(false);
-
+  const dispath = useAppDispatch();
   const navigate = useNavigate();
 
   const [courierDelivery, setCourierDelivery] = useState<IDelivery>({
@@ -26,16 +27,9 @@ export const DeliveryInfoPage = () => {
   });
 
   const addDelivery = () => {
-    fetch("http://localhost:3009/create-delivery-info", {
-      method: "POST",
-      body: JSON.stringify(courierDelivery),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    dispath(addToDeliveryInfo(courierDelivery))
     navigate("/payment");
   };
-  const dispatch = useAppDispatch();
 
   const products = useAppSelector((state) => state.cart.items);
 

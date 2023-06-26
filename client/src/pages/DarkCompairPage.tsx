@@ -1,12 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineClose } from "react-icons/ai";
-import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
+import { useAppSelector } from "../store/hooks/hooks";
 import { News } from "../components/News";
-import { SlBasket } from "react-icons/sl";
-import { FiCheckCircle } from "react-icons/fi";
-import { addToCart } from "../store/reducers/Cart";
-import { IProduct } from "../types/Model";
 import { CompairCard } from "../components/UX-UI/cards/CompairCard";
 import { Breadcrumbs } from "@material-tailwind/react";
 
@@ -20,7 +15,9 @@ export const DarkCompairPage = () => {
           <Link className="opacity-60 text-white" to="/">
             Главная
           </Link>
-          <Link to="/dark-compair" className="text-white">Сравнение</Link>
+          <Link to="/dark-compair" className="text-white">
+            Сравнение
+          </Link>
         </Breadcrumbs>
         <div className="text-4xl text-white flex justify-between">
           <div>Сравнение товаров</div>

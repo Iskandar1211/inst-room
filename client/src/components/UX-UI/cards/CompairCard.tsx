@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
+import { useAppDispatch } from "../../../store/hooks/hooks";
 import { addToCart } from "../../../store/reducers/Cart";
 import { IProduct } from "../../../types/Model";
 import { removeFromСomparison } from "../../../store/reducers/Сomparison";

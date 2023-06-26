@@ -1,20 +1,4 @@
-import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-} from "@material-tailwind/react";
-import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
-} from "@heroicons/react/24/solid";
+import { Card, List, ListItem } from "@material-tailwind/react";
 import { RequestAcall } from "../dialog/RequestAcall";
 import { Link } from "react-router-dom";
 import { RxInstagramLogo } from "react-icons/rx";

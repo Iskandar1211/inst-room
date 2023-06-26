@@ -6,13 +6,11 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-  Textarea,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { setLogin } from "../../../store/reducers/Registration";
-import type { DialogStylesType } from "@material-tailwind/react";
 
 interface Props {
   setIsLogin: (arg: boolean) => void;

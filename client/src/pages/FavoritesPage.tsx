@@ -2,8 +2,7 @@ import { Breadcrumbs, Option, Select } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CardFavorites } from "../components/UX-UI/cards/CardFavorites";
-import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
-import { addToCart } from "../store/reducers/Cart";
+import {  useAppSelector } from "../store/hooks/hooks";
 import { IProduct } from "../types/Model";
 
 export const FavoritesPage = () => {
