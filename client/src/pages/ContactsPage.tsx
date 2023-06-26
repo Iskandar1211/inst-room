@@ -13,13 +13,13 @@ export const ContactsPage = () => {
       <div className="flex text-3xl font-bold my-10">
         <h1>Контакты</h1>
       </div>
-      <div className="flex gap-10">
+      <div className="flex md:flex-row flex-col gap-10">
         <img
-          className="w-[50vw]  "
+          className="md:w-[50vw]"
           src="Contacts/photoContact1.png"
           alt="Contacts"
         />
-        <span>
+        <span className="md:px-0 px-4">
           <p className="text-[#8a8a8a]">ул. 1-я Дубравная, 15</p>
           <p className="text-[#8a8a8a]">г. Можайск, Московская область</p>
           <p className="text-[#8a8a8a]">+7 495 120-32-15</p>

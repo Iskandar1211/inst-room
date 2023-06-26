@@ -44,8 +44,8 @@ export const OrderFormPage = () => {
           </Link>
           <Link to="/order-form">Оформление заказа</Link>
         </Breadcrumbs>
-        <div className="text-4xl text-start">Оформление заказа</div>
-        <div className="flex bg-white px-6 py-6 gap-4">
+        <div className="md:text-4xl text-2xl md:text-start text-center">Оформление заказа</div>
+        <div className="flex md:flex-row flex-col bg-white px-6 py-6 gap-4">
           <div className=" flex-[2]">
             <div className=" mb-2 flex gap-16 text-[20px] font-normal-400">
               <Breadcrumbs>
@@ -59,8 +59,8 @@ export const OrderFormPage = () => {
               </Breadcrumbs>
             </div>
             <div className="flex w-[100%] flex-col gap-8 mb-4 ">
-              <div className="flex gap-[100px]">
-                <div className="flex flex-col gap-8 flex-1">
+              <div className="flex md:flex-row md:gap-[100px] flex-col gap-4">
+                <div className="flex flex-col md:gap-8 gap-4 flex-1">
                   <Input
                     onChange={(e) =>
                       setOrder({ ...order, lastName: e.target.value })
@@ -77,7 +77,7 @@ export const OrderFormPage = () => {
                     value={order.phone}
                   />
                 </div>
-                <div className="flex flex-col flex-1 gap-8">
+                <div className="flex flex-col flex-1 md:gap-8 gap-4">
                   <Input
                     onChange={(e) =>
                       setOrder({ ...order, name: e.target.value })

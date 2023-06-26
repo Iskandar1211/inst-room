@@ -25,7 +25,7 @@ export const DarkCompairPage = () => {
         <div className="text-4xl text-white flex justify-between">
           <div>Сравнение товаров</div>
         </div>
-        <div className="grid grid-cols-3 gap-3 text-white py-2">
+        <div className="grid md:grid-cols-3 grid-cols-1 px-4 gap-3 text-white py-2">
           {comparison.map((product) => (
             <CompairCard key={product.id} product={product} />
           ))}

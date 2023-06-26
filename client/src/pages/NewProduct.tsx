@@ -23,7 +23,7 @@ export const NewProduct = () => {
           <Link to="/stocks-page">Новинки</Link>
         </Breadcrumbs>
         <div className="text-4xl text-start">Новинки</div>
-        <div className="flex flex-wrap gap-7">
+        <div className="grid md:grid-cols-4 grid-cols-1 gap-4 m-auto">
           {newProducts.map((product) => (
             <Card key={product.id} product={product} />
           ))}

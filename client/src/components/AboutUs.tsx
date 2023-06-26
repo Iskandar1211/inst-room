@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const AboutUs = () => {
   return (
     <div className="bg-[#CBCBCB]">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 py-10 md:flex md:gap-10 flex flex-col">
+      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 py-10 md:flex md:gap-10 md:flex-row flex flex-col">
         <div className="flex-1">
           <img src="/about/about-img.png" alt="about-img" />
         </div>
@@ -18,7 +18,12 @@ export const AboutUs = () => {
             торгово-промышленное объединение предпринимателей, форма организации
             предприятия
           </p>
-          <Link to={`/catalog/${"painting-supplies"}`} className="bg-[#212526] w-[230px] h-[50px] text-white hover:bg-[#F05A00] flex justify-center items-center">ПЕРЕЙТИ В КАТАЛОГ</Link>
+          <Link
+            to={`/catalog/${"painting-supplies"}`}
+            className="bg-[#212526] w-[230px] h-[50px] text-white hover:bg-[#F05A00] flex justify-center items-center"
+          >
+            ПЕРЕЙТИ В КАТАЛОГ
+          </Link>
         </div>
       </div>
     </div>

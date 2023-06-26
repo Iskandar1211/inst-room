@@ -18,8 +18,8 @@ export const Navbar = () => {
   const [isSearch, setIsSearch] = useState(false);
   const widthFroSeacrchContainer = !isSearch
     ? "md:w-[35rem] w-[6rem]"
-    : "w-[35rem]";
-  const widthFroSeacrchButton = !isSearch ? " hidden" : "w-[40rem]";
+    : "md:w-[40rem] w-[35rem]";
+  const widthFroSeacrchButton = !isSearch ? "hidden" : "md:w-[40rem] w-[100%]";
   const styleForSearchContainer = [
     "flex items-center transition-all",
     widthFroSeacrchContainer,
@@ -124,7 +124,7 @@ export const Navbar = () => {
                           setIsSearch(false);
                           setSearchValue("");
                         }}
-                        className="w-full flex flex-col items-center"
+                        className="md:w-full md:flex md:flex-col md:items-center"
                       >
                         {filteredProducts.map((product) => (
                           <Search key={product.id} filterProduct={product} />

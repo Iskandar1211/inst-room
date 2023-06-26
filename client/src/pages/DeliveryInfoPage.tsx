@@ -54,7 +54,7 @@ export const DeliveryInfoPage = () => {
           <Link to="/order-form">Оформление заказа</Link>
         </Breadcrumbs>
         <div className="text-4xl text-start">Оформление заказа</div>
-        <div className="flex bg-white px-6 py-6 gap-4">
+        <div className="flex md:flex-row flex-col bg-white px-6 py-6 gap-4">
           <div className=" flex-[2]">
             <div className=" mb-2 flex gap-16 text-[20px] font-normal-400">
               <Breadcrumbs>
@@ -69,10 +69,10 @@ export const DeliveryInfoPage = () => {
             </div>
             <div className="flex w-[100%] flex-col gap-8 mb-4 ">
               <div className="flex flex-col gap-6">
-                <p className="text-start text-2xl">
-                  Выберите подходящий вам вариант доставки:
+                <p className="text-start md:text-2xl text-xl">
+                  Выберите подходящий вам вариант:
                 </p>
-                <div className="flex gap-[80px] text-[20px]">
+                <div className="flex md:flex-row md:gap-[80px] md:text-[20px] flex-col">
                   <div className="flex items-center">
                     {pickup && (
                       <Checkbox
@@ -109,8 +109,8 @@ export const DeliveryInfoPage = () => {
               {!pickup ? (
                 <div className="flex flex-col gap-6">
                   <b className="text-start">Введите адрес доставки</b>
-                  <div className="flex gap-[100px]">
-                    <div className="flex flex-col gap-8 flex-1">
+                  <div className="flex md:flex-row flex-col gap-2 md:gap-[100px]">
+                    <div className="flex flex-col md:gap-8 gap-2 flex-1">
                       <Input
                         onChange={(e) =>
                           setCourierDelivery({
@@ -131,7 +131,7 @@ export const DeliveryInfoPage = () => {
                       />
                     </div>
                     <div className="flex flex-col flex-1 gap-8">
-                      <div className="flex gap-2">
+                      <div className="flex md:flex-row flex-col gap-2">
                         <Input
                           onChange={(e) =>
                             setCourierDelivery({
@@ -157,7 +157,7 @@ export const DeliveryInfoPage = () => {
               ) : (
                 <div className="flex flex-col gap-6">
                   <b className="text-start">Выберите пункт доставки</b>
-                  <div className="w-[50%]">
+                  <div className="md:w-[50%]">
                     <Select
                       label="виберите пункт из списка"
                       onChange={(selectValue) => {

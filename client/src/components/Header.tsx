@@ -130,7 +130,7 @@ export const Header = () => {
             onClick={() => setShowSidebar(!showSidebar)}
             className="text-white md:hidden text-4xl px-1 py-1 hover:bg-[#F05A00] hover:rounded-full hover:px-1 hover:py-1"
           />
-          {showSidebar && <Sidebar resultBuy={resultBuy} />}
+          {showSidebar && <Sidebar resultBuy={resultBuy} setShowSidebar={setShowSidebar}/>}
         </div>
       </div>
     </div>

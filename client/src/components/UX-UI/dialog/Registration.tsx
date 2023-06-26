@@ -52,7 +52,7 @@ export function Registration({ setIsRegistred, setIsLogin }: Props) {
       >
         <FaRegUserCircle className="text-white" />
       </div>
-      <Dialog open={open} handler={handleOpen}>
+      <Dialog className="min-w-fit" open={open} handler={handleOpen}>
         <div className="flex items-center justify-between">
           <DialogHeader> </DialogHeader>
           <XMarkIcon className="mr-3 h-5 w-5" onClick={handleOpen} />

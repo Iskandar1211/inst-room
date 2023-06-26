@@ -125,7 +125,7 @@ export const AdminPage = () => {
           <Link to="/profile-page">Личный кабинет</Link>
         </Breadcrumbs>
         <div className="text-4xl text-start">Личный кабинет</div>
-        <div className="flex gap-[20px]">
+        <div className="flex md:flex-row flex-col gap-[20px]">
           <div className="flex-1 flex flex-col gap-[20px]">
             <div className="bg-[#212526] flex flex-col rounded-[5px]">
               <p
@@ -243,7 +243,7 @@ export const AdminPage = () => {
                     </Button>
                     <Collapse open={openLast}>
                       <Card className="my-4 mx-auto ">
-                        <CardBody className="grid grid-cols-2 gap-2">
+                        <CardBody className="grid md:grid-cols-2 grid-cols-1 gap-2">
                           {products.map((product) => (
                             <CardAdminPanel
                               edit={edit}
@@ -265,7 +265,7 @@ export const AdminPage = () => {
                     </Button>
                     <Collapse open={openThird}>
                       <Card className="my-4 mx-auto ">
-                        <CardBody className="grid grid-cols-3 gap-2">
+                        <CardBody className="grid md:grid-cols-3 grid-cols-1 gap-2">
                           {products.map((product) => (
                             <CardAdminPanel
                               edit={edit}

@@ -65,7 +65,7 @@ export const PaymentPage = () => {
             <Link to="/order-form">Оформление заказа</Link>
           </Breadcrumbs>
           <div className="text-4xl text-start">Оформление заказа</div>
-          <div className="flex bg-white px-6 py-6 gap-4">
+          <div className="flex md:flex-row flex-col bg-white px-6 py-6 gap-4">
             <div className=" flex-[2]">
               <div className=" mb-2 flex gap-16 text-[20px] font-normal-400">
                 <Breadcrumbs>

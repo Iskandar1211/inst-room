@@ -49,8 +49,8 @@ export const FavoritesPage = () => {
         <Link to="/favorites">Избранное</Link>
       </Breadcrumbs>
       <div className="text-4xl text-start">Избранное</div>
-      <div className="flex">
-        <div className="flex-1 text-start font-bold">
+      <div className="flex md:flex-row flex-col">
+        <div className="flex-1 md:text-start text-center my-4 font-bold">
           {favorites.length} товаров
         </div>
         <div className="flex flex-[2] justify-start">
@@ -69,7 +69,7 @@ export const FavoritesPage = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid md:grid-cols-4 gap-3 grid-cols-1 m-auto">
         {sortFavorite.map((favorite) => (
           <CardFavorites key={favorite.id} favorite={favorite} />
         ))}

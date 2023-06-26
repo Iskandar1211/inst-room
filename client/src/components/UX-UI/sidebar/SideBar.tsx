@@ -23,9 +23,10 @@ import { FiFacebook } from "react-icons/fi";
 
 interface Props {
   resultBuy: number;
+  setShowSidebar: (arg: boolean) => void;
 }
 
-export default function Sidebar({ resultBuy }: Props) {
+export default function Sidebar({ resultBuy, setShowSidebar }: Props) {
   return (
     <Card className="fixed top-[21vh] bg-[#171a1c] left-0 h-fit w-[75vw] max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 text-white">
       <List>
@@ -42,16 +43,32 @@ export default function Sidebar({ resultBuy }: Props) {
         <p className="text-[18px]">{resultBuy} &#8381;</p>
       </List>
       <List className="text-white text-center border-t-0 border-b-2">
-        <Link className="hover:text-[#F05A00]" to="/about">
+        <Link
+          onClick={() => setShowSidebar(false)}
+          className="hover:text-[#F05A00]"
+          to="/about"
+        >
           О компании
         </Link>
-        <Link className="hover:text-[#F05A00]" to="/stocks-page">
+        <Link
+          onClick={() => setShowSidebar(false)}
+          className="hover:text-[#F05A00]"
+          to="/stocks-page"
+        >
           Акции
         </Link>
-        <Link to="/contacts" className="hover:text-[#F05A00]">
+        <Link
+          onClick={() => setShowSidebar(false)}
+          to="/contacts"
+          className="hover:text-[#F05A00]"
+        >
           Контакты
         </Link>
-        <Link className="hover:text-[#F05A00]" to="/new-product">
+        <Link
+          onClick={() => setShowSidebar(false)}
+          className="hover:text-[#F05A00]"
+          to="/new-product"
+        >
           Новинки
         </Link>
       </List>
