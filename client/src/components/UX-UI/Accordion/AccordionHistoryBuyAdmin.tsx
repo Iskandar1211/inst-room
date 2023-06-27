@@ -119,7 +119,9 @@ export default function AccordionHistoryBuyAdmin({ product }: PropsAccordion) {
                     <div className="text-3xl">Самовывоз</div>
                     <div className="text-xl flex gap-3">
                       Адрес самовывоза:
-                      <span className="text-[16px]">{delivery.pickupAddress}</span>
+                      <span className="text-[16px]">
+                        {delivery.pickupAddress}
+                      </span>
                     </div>
                   </div>
                 );

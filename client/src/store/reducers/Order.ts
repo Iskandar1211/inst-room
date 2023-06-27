@@ -12,19 +12,24 @@ const initialState: ordersState = {
     order: {
         id: crypto.randomUUID(),
         orderNumber: 0,
-        created: moment().subtract(10, "days").calendar(),
-        received: moment().subtract(10, "days").calendar(),
+        created: moment().format('d.MM.YYYY'),
+        received: moment().format('d.MM.YYYY'),
         purchases: [],
         orders: [],
         deliveryInfo: [],
         payments: []
     }
+
 }
 
 export const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
+        addOrderNumber: (state, action: PayloadAction<number>) => {
+            const newOrder: number = action.payload
+            state.order.orderNumber = newOrder
+        },
         addToOrder: (state, action: PayloadAction<IOrder>) => {
             const newOrder: IOrder = action.payload
             state.order.orders.push(newOrder)
@@ -39,15 +44,14 @@ export const orderSlice = createSlice({
         },
         addTopPayments: (state, action: PayloadAction<IPayment>) => {
             const newPayment: IPayment = action.payload
-            state.order.orderNumber++
             state.order.payments.push(newPayment)
         },
         clearOrder: state => {
             state.order = {
                 id: crypto.randomUUID(),
                 orderNumber: 0,
-                created: "",
-                received: "",
+                created: moment().format('d.MM.YYYY'),
+                received: moment().format('d.MM.YYYY'),
                 purchases: [],
                 orders: [],
                 deliveryInfo: [],
@@ -57,7 +61,7 @@ export const orderSlice = createSlice({
     }
 });
 
-export const { addToOrder, addToPurchases, addToDeliveryInfo, addTopPayments, clearOrder } = orderSlice.actions
+export const { addToOrder, addToPurchases, addToDeliveryInfo, addTopPayments, clearOrder, addOrderNumber } = orderSlice.actions
 
 export const selectCartItems = (state: RootState) => state.cart.items
 

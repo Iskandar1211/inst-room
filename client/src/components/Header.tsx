@@ -26,6 +26,7 @@ export const Header = () => {
   const resultBuy = totalPrice - discount;
 
   const [users, setUsers] = useState<IRegistration[]>();
+
   const user = users?.find((user) => user.role === "user");
   const admin = users?.find((user) => user.role === "admin");
 

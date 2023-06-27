@@ -38,7 +38,7 @@ export const CartPage = () => {
           </Link>
         </div>
         {products.length === 0 ? (
-          <div className="text-4xl text-[#F05A00]">Нет товаров в карзине</div>
+          <div className="text-4xl text-[#F05A00] text-center">Нет товаров в карзине</div>
         ) : (
           <div className="bg-white">
             <div className="md:grid md:grid-cols-4 border py-3 px-3 font-bold hidden">
@@ -93,7 +93,7 @@ export const CartPage = () => {
             ))}
           </div>
         )}
-        <div className="md:flex md:justify-end flex justify-center mt-2">
+        {products.length > 0 && <div className="md:flex md:justify-end flex justify-center mt-2">
           <div className="">
             <div
               className="flex justify-between py-2"
@@ -120,7 +120,7 @@ export const CartPage = () => {
               ПЕРЕЙТИ К ОФОРМЛЕНИЮ
             </Link>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

@@ -2,12 +2,22 @@ import { Breadcrumbs, Input } from "@material-tailwind/react";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
-import { addToOrder, addToPurchases } from "../store/reducers/Order";
-import { IOrder } from "../types/Model";
+import {
+  addOrderNumber,
+  addToOrder,
+  addToPurchases,
+} from "../store/reducers/Order";
+import { IHistoryOfOrder, IOrder } from "../types/Model";
 
 export const OrderFormPage = () => {
   const navigate = useNavigate();
+  const [HistoryProducts, setHistoryProducts] = useState<IHistoryOfOrder[]>([]);
 
+  useEffect(() => {
+    fetch("http://localhost:3009/history-of-orders")
+      .then((response) => response.json())
+      .then((historyBuys) => setHistoryProducts(historyBuys));
+  }, []);
   const products = useAppSelector((state) => state.cart.items);
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.total;
@@ -35,6 +45,7 @@ export const OrderFormPage = () => {
     ) {
       dispatch(addToPurchases(products));
       dispatch(addToOrder(order));
+      dispatch(addOrderNumber(HistoryProducts.length + 1));
       navigate("/delivery-info");
     } else {
       setMessage("Поля не должен быть путимы");

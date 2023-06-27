@@ -9,6 +9,7 @@ import { clearCart } from "../store/reducers/Cart";
 
 export const PaymentPage = () => {
   const [complited, setComplited] = useState(false);
+  const [addingOrder, setAddingOrder] = useState(false);
 
   const dispatch = useAppDispatch();
   const productsFromCart = useAppSelector((state) => state.cart.items);
@@ -28,45 +29,26 @@ export const PaymentPage = () => {
     onlinePayment: false,
   });
 
-  const [message, setMessage] = useState("");
+  const addPayment = () => {
+    dispatch(addTopPayments(payment));
+    setAddingOrder(true);
+  };
 
   const addOrder = () => {
-    if (payment.paymentUponReceipt && !payment.onlinePayment) {
-      dispatch(addTopPayments(payment));
-      if (order.purchases.length > 0 && order.payments.length > 0) {
-        fetch("http://localhost:3009/create-history-order", {
-          method: "POST",
-          body: JSON.stringify(order),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }).then((status) => {
-          if (status.ok) {
-            dispatch(clearOrder());
-            dispatch(clearCart());
-          }
-        });
-        setComplited(true);
-      }
-    } else if (!payment.paymentUponReceipt && payment.onlinePayment) {
-      dispatch(addTopPayments(payment));
-      if (order.purchases.length > 0 && order.payments.length > 0) {
-        fetch("http://localhost:3009/create-history-order", {
-          method: "POST",
-          body: JSON.stringify(order),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }).then((status) => {
-          if (status.ok) {
-            dispatch(clearOrder());
-            dispatch(clearCart());
-          }
-        });
-        setComplited(true);
-      }
-    } else {
-      setMessage("Выберите способ оплаты");
+    if (order.payments.length > 0) {
+      fetch("http://localhost:3009/create-history-order", {
+        method: "POST",
+        body: JSON.stringify(order),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((status) => {
+        if (status.ok) {
+          dispatch(clearOrder());
+          dispatch(clearCart());
+        }
+      });
+      setComplited(true);
     }
   };
 
@@ -155,17 +137,26 @@ export const PaymentPage = () => {
                   </div>
                 </div>
                 <div className="text-start">
-                  <button
-                    onClick={() => addOrder()}
-                    className="w-[308px] h-[50px] flex justify-center items-center bg-[#F05A00] text-white"
-                  >
-                    ПОДТВЕРДИТЬ ЗАКАЗ
-                  </button>
+                  {!addingOrder ? (
+                    <button
+                      onClick={() => addPayment()}
+                      className="w-[308px] h-[50px] flex justify-center items-center bg-black text-white"
+                    >
+                      ДАЛЕЕ
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => addOrder()}
+                      className="w-[308px] h-[50px] flex justify-center items-center bg-[#F05A00] text-white"
+                    >
+                      ПОДТВЕРДИТЬ ЗАКАЗ
+                    </button>
+                  )}
+
                   <p className="w-[308px] text-[12px]">
                     Нажимая на кнопку вы соглашаетесь на обработку ваших
                     персональных данных
                   </p>
-                  <p className="text-red-500">{message}</p>
                 </div>
               </div>
             </div>
