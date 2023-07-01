@@ -61,7 +61,7 @@ export const Header = () => {
           <RequestAcall />
         </div>
         <div className="md:h-[100%] md:flex md:gap-1 max-w-sm:fixed z-20">
-          <div className="flex flex-col items-center fixed top-48 right-1 gap-1 md:flex md:flex-row md:relative md:top-0 md:gap-1 ">
+          <div className="flex items-center fixed bottom-0 right-10 gap-1 md:flex md:flex-row md:relative md:top-0 md:gap-1 ">
             <Link
               to="/favorites"
               className="max-w-sm h-[60px] w-[70px] md:h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] md:w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
