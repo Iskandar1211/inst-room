@@ -9,7 +9,7 @@ interface Props {
   title?: string;
   products: IProduct[];
   slideToShow: number;
-  categories:IProduct[]
+  categories: IProduct[];
 }
 
 export const CardProductCarousel = ({
@@ -45,6 +45,7 @@ export const CardProductCarousel = ({
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          dots: false,
         },
       },
       {
@@ -52,21 +53,24 @@ export const CardProductCarousel = ({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
     ],
   };
-  const categoriesSelect = categories.map(product => product.categories).join('')
-  
+  const categoriesSelect = categories
+    .map((product) => product.categories)
+    .join("");
+
   return (
     <div className={`w-[100%] py-4`}>
       <h2 className="text-4xl m-3 text-start"> {title} </h2>
       <Slider {...settings}>
-        {products.map((product) =>  {
-          if(product.categories === categoriesSelect) {
-            return (<Card key={product.id} product={product} />)
+        {products.map((product) => {
+          if (product.categories === categoriesSelect) {
+            return <Card key={product.id} product={product} />;
           }
-        } )}
+        })}
       </Slider>
     </div>
   );

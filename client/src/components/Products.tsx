@@ -9,7 +9,9 @@ export const Products = () => {
   const [overalls, setOveralls] = useState<IProduct[]>([]);
   const [forHomeAndCottage, setForHomeAndCottage] = useState<IProduct[]>([]);
   const [electricals, setElectricals] = useState<IProduct[]>([])
-
+  
+  
+  
   useEffect(() => {
     fetch("http://localhost:3009/painting-supplies")
       .then((response) => response.json())

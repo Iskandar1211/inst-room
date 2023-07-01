@@ -1,13 +1,23 @@
 import { Breadcrumbs, Input } from "@material-tailwind/react";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
-import { IOrder } from "../types/Model";
+import {
+  addOrderNumber,
+  addToOrder,
+  addToPurchases,
+} from "../store/reducers/Order";
+import { IHistoryOfOrder, IOrder } from "../types/Model";
 
 export const OrderFormPage = () => {
   const navigate = useNavigate();
+  const [HistoryProducts, setHistoryProducts] = useState<IHistoryOfOrder[]>([]);
 
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    fetch("http://localhost:3009/history-of-orders")
+      .then((response) => response.json())
+      .then((historyBuys) => setHistoryProducts(historyBuys));
+  }, []);
   const products = useAppSelector((state) => state.cart.items);
   const totalPrice = products.reduce((acum, item) => {
     return acum + item.total;
@@ -22,18 +32,36 @@ export const OrderFormPage = () => {
     email: "",
   });
 
-  
+  const [message, setMessage] = useState("");
+
+  const dispatch = useAppDispatch();
 
   const onAddOrders = () => {
-    fetch("http://localhost:3009/create-order", {
-      method: "POST",
-      body: JSON.stringify(order),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    navigate("/delivery-info");
+    if (
+      order.email !== "" &&
+      order.lastName !== "" &&
+      order.name !== "" &&
+      order.phone !== ""
+    ) {
+      dispatch(addToPurchases(products));
+      dispatch(addToOrder(order));
+      dispatch(addOrderNumber(HistoryProducts.length + 1));
+      navigate("/delivery-info");
+    } else {
+      setMessage("Поля не должен быть путимы");
+    }
   };
+
+  useEffect(() => {
+    if (
+      order.email.length > 0 ||
+      order.lastName.length > 0 ||
+      order.name.length > 0 ||
+      order.phone.length > 0
+    ) {
+      setMessage("");
+    }
+  }, [order.email, order.lastName, order.name, order.phone]);
 
   return (
     <div className="bg-[#CBCBCB]">
@@ -44,8 +72,10 @@ export const OrderFormPage = () => {
           </Link>
           <Link to="/order-form">Оформление заказа</Link>
         </Breadcrumbs>
-        <div className="text-4xl text-start">Оформление заказа</div>
-        <div className="flex bg-white px-6 py-6 gap-4">
+        <div className="md:text-4xl text-2xl md:text-start text-center">
+          Оформление заказа
+        </div>
+        <div className="flex md:flex-row flex-col bg-white px-6 py-6 gap-4">
           <div className=" flex-[2]">
             <div className=" mb-2 flex gap-16 text-[20px] font-normal-400">
               <Breadcrumbs>
@@ -59,8 +89,8 @@ export const OrderFormPage = () => {
               </Breadcrumbs>
             </div>
             <div className="flex w-[100%] flex-col gap-8 mb-4 ">
-              <div className="flex gap-[100px]">
-                <div className="flex flex-col gap-8 flex-1">
+              <div className="flex md:flex-row md:gap-[100px] flex-col gap-4">
+                <div className="flex flex-col md:gap-8 gap-4 flex-1">
                   <Input
                     onChange={(e) =>
                       setOrder({ ...order, lastName: e.target.value })
@@ -77,7 +107,7 @@ export const OrderFormPage = () => {
                     value={order.phone}
                   />
                 </div>
-                <div className="flex flex-col flex-1 gap-8">
+                <div className="flex flex-col flex-1 md:gap-8 gap-4">
                   <Input
                     onChange={(e) =>
                       setOrder({ ...order, name: e.target.value })
@@ -100,6 +130,7 @@ export const OrderFormPage = () => {
               >
                 ДАЛЕЕ
               </div>
+              <p className="text-red-500">{message}</p>
             </div>
           </div>
           <div className="flex-1 flex justify-center py-[30px] px-[30px] bg-[#212526] h-[212px] rounded text-white">

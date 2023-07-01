@@ -55,6 +55,16 @@ export interface IHistoryOfOrder {
     deliveryInfo: IDelivery[],
     payments: IPayment[]
 }
+export interface IHistoryOfOrderForServer {
+    id: string,
+    orderNumber: number,
+    created: string,
+    received: string,
+    purchases: IProduct[],
+    orders: IOrder[],
+    deliveryInfo: IDelivery[],
+    payments: IPayment[]
+}
 
 export interface IRegistration {
     id: string,
@@ -65,6 +75,7 @@ export interface IRegistration {
     password: string,
     confirmPassword: string
     role: string
+    code: string
 }
 export interface ILogin {
     phone: string

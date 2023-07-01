@@ -28,7 +28,7 @@ export function LoginConfirm({ setIsLoginConfirm }: Props) {
   const dispatch = useAppDispatch();
 
   const onLoginConfirm = () => {
-    fetch("http://localhost:3009/post-code", {
+    fetch("http://localhost:3009/login-confirm", {
       method: "POST",
       body: JSON.stringify(loginConfirm),
       headers: {
@@ -44,11 +44,11 @@ export function LoginConfirm({ setIsLoginConfirm }: Props) {
     <React.Fragment>
       <div
         onClick={handleOpen}
-        className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
+        className="max-w-sm h-[60px] w-[70px] md:h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] md:w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
       >
         <FaRegUserCircle className="text-white" />
       </div>
-      <Dialog open={open} handler={handleOpen}>
+      <Dialog className="min-w-fit" open={open} handler={handleOpen}>
         <div className="flex items-center justify-between">
           <DialogHeader> </DialogHeader>
           <XMarkIcon className="mr-3 h-5 w-5" onClick={handleOpen} />
@@ -60,6 +60,7 @@ export function LoginConfirm({ setIsLoginConfirm }: Props) {
           <div className="grid gap-6">
             <p>4 цифры</p>
             <Input
+            type='password'
               value={loginConfirm.code}
               onChange={(e) =>
                 dispatch(

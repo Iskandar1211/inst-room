@@ -1,9 +1,14 @@
-import express from 'express'
+import express, { Router } from 'express';
 import userController from '../controller/UserController';
-const router = express.Router()
 
-router.get('/', userController.getAllUsers());
-router.post('/registration', userController.onRegister());
-router.post('/login', userController.onLogin());
+const userRoutes = Router();
 
-export = router;
+userRoutes.get('/get-users', userController.getAllUsers());
+userRoutes.post('/registration', userController.onCreateUser());
+userRoutes.post('/login', userController.onLogin());
+userRoutes.post('/login-confirm', userController.onLoginConfirm());
+userRoutes.delete('/delete-user', userController.onDeleteUser());
+userRoutes.get('/history-of-orders', userController.onGetHistoryOfOrders());
+userRoutes.post('/create-history-order', userController.onCreateOrder())
+
+export default userRoutes;

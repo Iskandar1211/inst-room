@@ -11,7 +11,7 @@ interface Props {
   slideToShow: number;
 }
 
-export const FeaturesCarousel = ({ title, products, slideToShow}: Props) => {
+export const FeaturesCarousel = ({ title, products, slideToShow }: Props) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -46,6 +46,7 @@ export const FeaturesCarousel = ({ title, products, slideToShow}: Props) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
     ],

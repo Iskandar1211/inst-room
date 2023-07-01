@@ -30,9 +30,9 @@ export const ProfilePage = () => {
   const user = users?.find((user) => user.role === "user");
 
   useEffect(() => {
-    fetch("http://localhost:3009/get-registration")
+    fetch("http://localhost:3009/get-users")
       .then((response) => response.json())
-      .then((registration) => setUsers(registration));
+      .then((users) => setUsers(users));
   }, []);
 
   const navigation = useNavigate();

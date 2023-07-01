@@ -4,7 +4,6 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiBarChart2 } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import { CardProductCarousel } from "../components/UX-UI/carousel/CardProducCarousel";
-import { FeaturesCarousel } from "../components/UX-UI/carousel/FeaturesCarousel";
 import { useAppDispatch } from "../store/hooks/hooks";
 import { addToCart } from "../store/reducers/Cart";
 import { addToFavorites } from "../store/reducers/Favorites";
@@ -49,7 +48,7 @@ export const CardProductPage = () => {
           </Breadcrumbs>
         </div>
         {selectProduct.map((product) => (
-          <div key={product.id} className="bg-white flex px-[40px] py-[30px]">
+          <div key={product.id} className="bg-white flex md:flex-row flex-col px-[40px] py-[30px]">
             <div className="flex-1 flex justify-center  items-center">
               <img
                 className="w-[360px] h-[360px] "

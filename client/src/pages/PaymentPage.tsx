@@ -1,16 +1,21 @@
-import { Breadcrumbs, Checkbox, Input } from "@material-tailwind/react";
+import { Breadcrumbs, Checkbox } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { IPayment } from "../types/Model";
-import { BsCheckCircleFill, BsArrowBarRight } from "react-icons/bs";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { addTopPayments, clearOrder } from "../store/reducers/Order";
 import { clearCart } from "../store/reducers/Cart";
 
 export const PaymentPage = () => {
   const [complited, setComplited] = useState(false);
+  const [addingOrder, setAddingOrder] = useState(false);
 
   const dispatch = useAppDispatch();
   const productsFromCart = useAppSelector((state) => state.cart.items);
+
+  const order = useAppSelector((state) => state.order.order);
+
   const totalPrice = productsFromCart.reduce((acum, item) => {
     return acum + item.total;
   }, 0);
@@ -24,43 +29,27 @@ export const PaymentPage = () => {
     onlinePayment: false,
   });
 
-  const addAll = () => {
-    fetch("http://localhost:3009/create-history-of-orders", {
-      method: "POST",
-      body: JSON.stringify(productsFromCart),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const addPayment = () => {
+    dispatch(addTopPayments(payment));
+    setAddingOrder(true);
   };
-  const addProductsFromCart = () => {
-    fetch("http://localhost:3009/create-product-from-cart", {
-      method: "POST",
-      body: JSON.stringify(productsFromCart),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  };
-  const addDelivery = () => {
-    fetch("http://localhost:3009/create-payment", {
-      method: "POST",
-      body: JSON.stringify(payment),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          addAll();
-          setComplited(true);
+
+  const addOrder = () => {
+    if (order.payments.length > 0) {
+      fetch("http://localhost:3009/create-history-order", {
+        method: "POST",
+        body: JSON.stringify(order),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((status) => {
+        if (status.ok) {
+          dispatch(clearOrder());
           dispatch(clearCart());
         }
-      })
-      .catch((error) => {
-        console.log(error);
       });
-    addProductsFromCart();
+      setComplited(true);
+    }
   };
 
   return (
@@ -74,7 +63,7 @@ export const PaymentPage = () => {
             <Link to="/order-form">Оформление заказа</Link>
           </Breadcrumbs>
           <div className="text-4xl text-start">Оформление заказа</div>
-          <div className="flex bg-white px-6 py-6 gap-4">
+          <div className="flex md:flex-row flex-col bg-white px-6 py-6 gap-4">
             <div className=" flex-[2]">
               <div className=" mb-2 flex gap-16 text-[20px] font-normal-400">
                 <Breadcrumbs>
@@ -148,12 +137,22 @@ export const PaymentPage = () => {
                   </div>
                 </div>
                 <div className="text-start">
-                  <button
-                    onClick={() => addDelivery()}
-                    className="w-[308px] h-[50px] flex justify-center items-center bg-[#F05A00] text-white"
-                  >
-                    ПОДТВЕРДИТЬ ЗАКАЗ
-                  </button>
+                  {!addingOrder ? (
+                    <button
+                      onClick={() => addPayment()}
+                      className="w-[308px] h-[50px] flex justify-center items-center bg-black text-white"
+                    >
+                      ДАЛЕЕ
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => addOrder()}
+                      className="w-[308px] h-[50px] flex justify-center items-center bg-[#F05A00] text-white"
+                    >
+                      ПОДТВЕРДИТЬ ЗАКАЗ
+                    </button>
+                  )}
+
                   <p className="w-[308px] text-[12px]">
                     Нажимая на кнопку вы соглашаетесь на обработку ваших
                     персональных данных

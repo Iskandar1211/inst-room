@@ -1,6 +1,5 @@
 import { Breadcrumbs, Option, Select } from "@material-tailwind/react";
 import React, { useState, useEffect } from "react";
-import { IoIosArrowForward } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
 import { Card } from "../components/UX-UI/cards/Card";
 import { IProduct } from "../types/Model";
@@ -37,10 +36,8 @@ export const CatalogPage = () => {
         );
         setProducts(filtered);
       });
-      setSelectedItem(categori);
-    
+    setSelectedItem(categori);
   }, [categories]);
-
 
   const onSortProducts = (value: string | undefined) => {
     if (value === "По убыванию цены") {
@@ -87,17 +84,17 @@ export const CatalogPage = () => {
           <Link to="/catalog">Каталог</Link>
         </Breadcrumbs>
         <div className="text-4xl text-start">Каталог</div>
-        <div className="flex gap-4">
+        <div className="md:flex md:gap-4 ">
           <div className="flex-1 flex flex-col gap-6 mb-5">
             <div className="bg-[#212526] text-white">
-              <ul>
+              <ul className="md:block grid grid-cols-2">
                 <li
                   onClick={() => onFilteredProducts("Малярные товары")}
                   className={`border border-gray-400 px-2 py-4 flex justify-between cursor-pointer ${
                     selectedItem === "Малярные товары" ? "bg-[#F05A00]" : ""
                   }`}
                 >
-                  Малярные товары <IoIosArrowForward />
+                  Малярные товары
                 </li>
                 <li
                   onClick={() => onFilteredProducts("Электрооборудование")}
@@ -105,7 +102,7 @@ export const CatalogPage = () => {
                     selectedItem === "Электрооборудование" ? "bg-[#F05A00]" : ""
                   }`}
                 >
-                  Электроинструмент <IoIosArrowForward />
+                  Электроинструмент
                 </li>
                 <li
                   onClick={() => onFilteredProducts("Спецодежда")}
@@ -113,21 +110,19 @@ export const CatalogPage = () => {
                     selectedItem === "Спецодежда" ? "bg-[#F05A00]" : ""
                   }`}
                 >
-                  Спецодежда <IoIosArrowForward />
+                  Спецодежда
                 </li>
                 <li
                   onClick={() => onFilteredProducts("Для дома и дачи")}
                   className={`border border-gray-400 px-2 py-4 flex justify-between cursor-pointer ${
-                    selectedItem === "Для дома и дачи"
-                      ? "bg-[#F05A00]"
-                      : ""
+                    selectedItem === "Для дома и дачи" ? "bg-[#F05A00]" : ""
                   }`}
                 >
-                  Для дома и дачи <IoIosArrowForward />
+                  Для дома и дачи
                 </li>
               </ul>
             </div>
-            <div className="relative ">
+            <div className="md:relative md:block hidden">
               <div className="absolute left-5 top-5 text-white text-start">
                 <p className="font-bold">Новое поступление</p>
                 <p className="text-[12px]">Успей покататься</p>
@@ -138,7 +133,7 @@ export const CatalogPage = () => {
                 alt="new-arrival"
               />
             </div>
-            <div className="relative ">
+            <div className="md:relative md:block hidden">
               <div className="absolute left-5 top-5 text-white text-start">
                 <p className="font-bold">Печи со скидкой</p>
                 <p className="text-[12px]">до 30%</p>
@@ -148,7 +143,7 @@ export const CatalogPage = () => {
           </div>
           <div className="flex flex-col flex-[2.5] ">
             <div className="flex">
-              <div className="flex items-center gap-1 ">
+              <div className="flex items-center gap-1  ">
                 <p className="font-bold">Сортировать:</p>
                 <Select
                   label="Выбирите сортировку"
@@ -164,7 +159,7 @@ export const CatalogPage = () => {
                 </Select>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-3 py-8">
+            <div className="grid md:grid-cols-3 md:gap-3 gap-2 py-8 m-auto">
               {products.map((product) => (
                 <Card key={product.id} product={product} />
               ))}

@@ -9,27 +9,27 @@ export const Footter = () => {
     <div className="bg-[#212526]">
       <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6">
         <div className="flex gap-12 py-10 ">
-          <div className="flex-1 text-white text-start flex flex-col gap-3">
+          <div className="md:flex-1 md:text-white md:text-start md:flex md:flex-col md:gap-3 hidden">
             <Link className="hover:text-[#F05A00]" to={`/catalog/${"painting-supplies"}`}>Малярные товары</Link>
             <Link className="hover:text-[#F05A00]" to={`/catalog/${"electrical"}`}>Электрооборудование</Link>
             <Link className="hover:text-[#F05A00]" to={`/catalog/${"overalls"}`}>Спецодежда</Link>
             <Link className="hover:text-[#F05A00]" to={`/catalog/${"for-home-and-cottage"}`}>Для дома и дачи</Link>
           </div>
-          <div className="flex-1 text-white text-start flex flex-col gap-3">
+          <div className="md:flex-1 md:text-white md:text-start md:flex md:flex-col md:gap-3 hidden">
             <Link to='/about' className="hover:text-[#F05A00] w-fit">О компании</Link>
             <Link to='/contacts' className="hover:text-[#F05A00] w-fit">Контакты</Link>
             <Link to='/new-product' className="hover:text-[#F05A00] w-fit">Новинки</Link>
           </div>
           <div className="flex-1 text-start">
-            <div className="flex flex-col gap-3">
+            <div className="md:flex md:flex-col md:gap-3 flex flex-col items-center gap-2">
               <div>
-                <img src="logo.svg" alt="logo" />
+                <img className="md:block hidden" src="logo.svg" alt="logo" />
               </div>
               <div className="text-white">
                 <p>+7 495 120-32-14</p>
                 <p>+7 495 120-32-15</p>
               </div>
-              <div className="flex gap-2">
+              <div className="md:flex md:gap-2 hidden">
                 <RxInstagramLogo className="bg-white cursor-pointer text-3xl rounded-full px-1" />
                 <SlSocialVkontakte className="bg-white cursor-pointer text-3xl rounded-full px-1" />
                 <FiFacebook className="bg-white cursor-pointer text-3xl rounded-full px-1" />

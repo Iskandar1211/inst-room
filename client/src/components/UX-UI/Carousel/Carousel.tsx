@@ -39,6 +39,7 @@ export const Carousel = ({ title, products, slideToShow }: Props) => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          dots: false,
         },
       },
       {
@@ -46,6 +47,7 @@ export const Carousel = ({ title, products, slideToShow }: Props) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
     ],
@@ -62,7 +64,10 @@ export const Carousel = ({ title, products, slideToShow }: Props) => {
   }
   return (
     <div className={`lg:w-[47%] py-4 w-[77%] m-auto flex flex-col gap-3`}>
-      <Link to={`/catalog/${titleLink}`} className="text-4xl m-3 text-start hover:text-[#F05A00]">
+      <Link
+        to={`/catalog/${titleLink}`}
+        className="md:text-4xl text-2xl m-3 text-start hover:text-[#F05A00]"
+      >
         {title}
       </Link>
       <Slider {...settings}>

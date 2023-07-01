@@ -131,8 +131,8 @@ export const Slider = () => {
     }
   };
   return (
-    <div className="bg-[#212526] h-[60vh]">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 flex gap-2 h-[100%] py-2">
+    <div className="md:bg-[#212526] md:block md:h-[60vh] hidden">
+      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 md:flex md:gap-2 md:h-[100%] md:py-2 hidden">
         <div
           style={{
             backgroundImage: `url(${sliderCatalog[indexCatalog].imgSrc})`,

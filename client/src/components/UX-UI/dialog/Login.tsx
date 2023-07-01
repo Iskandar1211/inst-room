@@ -6,7 +6,6 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-  Textarea,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -28,7 +27,7 @@ export function Login({ setIsLogin, setIsRegistred }: Props) {
   const dispatch = useAppDispatch();
 
   const onLogin = () => {
-    fetch("http://localhost:3009/post-code", {
+    fetch("http://localhost:3009/login", {
       method: "POST",
       body: JSON.stringify(login),
       headers: {
@@ -41,15 +40,17 @@ export function Login({ setIsLogin, setIsRegistred }: Props) {
     });
   };
 
+  
+
   return (
-    <React.Fragment>
+    <React.Fragment >
       <div
         onClick={handleOpen}
-        className="h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
+        className="max-w-sm h-[60px] w-[70px] md:h-[100%] flex items-center justify-center text-4xl bg-[#3B3B3B] md:w-[5rem] relative cursor-pointer hover:bg-[#F05A00]"
       >
         <FaRegUserCircle className="text-white" />
       </div>
-      <Dialog open={open} handler={handleOpen}>
+      <Dialog className="min-w-fit" open={open} handler={handleOpen}>
         <div className="flex items-center justify-between">
           <DialogHeader> </DialogHeader>
           <XMarkIcon className="mr-3 h-5 w-5" onClick={handleOpen} />

@@ -50,7 +50,7 @@ export const FeaturedItems = () => {
       </div>
       <div className="bg-[#212526] py-5">
         <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 ">
-          <div className="w-[93%] m-auto">
+          <div className="md:w-[93%] m-auto w-[78%]">
             <FeaturesCarousel products={products} slideToShow={4} />
           </div>
         </div>

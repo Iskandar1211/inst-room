@@ -66,11 +66,13 @@ export const cartSlice = createSlice({
             console.log(item);
 
             if (item) {
-                // Обновите свойство quantity
-                item.quantity = (item.quantity || 0) - 1
-                // Обновите свойство total
-                item.total = (item.total || 0) + item.price
+                if (item.quantity > 1 && item.total > 0) {
+                    item.quantity = (item.quantity || 0) - 1
+                    // Обновите свойство total
+                    item.total = (item.total || 0) - item.price
+                }
             }
+
         },
     },
 })

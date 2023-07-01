@@ -16,8 +16,10 @@ import {
 
 export const Navbar = () => {
   const [isSearch, setIsSearch] = useState(false);
-  const widthFroSeacrchContainer = !isSearch ? "w-[35rem]" : "w-[40rem]";
-  const widthFroSeacrchButton = !isSearch ? " hidden" : "w-[40rem]";
+  const widthFroSeacrchContainer = !isSearch
+    ? "md:w-[35rem] w-[6rem]"
+    : "md:w-[40rem] w-[35rem]";
+  const widthFroSeacrchButton = !isSearch ? "hidden" : "md:w-[40rem] w-[100%]";
   const styleForSearchContainer = [
     "flex items-center transition-all",
     widthFroSeacrchContainer,
@@ -47,7 +49,7 @@ export const Navbar = () => {
 
   return (
     <div className="bg-black ">
-      <div className="lg:px-32 md:px-7 max-sm:px-4 sm:px-6 h-[10vh] flex items-center justify-between">
+      <div className="lg:px-32 md:px-7 px-4  h-[10vh] md:flex md:items-center md:justify-between flex gap-2 justify-between items-center">
         <Menu>
           <MenuHandler>
             <Button className="flex bg-transparent gap-4 items-center hover:bg-[#F05A00] border-[#F05A00]">
@@ -69,7 +71,7 @@ export const Navbar = () => {
             </Link>
           </MenuList>
         </Menu>
-        <div className="flex text-white gap-3">
+        <div className="md:flex md:text-white md:gap-3 hidden">
           <Link className="hover:text-[#F05A00]" to="/about">
             О компании
           </Link>
@@ -80,7 +82,7 @@ export const Navbar = () => {
             Новинки
           </Link>
         </div>
-        <div className="flex gap-2">
+        <div className="md:flex md:gap-2 hidden">
           <RxInstagramLogo className="bg-white cursor-pointer text-3xl rounded-full px-1 hover:text-[#D52574]" />
           <SlSocialVkontakte className="bg-white cursor-pointer text-3xl rounded-full px-1 hover:text-[#0272F1]" />
           <FiFacebook className="bg-white cursor-pointer text-3xl rounded-full px-1 hover:text-[#6781B8]" />
@@ -122,7 +124,7 @@ export const Navbar = () => {
                           setIsSearch(false);
                           setSearchValue("");
                         }}
-                        className="w-full flex flex-col items-center"
+                        className="md:w-full md:flex md:flex-col md:items-center"
                       >
                         {filteredProducts.map((product) => (
                           <Search key={product.id} filterProduct={product} />

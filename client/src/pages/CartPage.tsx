@@ -28,7 +28,7 @@ export const CartPage = () => {
           </Link>
           <Link to="/cart">Корзина</Link>
         </Breadcrumbs>
-        <div className="text-4xl flex justify-between">
+        <div className="md:text-4xl text-2xl flex md:justify-between justify-around">
           Корзина
           <Link
             to="/"
@@ -38,26 +38,26 @@ export const CartPage = () => {
           </Link>
         </div>
         {products.length === 0 ? (
-          <div className="text-4xl text-[#F05A00]">Нет товаров в карзине</div>
+          <div className="text-4xl text-[#F05A00] text-center">Нет товаров в карзине</div>
         ) : (
           <div className="bg-white">
-            <div className="grid grid-cols-4 border py-3 px-3 font-bold">
+            <div className="md:grid md:grid-cols-4 border py-3 px-3 font-bold hidden">
               <div>Название</div>
               <div>Стоимость</div>
-              <div>Количество</div>
-              <div>Итого</div>
+              <div className="text-center">Количество</div>
+              <div className="text-center">Итого</div>
             </div>
             {products.map((product) => (
               <div
                 key={product.id}
-                className="grid grid-cols-4 px-3 border py-3"
+                className="md:grid md:grid-cols-4 md:items-center flex flex-col px-3 border py-3"
               >
-                <div className="flex gap-2">
+                <div className="md:flex md:gap-2 md:flex-row  flex flex-col items-center">
                   <img className="w-[60px] h-[60px]" src={product.img} alt="" />
-                  <div>{product.name}</div>
+                  <div className="md:w-full w-[80vw]">{product.name}</div>
                 </div>
                 <div>
-                  <div>{product.price} ₽</div>
+                  <div className="md:block hidden">{product.price} ₽</div>
                 </div>
                 <div>
                   <div className="flex items-center gap-2 justify-center">
@@ -80,7 +80,7 @@ export const CartPage = () => {
                     />
                   </div>
                 </div>
-                <div className="flex justify-around">
+                <div className="md:flex md:justify-around flex justify-between">
                   <div>{product.total} ₽</div>
                   <div
                     onClick={() => dispatch(removeFromCart(product.id))}
@@ -93,7 +93,7 @@ export const CartPage = () => {
             ))}
           </div>
         )}
-        <div className="flex justify-end mt-2">
+        {products.length > 0 && <div className="md:flex md:justify-end flex justify-center mt-2">
           <div className="">
             <div
               className="flex justify-between py-2"
@@ -120,7 +120,7 @@ export const CartPage = () => {
               ПЕРЕЙТИ К ОФОРМЛЕНИЮ
             </Link>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );
